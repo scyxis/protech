@@ -55,4 +55,72 @@ pageLinks.forEach(link => {
     }, 400);
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+  const progressCircle = document.querySelector(".progress-ring circle");
+
+  if (!slides.length) {
+    console.error("Slides não encontrados!");
+    return;
+  }
+
+  let current = 0;
+  const duration = 4000;
+  const circumference = 126;
+
+  let startTime = null;
+  let animationFrame;
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    dots.forEach(dot => dot.classList.remove("active"));
+
+    slides[index].classList.add("active");
+    dots[index].classList.add("active");
+
+    current = index;
+    resetProgress();
+  }
+
+  function nextSlide() {
+    const next = (current + 1) % slides.length;
+    showSlide(next);
+  }
+
+  function resetProgress() {
+    cancelAnimationFrame(animationFrame);
+    startTime = null;
+    progressCircle.style.strokeDashoffset = circumference;
+    animationFrame = requestAnimationFrame(animateProgress);
+  }
+
+  function animateProgress(timestamp) {
+    if (!startTime) startTime = timestamp;
+
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const offset = circumference - (progress * circumference);
+    progressCircle.style.strokeDashoffset = offset;
+
+    if (progress < 1) {
+      animationFrame = requestAnimationFrame(animateProgress);
+    } else {
+      nextSlide();
+    }
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+    });
+  });
+
+  // Inicializa
+  showSlide(0);
+
+});
+
 

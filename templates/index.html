@@ -20,7 +20,9 @@
     </nav>
   </header>
 
-  <section class="hero">
+ <section class="hero">
+  <div class="hero-content">
+
     <div class="hero-text">
       <h1>Tecnologia que Cuida do Seu Hardware</h1>
       <p>
@@ -28,7 +30,34 @@
         para seus dispositivos.
       </p>
     </div>
-  </section>
+
+    <div class="hero-slider">
+
+      <div class="slides">
+        <img src="./img/note.jpg" class="slide active">
+        <img src="./img/smart.jpg" class="slide">
+        <img src="./img/note.jpg" class="slide">
+      </div>
+
+      <!-- CONTROLES -->
+      <div class="slider-controls">
+        <button class="dot active" data-index="0"></button>
+        <button class="dot" data-index="1"></button>
+        <button class="dot" data-index="2"></button>
+      </div>
+
+      <!-- PROGRESSO -->
+      <div class="progress-ring">
+        <svg width="48" height="48">
+          <circle cx="24" cy="24" r="20"></circle>
+        </svg>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
 
   <!-- SOLUÇÕES -->
   <section id="solutions" class="block">
@@ -46,7 +75,7 @@
 
   <!-- SERVIÇO 1 -->
   <section id="services" class="block reverse">
-    <img src="/img/smart.jpg">
+    <img src="./img/smart.jpg">
 
     <div class="block-text">
       <h2>Manutenção de Smartphones</h2>
@@ -68,7 +97,7 @@
     </div>
 
     <!-- <figure> -->
-    <img src="/img/note.jpg" alt="foto">
+    <img src="./img/note.jpg" alt="foto">
     <!-- </figure> -->
   </section>
 
@@ -97,7 +126,7 @@
     </div>
   </section>
 
-  <script src="land.js"></script>
+<script src="land.js" defer></script>
 </body>
 
 </html>

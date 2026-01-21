@@ -135,3 +135,43 @@ nav a:hover {
     text-align: center;
   }
 }
+
+
+.log{
+    color: white;
+    text-justify: initial;
+    background-color: #3fa9f5;
+    padding: 15px;
+    border-radius: 5px; 
+
+}
+/* ===============================
+   ANIMAÇÃO DE ENTRADA DAS SEÇÕES
+================================ */
+.block, 
+.process, 
+.contact {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+}
+
+.block.show, 
+.process.show, 
+.contact.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ===============================
+   TRANSIÇÃO ENTRE PÁGINAS
+================================ */
+body {
+  transition: opacity 0.4s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+

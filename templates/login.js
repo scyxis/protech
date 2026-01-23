@@ -9,13 +9,11 @@ function resize(){
 resize();
 window.addEventListener("resize", resize);
 
-const particles = Array.from({length:80},()=>({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  vx:(Math.random()-0.5)*0.6,
-  vy:(Math.random()-0.5)*0.6,
-  size:Math.random()*2+1
-}));
+const isMobile = window.innerWidth < 768;
+const particleCount = isMobile ? 35 : 80;
+
+const particles = Array.from({length:particleCount},()=>({
+
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);

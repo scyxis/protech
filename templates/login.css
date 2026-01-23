@@ -124,3 +124,48 @@ button:hover{
   -webkit-background-clip:text;
   color:transparent;
 }
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 768px){
+
+  .card{
+    width:100%;
+    max-width:360px;
+    padding:40px 28px;
+    border-radius:20px;
+  }
+
+  .logo{
+    font-size:34px;
+  }
+
+  .card p{
+    font-size:14px;
+  }
+
+  input{
+    padding:12px;
+    font-size:14px;
+  }
+
+  button{
+    padding:12px;
+    font-size:15px;
+  }
+}
+
+@media (max-width: 420px){
+
+  .card{
+    max-width:92%;
+    padding:32px 22px;
+  }
+
+  .logo{
+    font-size:30px;
+  }
+
+  .footer{
+    font-size:13px;
+  }
+}

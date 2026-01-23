@@ -1,132 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <meta charset="UTF-8">
-  <title>ProTech Tecnologia</title>
-  <link rel="stylesheet" href="land.css">
+<meta charset="UTF-8">
+<title>ProTech</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./land.css">
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="logo">Pro<span>Tech</span></div>
+<canvas id="particles"></canvas>
+
+<header>
+  <div class="navbar">
+<h1 class="logo">
+  <span class="pro">Pro</span><span class="tech">Tech</span>
+</h1>
     <nav>
-      <a href="#solutions">Soluções</a>
-      <a href="#services">Serviços</a>
-      <a href="#contact">Contato</a>
-      <a href="./login.html" class="log">Login</a>
-
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+<a href="./login.html" class="btn ghost">Login</a>
+<a href="./cadastro.html" class="btn primary">Cadastro</a>
     </nav>
-  </header>
+  </div>
+</header>
 
- <section class="hero">
-  <div class="hero-content">
+<section class="hero">
+  <div class="slide active">
+    <h1>Reparo Rápido e Confiável</h1>
+    <p>Especialistas em celulares, tablets e computadores.</p>
+  </div>
 
-    <div class="hero-text">
-      <h1>Tecnologia que Cuida do Seu Hardware</h1>
-      <p>
-        Manutenção inteligente, limpeza profissional e acompanhamento digital
-        para seus dispositivos.
-      </p>
-    </div>
+  <div class="slide">
+    <h1>Tecnologia que você confia</h1>
+    <p>Manutenção profissional com garantia total.</p>
+  </div>
 
-    <div class="hero-slider">
+  <div class="slide">
+    <h1>Seu dispositivo como novo</h1>
+    <p>Atendimento rápido e eficiente.</p>
+  </div>
+</section>
 
-      <div class="slides">
-        <img src="./img/note.jpg" class="slide active">
-        <img src="./img/smart.jpg" class="slide">
-        <img src="./img/note.jpg" class="slide">
+<section class="services" id="servicos">
+
+  <h2>Nossos Serviços</h2>
+
+  <div class="layout">
+
+    <!-- FILTROS -->
+    <aside class="sidebar">
+
+      <div class="filter-group">
+        <h4>Dispositivo</h4>
+        <label><input type="checkbox" value="celular"> Celular</label>
+        <label><input type="checkbox" value="tablet"> Tablet</label>
+        <label><input type="checkbox" value="computador"> Computador</label>
       </div>
 
-      <!-- CONTROLES -->
-      <div class="slider-controls">
-        <button class="dot active" data-index="0"></button>
-        <button class="dot" data-index="1"></button>
-        <button class="dot" data-index="2"></button>
+      <div class="filter-group">
+        <h4>Serviço</h4>
+        <label><input type="checkbox" value="tela"> Troca de Tela</label>
+        <label><input type="checkbox" value="pelicula"> Película</label>
+        <label><input type="checkbox" value="bateria"> Bateria</label>
+        <label><input type="checkbox" value="software"> Software</label>
       </div>
 
-      <!-- PROGRESSO -->
-      <div class="progress-ring">
-        <svg width="48" height="48">
-          <circle cx="24" cy="24" r="20"></circle>
-        </svg>
+      <div class="filter-group">
+        <h4>Modelo</h4>
+        <label><input type="checkbox" value="iphone"> iPhone</label>
+        <label><input type="checkbox" value="samsung"> Samsung</label>
+        <label><input type="checkbox" value="xiaomi"> Xiaomi</label>
+      </div>
+
+    </aside>
+
+    <!-- CARDS -->
+    <div class="grid">
+
+      <div class="card" 
+        data-device="celular" 
+        data-service="tela" 
+        data-model="iphone">
+        <h3>Troca de Tela - iPhone</h3>
+        <p>Substituição premium com garantia.</p>
+      </div>
+
+      <div class="card" 
+        data-device="celular" 
+        data-service="pelicula" 
+        data-model="samsung">
+        <h3>Película - Samsung</h3>
+        <p>Proteção máxima contra impactos.</p>
+      </div>
+
+      <div class="card" 
+        data-device="celular" 
+        data-service="bateria" 
+        data-model="xiaomi">
+        <h3>Bateria - Xiaomi</h3>
+        <p>Mais autonomia para seu dia.</p>
+      </div>
+
+      <div class="card" 
+        data-device="computador" 
+        data-service="software" 
+        data-model="generic">
+        <h3>Formatação de Computador</h3>
+        <p>Performance otimizada.</p>
       </div>
 
     </div>
 
   </div>
+
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="testimonials">
+
+  <h2>O Que Nossos Clientes Dizem</h2>
+  <p class="subtitle">Satisfação garantida em cada reparo realizado</p>
+
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <p>"Excelente atendimento! Meu notebook voltou como novo."</p>
+      <strong>Maria Silva</strong>
+    </div>
+
+    <div class="testimonial-card">
+      <p>"Preço justo e entrega rápida. Recomendo demais!"</p>
+      <strong>João Santos</strong>
+    </div>
+
+    <div class="testimonial-card">
+      <p>"Recuperaram meus arquivos importantes. Salvou meu semestre."</p>
+      <strong>Ana Costa</strong>
+    </div>
+
+  </div>
+
 </section>
 
 
-  <!-- SOLUÇÕES -->
-  <section id="solutions" class="block">
-    <div class="block-text">
-      <h2>Gestão Inteligente de Manutenção</h2>
-      <p>
-        Nossa plataforma permite que você acompanhe todo o ciclo do seu
-        equipamento: abertura de orçamento, aprovação, manutenção e entrega,
-        tudo em tempo real.
-      </p>
+<!-- CONTATO -->
+<section class="contact" id="contato">
+
+  <h2>Entre em Contato</h2>
+  <p class="subtitle">Estamos prontos para ajudar você</p>
+
+  <div class="contact-layout">
+
+    <!-- INFO -->
+    <div class="contact-info">
+
+      <div class="info-card">
+        <h4>📍 Endereço</h4>
+        <p>Rua da Tecnologia, 123<br>São Paulo - SP</p>
+      </div>
+
+      <div class="info-card">
+        <h4>📞 Telefone</h4>
+        <p>(11) 98765-4321<br>(11) 3456-7890</p>
+      </div>
+
+      <div class="info-card">
+        <h4>⏰ Horário</h4>
+        <p>Seg - Sex: 9h às 18h<br>Sábado: 9h às 13h</p>
+      </div>
+
     </div>
 
-    <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc">
-  </section>
+    <!-- FORM -->
+    <form class="contact-form">
+      <h3>Envie uma Mensagem</h3>
 
-  <!-- SERVIÇO 1 -->
-  <section id="services" class="block reverse">
-    <img src="./img/smart.jpg">
+      <input type="text" placeholder="Nome completo">
+      <input type="email" placeholder="Email">
+      <input type="tel" placeholder="Telefone">
+      <textarea placeholder="Descreva seu problema..."></textarea>
 
-    <div class="block-text">
-      <h2>Manutenção de Smartphones</h2>
-      <p>
-        Limpeza interna e externa, troca de conectores, otimização de sistema,
-        diagnóstico avançado e prevenção contra oxidação.
-      </p>
-    </div>
-  </section>
+      <button type="submit">Enviar Mensagem</button>
+    </form>
 
-  <!-- SERVIÇO 2 -->
-  <section class="block">
-    <div class="block-text">
-      <h2>Computadores e Notebooks</h2>
-      <p>
-        Higienização técnica, troca de pasta térmica, upgrade de hardware,
-        formatação segura e aumento de performance.
-      </p>
-    </div>
+  </div>
 
-    <!-- <figure> -->
-    <img src="./img/note.jpg" alt="foto">
-    <!-- </figure> -->
-  </section>
+</section>
 
-  <!-- PROCESSO -->
-  <section id="flow" class="process">
-    <h2>Como Funciona</h2>
+<footer>
+  <p>© 2026 ProTech - Todos os direitos reservados.</p>
+</footer>
 
-    <div class="timeline">
-      <div class="step">Solicitação</div>
-      <div class="step">Diagnóstico</div>
-      <div class="step">Aprovação</div>
-      <div class="step">Manutenção</div>
-      <div class="step">Entrega</div>
-    </div>
-  </section>
 
-  <!-- CONTATO -->
-  <section id="contact" class="contact">
-    <h2>Contato</h2>
-
-    <div class="contact-grid">
-      <div>📍 Jacareí - SP</div>
-      <div>📞 (12) 99751-5688</div>
-      <div>✉️ matheusmiranda0801@gmail.com</div>
-      <div>🕒 Seg–Sex • 09h–18h</div>
-    </div>
-  </section>
-
-<script src="land.js" defer></script>
+<script src="./land.js"></script>
 </body>
-
 </html>

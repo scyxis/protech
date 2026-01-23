@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>ProTech | Login</title>
+<title>ProTech | Cadastro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./login.css">
 </head>
@@ -15,20 +15,24 @@
 
   <div class="card">
 
-<h1 class="logo">
-  <span class="pro">Pro</span><span class="tech">Tech</span>
-</h1>
-    <p>Acesse sua conta</p>
+    <h1 class="logo">
+      <span class="pro">Pro</span><span class="tech">Tech</span>
+    </h1>
+
+    <p>Crie sua conta</p>
 
     <form>
+      <input type="text" placeholder="Nome completo" required>
       <input type="email" placeholder="Email" required>
       <input type="password" placeholder="Senha" required>
-      <button>Entrar</button>
+      <input type="password" placeholder="Confirmar senha" required>
+
+      <button>Cadastrar</button>
     </form>
 
     <div class="footer">
-      <span>Não tem conta?</span>
-      <a href="./cadastro.html">Criar conta</a>
+      <span>Já tem conta?</span>
+      <a href="./login.html">Entrar</a>
     </div>
 
   </div>

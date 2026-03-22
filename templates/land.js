@@ -250,7 +250,7 @@
     console.log('✅ Site inicializado com sucesso!');
 })();
 
-const API_URL = 'https://protechv2.vercel.app/api';
+const API_URL = 'https://protech-rt8q.onrender.com/api';
 
 // Verificar se usuário está logado
 function isAuthenticated() {

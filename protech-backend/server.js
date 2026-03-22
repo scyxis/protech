@@ -168,7 +168,6 @@ app.post('/api/users/manutencoes', authMiddleware, async (req, res) => {
   }
 });
 
-// Exportar para Vercel
 module.exports = app;
 
 // Rodar localmente

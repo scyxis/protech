@@ -29,12 +29,12 @@ db.exec(`
 // Adicionar coluna role se não existir
 try {
   db.exec(`ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user'`);
-  console.log('✅ Coluna "role" adicionada');
+  console.log('✅ Coluna role adicionada');
 } catch (e) {
-  // Coluna já existe
+  console.log('ℹ️ Coluna role já existe');
 }
 
-console.log('✅ Tabela "users" pronta!');
+console.log('✅ Banco de dados pronto!');
 
 // ==================== ROTA DE TESTE ====================
 app.get('/', (req, res) => {
@@ -48,7 +48,6 @@ app.get('/', (req, res) => {
 
 // ==================== AUTENTICAÇÃO ====================
 
-// Cadastro
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -86,28 +85,28 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// Login
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email e senha são obrigatórios' });
-    }
+    console.log('Tentativa login:', email);
     
     const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
     
     if (!user) {
+      console.log('Usuário não encontrado');
       return res.status(401).json({ error: 'Email ou senha inválidos' });
     }
     
     const valid = await bcrypt.compare(password, user.password);
+    console.log('Senha válida:', valid);
+    
     if (!valid) {
       return res.status(401).json({ error: 'Email ou senha inválidos' });
     }
     
     const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role },
+      { userId: user.id, email: user.email, role: user.role || 'user' },
       process.env.JWT_SECRET || 'protech_secret_2024',
       { expiresIn: '30d' }
     );
@@ -115,7 +114,7 @@ app.post('/api/auth/login', async (req, res) => {
     res.json({
       message: 'Login realizado com sucesso!',
       token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role }
+      user: { id: user.id, name: user.name, email: user.email, role: user.role || 'user' }
     });
   } catch (error) {
     console.error('Erro no login:', error);
@@ -131,7 +130,7 @@ const authMiddleware = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'protech_secret_2024');
     req.userId = decoded.userId;
-    req.userRole = decoded.role;
+    req.userRole = decoded.role || 'user';
     next();
   } catch (error) {
     return res.status(401).json({ error: 'Token inválido' });
@@ -333,7 +332,6 @@ app.listen(PORT, () => {
   console.log(`   POST   /api/users/manutencoes - Adicionar manutenção`);
   console.log(`   GET    /api/tecnico/ordens    - Todas ordens (técnico)`);
   console.log(`   GET    /api/admin/usuarios    - Listar usuários (admin)`);
-  console.log(`   PUT    /api/admin/usuarios/:id/role - Alterar papel (admin)`);
   console.log(`\n💡 Use Ctrl+C para parar\n`);
 });
 

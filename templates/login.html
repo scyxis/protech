@@ -2,39 +2,303 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>ProTech | Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="./login.css">
-</head>
+<title>Login - ProTech</title>
+<link rel="stylesheet" href="land.css">
+<style>
+.auth-page {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+}
 
+.auth-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card h2 {
+  color: #123d7a;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.auth-card .subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  color: #334155;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #4fa3ff;
+  box-shadow: 0 0 0 3px rgba(79, 163, 255, 0.1);
+}
+
+.auth-btn {
+  background: #4fa3ff;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.auth-btn:hover {
+  background: #3b8be3;
+  transform: translateY(-2px);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #64748b;
+}
+
+.auth-footer a {
+  color: #4fa3ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #ef4444;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  background: #d1fae5;
+  color: #10b981;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.back-home {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #4fa3ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
 <body>
 
 <canvas id="particles"></canvas>
 
-<div class="page">
-
-  <div class="card">
-
-<h1 class="logo">
-  <span class="pro">Pro</span><span class="tech">Tech</span>
-</h1>
-    <p>Acesse sua conta</p>
-
-    <form>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Senha" required>
-      <button>Entrar</button>
-    </form>
-
-    <div class="footer">
-      <span>Não tem conta?</span>
-      <a href="./cadastro.html">Criar conta</a>
-    </div>
-
+<header>
+  <div class="navbar">
+    <h1 class="logo"><span class="pro">Pro</span><span class="tech">Tech</span></h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
   </div>
+</header>
 
+<div class="auth-page">
+  <div class="auth-card">
+    <a href="index.html" class="back-home">← Voltar para o site</a>
+    <h2>Bem-vindo de volta!</h2>
+    <p class="subtitle">Faça login para continuar</p>
+    
+    <form class="auth-form" id="loginForm">
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+      </div>
+      <div class="input-group">
+        <label>Senha</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required>
+      </div>
+      <div id="loginError" class="error-message" style="display: none;"></div>
+      <button type="submit" class="auth-btn" id="loginBtn">Entrar</button>
+    </form>
+    <div class="auth-footer">
+      Não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
+    </div>
+  </div>
 </div>
 
-<script src="./login.js"></script>
+<footer>
+  <p>© 2026 ProTech - Todos os direitos reservados.</p>
+</footer>
+
+<script>
+// URL do backend
+const API_URL = 'http://localhost:3000/api';
+
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const errorDiv = document.getElementById('loginError');
+  const submitBtn = document.getElementById('loginBtn');
+  const originalText = submitBtn.innerHTML;
+  
+  errorDiv.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="loading-spinner"></span> Entrando...';
+  
+  try {
+    const response = await fetch(`${API_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+      // Salvar token e dados do usuário
+      localStorage.setItem('protech_token', data.token);
+      localStorage.setItem('protech_user', JSON.stringify(data.user));
+      
+      // Mostrar mensagem de sucesso
+      submitBtn.innerHTML = '✓ Login realizado!';
+      submitBtn.style.background = '#10b981';
+      
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    } else {
+      errorDiv.textContent = data.message || 'Email ou senha incorretos';
+      errorDiv.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      submitBtn.style.background = '#4fa3ff';
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    errorDiv.textContent = 'Erro de conexão com o servidor. Certifique-se que o backend está rodando em http://localhost:3000';
+    errorDiv.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+    submitBtn.style.background = '#4fa3ff';
+  }
+});
+
+// Verificar se já está logado
+const token = localStorage.getItem('protech_token');
+if (token) {
+  window.location.href = 'index.html';
+}
+
+// Partículas
+const canvas = document.getElementById('particles');
+if(canvas) {
+  let ctx = canvas.getContext('2d');
+  let particles = [];
+  
+  function resize() { 
+    canvas.width = window.innerWidth; 
+    canvas.height = window.innerHeight; 
+  }
+  
+  function createParticles() {
+    let count = window.innerWidth < 768 ? 40 : 80;
+    particles = [];
+    for(let i = 0; i < count; i++) {
+      particles.push({ 
+        x: Math.random() * canvas.width, 
+        y: Math.random() * canvas.height, 
+        r: Math.random() * 3 + 1, 
+        vx: (Math.random() - 0.5) * 0.5, 
+        vy: (Math.random() - 0.5) * 0.3, 
+        op: Math.random() * 0.4 + 0.1 
+      });
+    }
+  }
+  
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { 
+      ctx.beginPath(); 
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); 
+      ctx.fillStyle = `rgba(79, 163, 255, ${p.op})`; 
+      ctx.fill(); 
+      p.x += p.vx; 
+      p.y += p.vy; 
+      if(p.x < 0) p.x = canvas.width; 
+      if(p.x > canvas.width) p.x = 0; 
+      if(p.y < 0) p.y = canvas.height; 
+      if(p.y > canvas.height) p.y = 0; 
+    });
+    requestAnimationFrame(draw);
+  }
+  
+  resize(); 
+  createParticles(); 
+  draw();
+  window.addEventListener('resize', () => { 
+    resize(); 
+    createParticles(); 
+  });
+}
+</script>
 </body>
 </html>

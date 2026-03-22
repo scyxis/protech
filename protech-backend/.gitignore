@@ -1,4 +1,5 @@
 node_modules/
+protech.db
 .env
-.env.local
 .DS_Store
+*.log

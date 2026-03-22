@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProTech - Minhas Manutenções</title>
+<link rel="stylesheet" href="land.css">
+<style>
+/* Estilos adicionais para pagamento */
+.card-actions-pagamento {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 10px;
+}
+
+.btn-pagar {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.btn-pagar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-pagar:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.btn-detalhes {
+  background: rgba(79, 163, 255, 0.2);
+  border: 1px solid rgba(79, 163, 255, 0.3);
+  color: #4fa3ff;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.btn-detalhes:hover {
+  background: rgba(79, 163, 255, 0.3);
+}
+
+/* Modal de pagamento */
+.modal-pagamento {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-pagamento.active {
+  display: flex;
+}
+
+.pagamento-content {
+  background: #fff;
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+}
+
+.pagamento-content h3 {
+  color: #123d7a;
+  margin-bottom: 20px;
+}
+
+.pagamento-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.pagamento-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.pagamento-option:hover {
+  border-color: #4fa3ff;
+  background: #f8fafc;
+}
+
+.pagamento-option input {
+  width: 20px;
+  height: 20px;
+  accent-color: #4fa3ff;
+}
+
+.pagamento-option label {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.pagamento-btn {
+  background: #4fa3ff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 40px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.pagamento-btn:hover {
+  background: #3b8be3;
+}
+
+.pix-code {
+  background: #f1f5f9;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+  word-break: break-all;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <div class="navbar">
+    <h1 class="logo"><span class="pro">Pro</span><span class="tech">Tech</span></h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="index.html#servicos">🔧 Serviços</a>
+      <a href="manutencoes.html">📋 Minhas Manutenções</a>
+      
+      <div class="user-menu-container" id="userMenuContainer" style="display: none;">
+        <div class="user-avatar" id="userAvatar">
+          <span class="avatar-icon">👤</span>
+          <span class="avatar-name" id="avatarName"></span>
+          <span class="avatar-arrow">▼</span>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <a href="manutencoes.html" class="dropdown-item">
+            <span>🔧</span> Minhas Manutenções
+          </a>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item logout-item" id="dropdownLogoutBtn">
+            <span>🚪</span> Sair
+          </button>
+        </div>
+      </div>
+      
+      <div id="authButtons">
+        <a href="login.html" class="btn ghost">Login</a>
+        <a href="cadastro.html" class="btn primary">Cadastro</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="manutencoes-layout">
+  <div class="sidebar">
+    <h3>📋 Minhas Manutenções</h3>
+    <a href="#" class="active" data-filter="all">📌 Todas</a>
+    <a href="#" data-filter="pendente">⏳ Pendentes</a>
+    <a href="#" data-filter="em_andamento">🔄 Em andamento</a>
+    <a href="#" data-filter="concluido">✅ Concluídas</a>
+    <a href="#" data-filter="pago">💳 Pagas</a>
+  </div>
+
+  <div class="main-content">
+    <div class="section">
+      <div class="section-title">Manutenções Ativas <span id="ativasCount">0</span></div>
+      <div class="scroll-container">
+        <div class="scroll-wrapper">
+          <div class="scroll" id="ativasScroll"></div>
+        </div>
+        <div class="scroll-arrow" onclick="scrollRow('ativasScroll')"><span>→</span></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Concluídas <span id="concluidasCount">0</span></div>
+      <div class="scroll-container">
+        <div class="scroll-wrapper">
+          <div class="scroll" id="concluidasScroll"></div>
+        </div>
+        <div class="scroll-arrow" onclick="scrollRow('concluidasScroll')"><span>→</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Pagamento -->
+<div class="modal-pagamento" id="modalPagamento">
+  <div class="pagamento-content">
+    <h3>💳 Realizar Pagamento</h3>
+    <p id="pagamentoServicoNome"></p>
+    <p id="pagamentoValor" style="font-size: 1.5rem; color: #4fa3ff; font-weight: bold;"></p>
+    
+    <div class="pagamento-options" id="pagamentoOptions">
+      <div class="pagamento-option">
+        <input type="radio" name="metodoPagamento" value="pix" id="pix" checked>
+        <label for="pix">📱 PIX (Instantâneo)</label>
+      </div>
+      <div class="pagamento-option">
+        <input type="radio" name="metodoPagamento" value="cartao" id="cartao">
+        <label for="cartao">💳 Cartão de Crédito</label>
+      </div>
+      <div class="pagamento-option">
+        <input type="radio" name="metodoPagamento" value="boleto" id="boleto">
+        <label for="boleto">📄 Boleto Bancário</label>
+      </div>
+    </div>
+    
+    <div id="pixInfo" style="display: none;">
+      <div class="pix-code">
+        <strong>Chave PIX:</strong><br>
+        contato@protech.com.br
+      </div>
+      <p style="font-size: 0.75rem; color: #64748b; margin-top: 10px;">Copie a chave e pague no seu app bancário</p>
+    </div>
+    
+    <button class="pagamento-btn" id="confirmarPagamentoBtn">Confirmar Pagamento</button>
+  </div>
+</div>
+
+<script>
+const API_URL = 'https://protech-rt8q.onrender.com/api';
+let manutencoesDoUsuario = [];
+let filtroAtual = "all";
+let manutencaoPagando = null;
+
+// Funções auxiliares
+function getStatusIcon(status) {
+  const icons = { 'pendente': '⏳', 'em_andamento': '🔄', 'concluido': '✅', 'pago': '💳' };
+  return icons[status] || '📌';
+}
+
+function getStatusText(status) {
+  const texts = { 'pendente': 'Pendente', 'em_andamento': 'Em andamento', 'concluido': 'Concluído', 'pago': 'Pago' };
+  return texts[status] || status;
+}
+
+function formatDate(dateString) {
+  if (!dateString) return 'Data não informada';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('pt-BR');
+}
+
+function showToast(message, isError = false) {
+  const toast = document.createElement('div');
+  toast.className = `toast ${isError ? 'error' : ''}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// Autenticação
+function checkAuth() {
+  const token = localStorage.getItem('protech_token');
+  const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
+  if (!token) { window.location.href = 'login.html'; return false; }
+  
+  const userMenu = document.getElementById('userMenuContainer');
+  const authButtons = document.getElementById('authButtons');
+  const avatarName = document.getElementById('avatarName');
+  if (userMenu && authButtons) {
+    userMenu.style.display = 'block';
+    authButtons.style.display = 'none';
+    if (avatarName) avatarName.textContent = user.name?.split(' ')[0] || 'Usuário';
+  }
+  return { token, user };
+}
+
+// Função para pagar manutenção
+async function pagarManutencao(manutencao) {
+  const auth = checkAuth();
+  if (!auth) return;
+  
+  try {
+    // Atualizar status para "pago"
+    const response = await fetch(`${API_URL}/users/manutencoes/${manutencao._id || manutencao.id}/pagar`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${auth.token}`
+      }
+    });
+    
+    if (response.ok) {
+      showToast(`✅ Pagamento de ${manutencao.nome} realizado com sucesso!`);
+      carregarManutencoes();
+    } else {
+      showToast('❌ Erro ao processar pagamento', true);
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    showToast('Erro de conexão', true);
+  }
+}
+
+// Criar card com botões
+function criarCard(item) {
+  const card = document.createElement("div");
+  card.className = "card";
+  
+  const podePagar = item.status === 'pendente' || item.status === 'concluido';
+  
+  card.innerHTML = `
+    <h3>${escapeHtml(item.nome || item.servicoNome || 'Serviço')}</h3>
+    <p>📱 ${escapeHtml(item.dispositivo || 'Não especificado')}</p>
+    <p>💰 ${escapeHtml(item.preco || 'R$ 0')}</p>
+    <p>📅 ${formatDate(item.data || item.createdAt)}</p>
+    <div class="status-badge status-${item.status || 'pendente'}">
+      ${getStatusIcon(item.status)} ${getStatusText(item.status)}
+    </div>
+    <div class="card-actions-pagamento">
+      ${podePagar ? `<button class="btn-pagar" data-id="${item._id || item.id}">💳 Pagar Agora</button>` : ''}
+      <button class="btn-detalhes" data-id="${item._id || item.id}">📋 Ver Detalhes</button>
+    </div>
+  `;
+  
+  setTimeout(() => card.classList.add("show"), 0);
+  return card;
+}
+
+// Renderizar manutenções
+function renderizarManutencoes() {
+  const ativasContainer = document.getElementById("ativasScroll");
+  const concluidasContainer = document.getElementById("concluidasScroll");
+  
+  ativasContainer.innerHTML = "";
+  concluidasContainer.innerHTML = "";
+  
+  let manutencoesFiltradas = manutencoesDoUsuario;
+  if (filtroAtual !== "all") {
+    manutencoesFiltradas = manutencoesDoUsuario.filter(m => m.status === filtroAtual);
+  }
+  
+  const ativas = manutencoesFiltradas.filter(m => m.status === "pendente" || m.status === "em_andamento");
+  const concluidas = manutencoesFiltradas.filter(m => m.status === "concluido" || m.status === "pago");
+  
+  document.getElementById("ativasCount").textContent = ativas.length;
+  document.getElementById("concluidasCount").textContent = concluidas.length;
+  
+  if (ativas.length === 0) {
+    ativasContainer.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔧</div><p>Nenhuma manutenção ativa</p></div>`;
+  } else {
+    ativas.forEach(item => ativasContainer.appendChild(criarCard(item)));
+  }
+  
+  if (concluidas.length === 0) {
+    concluidasContainer.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅</div><p>Nenhuma manutenção concluída</p></div>`;
+  } else {
+    concluidas.forEach(item => concluidasContainer.appendChild(criarCard(item)));
+  }
+  
+  // Eventos dos botões
+  document.querySelectorAll('.btn-pagar').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      manutencaoPagando = manutencoesDoUsuario.find(m => (m._id || m.id) == id);
+      if (manutencaoPagando) {
+        document.getElementById('pagamentoServicoNome').textContent = manutencaoPagando.nome;
+        document.getElementById('pagamentoValor').textContent = manutencaoPagando.preco;
+        document.getElementById('modalPagamento').classList.add('active');
+      }
+    });
+  });
+  
+  document.querySelectorAll('.btn-detalhes').forEach(btn => {
+    btn.addEventListener('click', () => {
+      showToast('🔍 Detalhes em breve', false);
+    });
+  });
+}
+
+// Carregar manutenções do backend
+async function carregarManutencoes() {
+  const auth = checkAuth();
+  if (!auth) return;
+  
+  try {
+    const response = await fetch(`${API_URL}/users/manutencoes`, {
+      headers: { 'Authorization': `Bearer ${auth.token}` }
+    });
+    
+    if (response.ok) {
+      manutencoesDoUsuario = await response.json();
+      renderizarManutencoes();
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+  }
+}
+
+// Modal pagamento
+document.getElementById('confirmarPagamentoBtn')?.addEventListener('click', async () => {
+  document.getElementById('modalPagamento').classList.remove('active');
+  if (manutencaoPagando) {
+    await pagarManutencao(manutencaoPagando);
+    manutencaoPagando = null;
+  }
+});
+
+// Fechar modal
+document.getElementById('modalPagamento')?.addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalPagamento')) {
+    document.getElementById('modalPagamento').classList.remove('active');
+  }
+});
+
+// Filtros e scroll
+function scrollRow(elementId) {
+  const element = document.getElementById(elementId);
+  if (element) element.scrollBy({ left: 320, behavior: 'smooth' });
+}
+
+function configurarFiltros() {
+  document.querySelectorAll('.sidebar a').forEach(filtro => {
+    filtro.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar a').forEach(f => f.classList.remove('active'));
+      filtro.classList.add('active');
+      filtroAtual = filtro.dataset.filter;
+      renderizarManutencoes();
+    });
+  });
+}
+
+// Menu dropdown e logout
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();
+  carregarManutencoes();
+  configurarFiltros();
+  
+  const userAvatar = document.getElementById('userAvatar');
+  const userMenu = document.getElementById('userMenuContainer');
+  if (userAvatar) {
+    userAvatar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userMenu.classList.toggle('active');
+    });
+    document.addEventListener('click', () => userMenu.classList.remove('active'));
+  }
+  
+  document.getElementById('dropdownLogoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('protech_token');
+    localStorage.removeItem('protech_user');
+    window.location.href = 'index.html';
+  });
+});
+
+// Partículas
+const canvas = document.getElementById('particles');
+if(canvas) {
+  let ctx = canvas.getContext('2d');
+  let particles = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function createParticles() {
+    const count = window.innerWidth < 768 ? 40 : 80;
+    particles = [];
+    for(let i = 0; i < count; i++) {
+      particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 3 + 1, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.3, op: Math.random() * 0.4 + 0.1 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(79, 163, 255, ${p.op})`; ctx.fill(); p.x += p.vx; p.y += p.vy; if(p.x < 0) p.x = canvas.width; if(p.x > canvas.width) p.x = 0; if(p.y < 0) p.y = canvas.height; if(p.y > canvas.height) p.y = 0; });
+    requestAnimationFrame(draw);
+  }
+  resize(); createParticles(); draw();
+  window.addEventListener("resize", () => { resize(); createParticles(); });
+}
+</script>
+</body>
+</html>

@@ -2,9 +2,161 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>ProTech - Assistência Técnica Especializada</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProTech - Assistência Técnica</title>
 <link rel="stylesheet" href="land.css">
+<style>
+/* Estilos adicionais para os cards com botão */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-contratar {
+  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+.btn-contratar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
+}
+
+.btn-contratar:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Modal de confirmação */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content h3 {
+  color: #123d7a;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.modal-btn.confirm {
+  background: #4fa3ff;
+  color: white;
+}
+
+.modal-btn.confirm:hover {
+  background: #3b8be3;
+}
+
+.modal-btn.cancel {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.modal-btn.cancel:hover {
+  background: #cbd5e1;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #10b981;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  z-index: 2000;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.toast.error {
+  background: #ef4444;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+</style>
 </head>
 <body>
 
@@ -12,14 +164,11 @@
 
 <header>
   <div class="navbar">
-    <h1 class="logo">
-      <span class="pro">Pro</span><span class="tech">Tech</span>
-    </h1>
+    <h1 class="logo"><span class="pro">Pro</span><span class="tech">Tech</span></h1>
     <nav>
       <a href="#servicos">Serviços</a>
       <a href="#contato">Contato</a>
       
-      <!-- MENU DO USUÁRIO (aparece quando logado) -->
       <div class="user-menu-container" id="userMenuContainer" style="display: none;">
         <div class="user-avatar" id="userAvatar">
           <span class="avatar-icon">👤</span>
@@ -27,9 +176,6 @@
           <span class="avatar-arrow">▼</span>
         </div>
         <div class="user-dropdown" id="userDropdown">
-          <a href="minha-conta.html" class="dropdown-item">
-            <span>👤</span> Minha Conta
-          </a>
           <a href="manutencoes.html" class="dropdown-item">
             <span>🔧</span> Minhas Manutenções
           </a>
@@ -40,7 +186,6 @@
         </div>
       </div>
       
-      <!-- BOTÕES DE AUTENTICAÇÃO (aparecem quando NÃO logado) -->
       <div id="authButtons">
         <a href="login.html" class="btn ghost">Login</a>
         <a href="cadastro.html" class="btn primary">Cadastro</a>
@@ -69,34 +214,21 @@
     <div class="services-header">
       <div class="header-left">
         <h2>Nossos Serviços</h2>
-        <p class="section-subtitle">Mais de 50 tipos de manutenção para todos os dispositivos</p>
+        <p class="section-subtitle">Escolha o serviço e contrate já!</p>
       </div>
       <button class="toggle-filters-btn" id="toggleFiltersBtn">
-        <span class="btn-icon">🔍</span>
-        <span class="btn-text">Ocultar Filtros</span>
-        <span class="btn-arrow">▲</span>
+        <span>🔍</span>
+        <span>Ocultar Filtros</span>
+        <span>▲</span>
       </button>
     </div>
 
-    <!-- BOTÃO PARA ABRIR FILTROS NO MOBILE -->
-    <div class="mobile-filter-trigger" id="mobileFilterTrigger">
-      <div class="mobile-filter-trigger-content">
-        <span class="trigger-icon">🔍</span>
-        <span class="trigger-text">Filtrar serviços</span>
-        <span class="trigger-badge" id="mobileTriggerBadge">0</span>
-        <span class="trigger-arrow">▼</span>
-      </div>
-    </div>
-
-    <!-- FILTROS DESKTOP -->
+    <!-- FILTROS -->
     <div class="filters-wrapper desktop-filters" id="filtersWrapper">
       <div class="filters-container">
         <div class="filters-bar">
           <div class="filter-group">
-            <div class="filter-header">
-              <h4>📱 Dispositivo</h4>
-              <span class="filter-badge" id="deviceBadge">0</span>
-            </div>
+            <div class="filter-header"><h4>📱 Dispositivo</h4><span class="filter-badge" id="deviceBadge">0</span></div>
             <div class="filter-options">
               <label class="filter-option"><input type="checkbox" value="celular" class="filter-checkbox" data-type="device"><span>Celular</span><span class="item-count" id="count-celular">0</span></label>
               <label class="filter-option"><input type="checkbox" value="tablet" class="filter-checkbox" data-type="device"><span>Tablet</span><span class="item-count" id="count-tablet">0</span></label>
@@ -104,29 +236,21 @@
             </div>
           </div>
           <div class="filter-group">
-            <div class="filter-header">
-              <h4>🔧 Tipo de Serviço</h4>
-              <span class="filter-badge" id="serviceBadge">0</span>
-            </div>
+            <div class="filter-header"><h4>🔧 Serviço</h4><span class="filter-badge" id="serviceBadge">0</span></div>
             <div class="filter-options scrollable">
               <label class="filter-option"><input type="checkbox" value="tela" class="filter-checkbox" data-type="service"><span>🖥️ Troca de Tela</span><span class="item-count" id="count-tela">0</span></label>
               <label class="filter-option"><input type="checkbox" value="bateria" class="filter-checkbox" data-type="service"><span>🔋 Bateria</span><span class="item-count" id="count-bateria">0</span></label>
-              <label class="filter-option"><input type="checkbox" value="conector" class="filter-checkbox" data-type="service"><span>⚡ Conector de Carga</span><span class="item-count" id="count-conector">0</span></label>
               <label class="filter-option"><input type="checkbox" value="software" class="filter-checkbox" data-type="service"><span>💻 Software/Formatação</span><span class="item-count" id="count-software">0</span></label>
               <label class="filter-option"><input type="checkbox" value="camera" class="filter-checkbox" data-type="service"><span>📸 Câmera</span><span class="item-count" id="count-camera">0</span></label>
               <label class="filter-option"><input type="checkbox" value="pelicula" class="filter-checkbox" data-type="service"><span>🔮 Película</span><span class="item-count" id="count-pelicula">0</span></label>
             </div>
           </div>
           <div class="filter-group">
-            <div class="filter-header">
-              <h4>🏷️ Marca</h4>
-              <span class="filter-badge" id="brandBadge">0</span>
-            </div>
+            <div class="filter-header"><h4>🏷️ Marca</h4><span class="filter-badge" id="brandBadge">0</span></div>
             <div class="filter-options scrollable">
               <label class="filter-option"><input type="checkbox" value="iphone" class="filter-checkbox" data-type="brand"><span>Apple iPhone</span><span class="item-count" id="count-iphone">0</span></label>
               <label class="filter-option"><input type="checkbox" value="samsung" class="filter-checkbox" data-type="brand"><span>Samsung</span><span class="item-count" id="count-samsung">0</span></label>
               <label class="filter-option"><input type="checkbox" value="xiaomi" class="filter-checkbox" data-type="brand"><span>Xiaomi</span><span class="item-count" id="count-xiaomi">0</span></label>
-              <label class="filter-option"><input type="checkbox" value="motorola" class="filter-checkbox" data-type="brand"><span>Motorola</span><span class="item-count" id="count-motorola">0</span></label>
               <label class="filter-option"><input type="checkbox" value="dell" class="filter-checkbox" data-type="brand"><span>Dell</span><span class="item-count" id="count-dell">0</span></label>
               <label class="filter-option"><input type="checkbox" value="hp" class="filter-checkbox" data-type="brand"><span>HP</span><span class="item-count" id="count-hp">0</span></label>
             </div>
@@ -138,54 +262,22 @@
       </div>
     </div>
 
-    <!-- FILTROS MOBILE MODAL -->
-    <div class="mobile-filters-modal" id="mobileFiltersModal">
-      <div class="mobile-filters-overlay" id="mobileFiltersOverlay"></div>
-      <div class="mobile-filters-drawer">
-        <div class="mobile-filters-header">
-          <h3>Filtrar serviços</h3>
-          <button class="close-mobile-filters" id="closeMobileFiltersBtn">✕</button>
-        </div>
-        <div class="mobile-filters-content">
-          <div class="mobile-filter-group"><div class="mobile-filter-header"><h4>📱 Dispositivo</h4><span class="mobile-filter-badge" id="mobileDeviceBadge">0</span></div>
-            <div class="mobile-filter-options">
-              <label class="mobile-filter-option"><input type="checkbox" value="celular" class="mobile-filter-checkbox" data-type="device"><span>Celular</span><span class="mobile-item-count" id="mobile-count-celular">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="tablet" class="mobile-filter-checkbox" data-type="device"><span>Tablet</span><span class="mobile-item-count" id="mobile-count-tablet">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="computador" class="mobile-filter-checkbox" data-type="device"><span>Computador/Notebook</span><span class="mobile-item-count" id="mobile-count-computador">0</span></label>
-            </div>
-          </div>
-          <div class="mobile-filter-group"><div class="mobile-filter-header"><h4>🔧 Serviço</h4><span class="mobile-filter-badge" id="mobileServiceBadge">0</span></div>
-            <div class="mobile-filter-options">
-              <label class="mobile-filter-option"><input type="checkbox" value="tela" class="mobile-filter-checkbox" data-type="service"><span>🖥️ Troca de Tela</span><span class="mobile-item-count" id="mobile-count-tela">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="bateria" class="mobile-filter-checkbox" data-type="service"><span>🔋 Bateria</span><span class="mobile-item-count" id="mobile-count-bateria">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="conector" class="mobile-filter-checkbox" data-type="service"><span>⚡ Conector de Carga</span><span class="mobile-item-count" id="mobile-count-conector">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="software" class="mobile-filter-checkbox" data-type="service"><span>💻 Software/Formatação</span><span class="mobile-item-count" id="mobile-count-software">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="camera" class="mobile-filter-checkbox" data-type="service"><span>📸 Câmera</span><span class="mobile-item-count" id="mobile-count-camera">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="pelicula" class="mobile-filter-checkbox" data-type="service"><span>🔮 Película</span><span class="mobile-item-count" id="mobile-count-pelicula">0</span></label>
-            </div>
-          </div>
-          <div class="mobile-filter-group"><div class="mobile-filter-header"><h4>🏷️ Marca</h4><span class="mobile-filter-badge" id="mobileBrandBadge">0</span></div>
-            <div class="mobile-filter-options">
-              <label class="mobile-filter-option"><input type="checkbox" value="iphone" class="mobile-filter-checkbox" data-type="brand"><span>Apple iPhone</span><span class="mobile-item-count" id="mobile-count-iphone">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="samsung" class="mobile-filter-checkbox" data-type="brand"><span>Samsung</span><span class="mobile-item-count" id="mobile-count-samsung">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="xiaomi" class="mobile-filter-checkbox" data-type="brand"><span>Xiaomi</span><span class="mobile-item-count" id="mobile-count-xiaomi">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="motorola" class="mobile-filter-checkbox" data-type="brand"><span>Motorola</span><span class="mobile-item-count" id="mobile-count-motorola">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="dell" class="mobile-filter-checkbox" data-type="brand"><span>Dell</span><span class="mobile-item-count" id="mobile-count-dell">0</span></label>
-              <label class="mobile-filter-option"><input type="checkbox" value="hp" class="mobile-filter-checkbox" data-type="brand"><span>HP</span><span class="mobile-item-count" id="mobile-count-hp">0</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="mobile-filters-footer">
-          <button class="mobile-clear-filters" id="mobileClearFiltersBtn">Limpar todos</button>
-          <button class="mobile-apply-filters" id="mobileApplyFiltersBtn">Aplicar Filtros</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="active-filters" id="activeFilters"></div>
     <div class="services-grid" id="servicesGrid"></div>
   </div>
 </section>
+
+<!-- Modal de Confirmação -->
+<div class="modal" id="contratarModal">
+  <div class="modal-content">
+    <h3>✅ Confirmar Contratação</h3>
+    <p id="modalServicoNome"></p>
+    <p id="modalServicoPreco"></p>
+    <div class="modal-buttons">
+      <button class="modal-btn confirm" id="confirmarBtn">Confirmar</button>
+      <button class="modal-btn cancel" id="cancelarBtn">Cancelar</button>
+    </div>
+  </div>
+</div>
 
 <section class="testimonials">
   <div class="container">
@@ -225,6 +317,256 @@
   <p>© 2026 ProTech - Todos os direitos reservados.</p>
 </footer>
 
-<script src="land.js"></script>
+<script>
+// API URL
+const API_URL = 'https://protech-rt8q.onrender.com/api';
+
+// Dados dos serviços
+const servicesData = [
+  { id: 1, device: 'celular', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPhone 12', desc: 'Tela Super Retina XDR original.', price: 'R$ 399', time: '2h', badge: 'iPhone' },
+  { id: 2, device: 'celular', service: 'bateria', brand: 'iphone', name: 'Bateria - iPhone 12', desc: 'Bateria original Apple.', price: 'R$ 229', time: '1h', badge: 'iPhone' },
+  { id: 3, device: 'celular', service: 'tela', brand: 'samsung', name: 'Troca de Tela - Samsung S21', desc: 'Tela Dynamic AMOLED.', price: 'R$ 349', time: '2h', badge: 'Samsung' },
+  { id: 4, device: 'celular', service: 'bateria', brand: 'samsung', name: 'Bateria - Samsung S21', desc: 'Bateria original.', price: 'R$ 179', time: '1h', badge: 'Samsung' },
+  { id: 5, device: 'celular', service: 'software', brand: 'generic', name: 'Formatação e Otimização', desc: 'Formatação completa e instalação de drivers.', price: 'R$ 149', time: '3h', badge: 'Geral' },
+  { id: 6, device: 'celular', service: 'pelicula', brand: 'iphone', name: 'Película de Vidro - iPhone', desc: 'Vidro temperado 9H.', price: 'R$ 49', time: '15min', badge: 'iPhone' },
+  { id: 7, device: 'computador', service: 'software', brand: 'dell', name: 'Formatação - Dell', desc: 'Formatação e otimização.', price: 'R$ 149', time: '3h', badge: 'Dell' },
+  { id: 8, device: 'computador', service: 'bateria', brand: 'hp', name: 'Bateria - HP', desc: 'Bateria original HP.', price: 'R$ 329', time: '1h', badge: 'HP' },
+  { id: 9, device: 'tablet', service: 'tela', brand: 'samsung', name: 'Troca de Tela - Samsung Tab', desc: 'Tela para tablet.', price: 'R$ 399', time: '2h', badge: 'Samsung Tablet' }
+];
+
+// Variáveis de filtro
+let filtroAtivo = { devices: [], services: [], brands: [] };
+let servicoSelecionado = null;
+
+// Funções de autenticação
+function isAuthenticated() {
+  return !!localStorage.getItem('protech_token');
+}
+
+function getToken() {
+  return localStorage.getItem('protech_token');
+}
+
+function showToast(message, isError = false) {
+  const toast = document.createElement('div');
+  toast.className = `toast ${isError ? 'error' : ''}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// Função para contratar serviço
+// Função para contratar serviço
+async function contratarServico(servico) {
+  const token = getToken();
+  
+  if (!token) {
+    showToast('🔒 Faça login para contratar um serviço', true);
+    setTimeout(() => window.location.href = 'login.html', 1500);
+    return false;
+  }
+  
+  const manutencao = {
+    servicoId: servico.id,
+    nome: servico.name,
+    dispositivo: servico.device,
+    preco: servico.price,
+    status: 'pendente',
+    data: new Date().toISOString()
+  };
+  
+  console.log('Enviando manutenção:', manutencao);
+  
+  try {
+    const response = await fetch(`${API_URL}/users/manutencoes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(manutencao)
+    });
+    
+    const data = await response.json();
+    console.log('Resposta:', data);
+    
+    if (response.ok) {
+      showToast(`✅ ${servico.name} contratado com sucesso!`);
+      return true;
+    } else {
+      showToast(data.error || data.message || 'Erro ao contratar serviço', true);
+      return false;
+    }
+  } catch (error) {
+    console.error('Erro detalhado:', error);
+    showToast('Erro de conexão com o servidor. Verifique se o backend está online.', true);
+    return false;
+  }
+}
+// Função para renderizar cards com botão contratar
+function renderCards() {
+  const grid = document.getElementById('servicesGrid');
+  if (!grid) return;
+  
+  let filtered = [...servicesData];
+  
+  if (filtroAtivo.devices.length) {
+    filtered = filtered.filter(s => filtroAtivo.devices.includes(s.device));
+  }
+  if (filtroAtivo.services.length) {
+    filtered = filtered.filter(s => filtroAtivo.services.includes(s.service));
+  }
+  if (filtroAtivo.brands.length) {
+    filtered = filtered.filter(s => filtroAtivo.brands.includes(s.brand));
+  }
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results-message"><div class="no-results-icon">🔍</div><h3>Nenhum serviço encontrado</h3><p>Tente remover alguns filtros.</p></div>`;
+    return;
+  }
+  
+  grid.innerHTML = filtered.map(service => `
+    <div class="card" data-id="${service.id}">
+      <div class="card-badge">${service.badge}</div>
+      <h3>${service.name}</h3>
+      <p>${service.desc}</p>
+      <div class="card-footer">
+        <span class="price">${service.price}</span>
+        <span class="duration">⏱️ ${service.time}</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn-contratar" data-id="${service.id}">Contratar Agora</button>
+      </div>
+    </div>
+  `).join('');
+  
+  // Adicionar eventos aos botões
+  document.querySelectorAll('.btn-contratar').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.dataset.id);
+      servicoSelecionado = servicesData.find(s => s.id === id);
+      
+      if (servicoSelecionado) {
+        document.getElementById('modalServicoNome').textContent = `📱 ${servicoSelecionado.name}`;
+        document.getElementById('modalServicoPreco').textContent = `💰 ${servicoSelecionado.price}`;
+        document.getElementById('contratarModal').classList.add('active');
+      }
+    });
+  });
+}
+
+// Modal handlers
+document.getElementById('confirmarBtn')?.addEventListener('click', async () => {
+  document.getElementById('contratarModal').classList.remove('active');
+  if (servicoSelecionado) {
+    await contratarServico(servicoSelecionado);
+    servicoSelecionado = null;
+  }
+});
+
+document.getElementById('cancelarBtn')?.addEventListener('click', () => {
+  document.getElementById('contratarModal').classList.remove('active');
+  servicoSelecionado = null;
+});
+
+// Fechar modal ao clicar fora
+document.getElementById('contratarModal')?.addEventListener('click', (e) => {
+  if (e.target === document.getElementById('contratarModal')) {
+    document.getElementById('contratarModal').classList.remove('active');
+  }
+});
+
+// Função para atualizar contadores
+function updateCounters() {
+  const counts = {
+    celular: 0, tablet: 0, computador: 0,
+    tela: 0, bateria: 0, software: 0, camera: 0, pelicula: 0,
+    iphone: 0, samsung: 0, xiaomi: 0, dell: 0, hp: 0
+  };
+  
+  servicesData.forEach(s => {
+    if (counts[s.device] !== undefined) counts[s.device]++;
+    if (counts[s.service] !== undefined) counts[s.service]++;
+    if (counts[s.brand] !== undefined) counts[s.brand]++;
+  });
+  
+  Object.keys(counts).forEach(key => {
+    const el = document.getElementById(`count-${key}`);
+    if (el) el.textContent = counts[key];
+  });
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+  updateCounters();
+  renderCards();
+  
+  // Filtros
+  document.querySelectorAll('.filter-checkbox').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const type = cb.dataset.type;
+      const value = cb.value;
+      
+      if (cb.checked) {
+        if (!filtroAtivo[`${type}s`].includes(value)) {
+          filtroAtivo[`${type}s`].push(value);
+        }
+      } else {
+        filtroAtivo[`${type}s`] = filtroAtivo[`${type}s`].filter(v => v !== value);
+      }
+      
+      renderCards();
+      
+      // Atualizar badges
+      document.getElementById('deviceBadge').textContent = filtroAtivo.devices.length;
+      document.getElementById('serviceBadge').textContent = filtroAtivo.services.length;
+      document.getElementById('brandBadge').textContent = filtroAtivo.brands.length;
+    });
+  });
+  
+  document.getElementById('clearFiltersBtn')?.addEventListener('click', () => {
+    document.querySelectorAll('.filter-checkbox:checked').forEach(cb => cb.checked = false);
+    filtroAtivo = { devices: [], services: [], brands: [] };
+    renderCards();
+    document.getElementById('deviceBadge').textContent = 0;
+    document.getElementById('serviceBadge').textContent = 0;
+    document.getElementById('brandBadge').textContent = 0;
+  });
+  
+  // Menu do usuário
+  const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
+  const userMenu = document.getElementById('userMenuContainer');
+  const authButtons = document.getElementById('authButtons');
+  const avatarName = document.getElementById('avatarName');
+  
+  if (user && user.name) {
+    userMenu.style.display = 'block';
+    authButtons.style.display = 'none';
+    avatarName.textContent = user.name.split(' ')[0];
+  } else {
+    userMenu.style.display = 'none';
+    authButtons.style.display = 'flex';
+  }
+  
+  // Logout
+  document.getElementById('dropdownLogoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('protech_token');
+    localStorage.removeItem('protech_user');
+    window.location.href = 'index.html';
+  });
+  
+  // Dropdown
+  const userAvatar = document.getElementById('userAvatar');
+  const userDropdown = document.getElementById('userMenuContainer');
+  if (userAvatar) {
+    userAvatar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', () => userDropdown.classList.remove('active'));
+  }
+});
+</script>
 </body>
 </html>

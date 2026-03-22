@@ -236,3 +236,74 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+// ==================== ROTAS DE MANUTENÇÕES ====================
+
+// Listar manutenções do usuário
+app.get('/api/users/manutencoes', authMiddleware, (req, res) => {
+  try {
+    const user = db.prepare('SELECT manutencoes FROM users WHERE id = ?').get(req.userId);
+    const manutencoes = user?.manutencoes ? JSON.parse(user.manutencoes) : [];
+    res.json(manutencoes);
+  } catch (error) {
+    console.error('Erro ao listar manutenções:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Adicionar manutenção
+app.post('/api/users/manutencoes', authMiddleware, (req, res) => {
+  try {
+    const { servicoId, nome, dispositivo, preco, status, data } = req.body;
+    
+    // Buscar manutenções atuais
+    const user = db.prepare('SELECT manutencoes FROM users WHERE id = ?').get(req.userId);
+    let manutencoes = user?.manutencoes ? JSON.parse(user.manutencoes) : [];
+    
+    // Adicionar nova manutenção
+    const novaManutencao = {
+      id: Date.now(),
+      servicoId,
+      nome,
+      dispositivo,
+      preco,
+      status: status || 'pendente',
+      data: data || new Date().toISOString(),
+      createdAt: new Date().toISOString()
+    };
+    
+    manutencoes.push(novaManutencao);
+    
+    // Salvar de volta
+    db.prepare('UPDATE users SET manutencoes = ? WHERE id = ?').run(JSON.stringify(manutencoes), req.userId);
+    
+    res.json({ message: 'Manutenção adicionada!', manutencao: novaManutencao });
+  } catch (error) {
+    console.error('Erro ao adicionar manutenção:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Atualizar status da manutenção (pagar)
+app.put('/api/users/manutencoes/:id/pagar', authMiddleware, (req, res) => {
+  try {
+    const manutencaoId = parseInt(req.params.id);
+    
+    const user = db.prepare('SELECT manutencoes FROM users WHERE id = ?').get(req.userId);
+    let manutencoes = user?.manutencoes ? JSON.parse(user.manutencoes) : [];
+    
+    const index = manutencoes.findIndex(m => m.id === manutencaoId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Manutenção não encontrada' });
+    }
+    
+    manutencoes[index].status = 'pago';
+    manutencoes[index].dataPagamento = new Date().toISOString();
+    
+    db.prepare('UPDATE users SET manutencoes = ? WHERE id = ?').run(JSON.stringify(manutencoes), req.userId);
+    
+    res.json({ message: 'Pagamento realizado com sucesso!', manutencao: manutencoes[index] });
+  } catch (error) {
+    console.error('Erro ao processar pagamento:', error);
+    res.status(500).json({ error: error.message });
+  }
+});

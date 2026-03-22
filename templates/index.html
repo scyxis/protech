@@ -145,6 +145,45 @@ nav a:hover { color: #4fa3ff; }
 }
 .toggle-filters-btn:hover { background: #eef2ff; border-color: #4fa3ff; }
 
+/* BOTÃO MOBILE DENTRO DA ÁREA DE SERVIÇOS */
+.mobile-filter-trigger {
+  display: none;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.mobile-filter-trigger-content {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 60px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+}
+
+.mobile-filter-trigger-content:hover {
+  background: #f8fafc;
+  border-color: #4fa3ff;
+}
+
+.trigger-icon { font-size: 1.1rem; }
+.trigger-text { flex: 1; font-weight: 600; color: #123d7a; font-size: 0.95rem; }
+.trigger-badge {
+  background: #4fa3ff;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: none;
+}
+.trigger-badge.active { display: inline-block; }
+.trigger-arrow { color: #94a3b8; font-size: 0.8rem; }
+
 /* FILTROS DESKTOP */
 .filters-wrapper {
   transition: all 0.4s ease;
@@ -317,7 +356,7 @@ nav a:hover { color: #4fa3ff; }
   font-weight: 600;
 }
 
-/* FILTROS MOBILE - MODAL */
+/* FILTROS MOBILE MODAL */
 .mobile-filters-modal {
   position: fixed;
   top: 0;
@@ -442,33 +481,6 @@ nav a:hover { color: #4fa3ff; }
 }
 .mobile-apply-filters:hover { background: #3b8be3; }
 
-/* BOTÃO FLUTUANTE MOBILE */
-.floating-filters-btn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #4fa3ff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 1000;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
-}
-.filter-count-badge {
-  background: #ff6b6b;
-  color: white;
-  border-radius: 20px;
-  padding: 2px 8px;
-  font-size: 0.7rem;
-  display: none;
-}
-
 /* TESTIMONIALS */
 .testimonials { background: #fff; padding: 80px 0; }
 .testimonials h2 { text-align: center; color: #123d7a; font-size: 2rem; margin-bottom: 10px; }
@@ -532,7 +544,7 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
   .services-header { flex-direction: column; align-items: flex-start; }
   .toggle-filters-btn { width: 100%; justify-content: center; }
   .desktop-filters { display: none !important; }
-  .floating-filters-btn { display: flex; }
+  .mobile-filter-trigger { display: block; }
   .services-grid { grid-template-columns: 1fr; }
   .contact-layout { grid-template-columns: 1fr; }
 }
@@ -574,6 +586,16 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
     <div class="services-header">
       <div><h2>Nossos Serviços</h2><p class="section-subtitle">Mais de 50 tipos de manutenção para todos os dispositivos</p></div>
       <button class="toggle-filters-btn" id="toggleFiltersBtn"><span>🔍</span><span>Ocultar Filtros</span><span>▲</span></button>
+    </div>
+
+    <!-- BOTÃO PARA ABRIR FILTROS NO MOBILE (DENTRO DA ÁREA) -->
+    <div class="mobile-filter-trigger" id="mobileFilterTrigger">
+      <div class="mobile-filter-trigger-content">
+        <span class="trigger-icon">🔍</span>
+        <span class="trigger-text">Filtrar serviços</span>
+        <span class="trigger-badge" id="mobileTriggerBadge">0</span>
+        <span class="trigger-arrow">▼</span>
+      </div>
     </div>
 
     <!-- FILTROS DESKTOP -->
@@ -654,7 +676,6 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
     </div>
 
     <div class="active-filters" id="activeFilters"></div>
-    <button class="floating-filters-btn" id="floatingFiltersBtn"><span>🔍</span><span>Filtros</span><span class="filter-count-badge" id="floatingFilterCount">0</span></button>
     <div class="services-grid" id="servicesGrid"></div>
   </div>
 </section>
@@ -694,20 +715,28 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
     const servicesData = [
         { device: 'celular', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPhone 11', desc: 'Tela LCD original com garantia.', price: 'R$ 299', time: '2h', badge: 'iPhone' },
         { device: 'celular', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPhone 12', desc: 'Tela Super Retina XDR.', price: 'R$ 399', time: '2h', badge: 'iPhone' },
+        { device: 'celular', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPhone 13', desc: 'Tela OLED de alta qualidade.', price: 'R$ 449', time: '2h', badge: 'iPhone' },
         { device: 'celular', service: 'bateria', brand: 'iphone', name: 'Bateria - iPhone 11', desc: 'Bateria original Apple.', price: 'R$ 199', time: '1h', badge: 'iPhone' },
+        { device: 'celular', service: 'bateria', brand: 'iphone', name: 'Bateria - iPhone 12', desc: 'Bateria de alta capacidade.', price: 'R$ 229', time: '1h', badge: 'iPhone' },
         { device: 'celular', service: 'pelicula', brand: 'iphone', name: 'Película de Vidro - iPhone', desc: 'Vidro temperado 9H.', price: 'R$ 49', time: '15min', badge: 'iPhone' },
         { device: 'celular', service: 'tela', brand: 'samsung', name: 'Troca de Tela - Samsung S21', desc: 'Tela Dynamic AMOLED.', price: 'R$ 349', time: '2h', badge: 'Samsung' },
-        { device: 'celular', service: 'bateria', brand: 'samsung', name: 'Bateria - Samsung', desc: 'Bateria original.', price: 'R$ 179', time: '1h', badge: 'Samsung' },
+        { device: 'celular', service: 'tela', brand: 'samsung', name: 'Troca de Tela - Samsung A系列', desc: 'Tela LCD original.', price: 'R$ 249', time: '2h', badge: 'Samsung' },
+        { device: 'celular', service: 'bateria', brand: 'samsung', name: 'Bateria - Samsung S系列', desc: 'Bateria original.', price: 'R$ 179', time: '1h', badge: 'Samsung' },
         { device: 'celular', service: 'pelicula', brand: 'samsung', name: 'Película de Vidro - Samsung', desc: 'Proteção para tela curva.', price: 'R$ 59', time: '15min', badge: 'Samsung' },
-        { device: 'celular', service: 'tela', brand: 'xiaomi', name: 'Troca de Tela - Xiaomi', desc: 'Tela LCD original.', price: 'R$ 239', time: '2h', badge: 'Xiaomi' },
+        { device: 'celular', service: 'tela', brand: 'xiaomi', name: 'Troca de Tela - Xiaomi Redmi', desc: 'Tela LCD original.', price: 'R$ 239', time: '2h', badge: 'Xiaomi' },
         { device: 'celular', service: 'bateria', brand: 'xiaomi', name: 'Bateria - Xiaomi', desc: 'Alta capacidade.', price: 'R$ 149', time: '1h', badge: 'Xiaomi' },
         { device: 'celular', service: 'pelicula', brand: 'xiaomi', name: 'Película - Xiaomi', desc: 'Proteção completa.', price: 'R$ 45', time: '15min', badge: 'Xiaomi' },
         { device: 'celular', service: 'tela', brand: 'motorola', name: 'Troca de Tela - Motorola', desc: 'Tela LCD.', price: 'R$ 219', time: '2h', badge: 'Motorola' },
-        { device: 'computador', service: 'software', brand: 'dell', name: 'Formatação - Dell', desc: 'Formatação completa.', price: 'R$ 149', time: '3h', badge: 'Dell' },
+        { device: 'celular', service: 'bateria', brand: 'motorola', name: 'Bateria - Motorola', desc: 'Bateria original.', price: 'R$ 139', time: '1h', badge: 'Motorola' },
+        { device: 'computador', service: 'software', brand: 'dell', name: 'Formatação - Dell Inspiron', desc: 'Formatação completa.', price: 'R$ 149', time: '3h', badge: 'Dell' },
         { device: 'computador', service: 'bateria', brand: 'dell', name: 'Bateria - Dell', desc: 'Bateria original.', price: 'R$ 349', time: '1h', badge: 'Dell' },
-        { device: 'computador', service: 'software', brand: 'hp', name: 'Formatação - HP', desc: 'Formatação e backup.', price: 'R$ 159', time: '3h', badge: 'HP' },
+        { device: 'computador', service: 'tela', brand: 'dell', name: 'Troca de Tela - Dell Notebook', desc: 'Tela LCD/LED original.', price: 'R$ 399', time: '2h', badge: 'Dell' },
+        { device: 'computador', service: 'software', brand: 'hp', name: 'Formatação - HP Pavilion', desc: 'Formatação e backup.', price: 'R$ 159', time: '3h', badge: 'HP' },
+        { device: 'computador', service: 'bateria', brand: 'hp', name: 'Bateria - HP', desc: 'Bateria original.', price: 'R$ 329', time: '1h', badge: 'HP' },
         { device: 'tablet', service: 'tela', brand: 'samsung', name: 'Troca de Tela - Samsung Tab', desc: 'Tela para tablet.', price: 'R$ 399', time: '2h', badge: 'Samsung Tablet' },
-        { device: 'tablet', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPad', desc: 'Tela original iPad.', price: 'R$ 499', time: '2h', badge: 'iPad' }
+        { device: 'tablet', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPad', desc: 'Tela original iPad.', price: 'R$ 499', time: '2h', badge: 'iPad' },
+        { device: 'tablet', service: 'bateria', brand: 'iphone', name: 'Bateria - iPad', desc: 'Bateria original Apple.', price: 'R$ 349', time: '1.5h', badge: 'iPad' },
+        { device: 'tablet', service: 'pelicula', brand: 'iphone', name: 'Película para iPad', desc: 'Película de vidro.', price: 'R$ 89', time: '20min', badge: 'iPad' }
     ];
 
     // ============================================
@@ -755,7 +784,7 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
         renderCards(filtered);
         updateActiveFilters(devices, services, brands);
         updateFilterBadges(devices.length, services.length, brands.length);
-        updateFloatingCount();
+        updateMobileTriggerBadge();
         return filtered;
     }
 
@@ -774,10 +803,12 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
         document.getElementById('brandBadge') && (document.getElementById('brandBadge').textContent = b);
     }
 
-    function updateFloatingCount() {
+    function updateMobileTriggerBadge() {
+        const badge = document.getElementById('mobileTriggerBadge');
+        if(!badge) return;
         const count = document.querySelectorAll('.filter-checkbox:checked').length;
-        const badge = document.getElementById('floatingFilterCount');
-        if(badge) { if(count>0) { badge.textContent = count; badge.style.display = 'inline-block'; } else { badge.style.display = 'none'; } }
+        if(count > 0) { badge.textContent = count; badge.classList.add('active'); }
+        else { badge.classList.remove('active'); }
     }
 
     window.removeFilter = function(value) {
@@ -810,10 +841,10 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
     }
 
     // ============================================
-    // FILTROS MOBILE
+    // FILTROS MOBILE - BOTÃO DENTRO DA ÁREA
     // ============================================
+    const mobileTrigger = document.getElementById('mobileFilterTrigger');
     const mobileModal = document.getElementById('mobileFiltersModal');
-    const floatingBtn = document.getElementById('floatingFiltersBtn');
     const closeMobile = document.getElementById('closeMobileFiltersBtn');
     const mobileOverlay = document.getElementById('mobileFiltersOverlay');
     const applyBtn = document.getElementById('mobileApplyFiltersBtn');
@@ -849,8 +880,8 @@ footer { background: #051425; text-align: center; padding: 30px; color: #94a3b8;
         Object.keys(counts).forEach(key => { let el = document.getElementById(`mobile-count-${key}`); if(el) el.textContent = counts[key]; });
     }
 
-    if(floatingBtn && mobileModal) {
-        floatingBtn.addEventListener('click', () => {
+    if(mobileTrigger && mobileModal) {
+        mobileTrigger.addEventListener('click', () => {
             syncDesktopToMobile();
             mobileModal.classList.add('active');
             document.body.style.overflow = 'hidden';

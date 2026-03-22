@@ -4,15 +4,409 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ProTech - Minhas Manutenções</title>
-<link rel="stylesheet" href="land.css">
 <style>
-/* Estilos adicionais para pagamento */
-.card-actions-pagamento {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* ============================================ */
+/* ESTILOS COMPLETOS DA PÁGINA */
+/* ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #0f2a52, #071426);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HEADER */
+header {
+  position: relative;
+  z-index: 100;
+  background: rgba(11, 31, 58, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(79, 163, 255, 0.3);
+  padding: 15px 0;
+}
+
+.navbar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.logo .pro {
+  color: #fff;
+}
+
+.logo .tech {
+  background: linear-gradient(135deg, #4fa3ff, #9bd4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #4fa3ff;
+}
+
+.btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn.ghost {
+  border: 1px solid #4fa3ff;
+  background: transparent;
+  color: #4fa3ff;
+}
+
+.btn.primary {
+  background: #4fa3ff;
+  color: #0b1f3a;
+}
+
+/* MENU USUÁRIO */
+.user-menu-container {
+  position: relative;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.user-avatar:hover {
+  background: rgba(79, 163, 255, 0.2);
+}
+
+.avatar-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.avatar-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.3s;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 16px;
+  min-width: 200px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s;
+  z-index: 1000;
+}
+
+.user-menu-container.active .user-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-menu-container.active .avatar-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #1e293b;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.dropdown-item:hover {
+  background: #f1f5f9;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 0;
+}
+
+.logout-item {
+  color: #ef4444;
+}
+
+.logout-item:hover {
+  background: #fee2e2;
+}
+
+/* LAYOUT PRINCIPAL */
+.manutencoes-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  display: flex;
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 24px;
+  height: fit-content;
+  border: 1px solid rgba(79, 163, 255, 0.2);
+}
+
+.sidebar h3 {
+  margin-bottom: 20px;
+  color: #4fa3ff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-left: 3px solid #4fa3ff;
+  padding-left: 12px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  color: #cbd5f5;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sidebar a:hover {
+  background: rgba(79, 163, 255, 0.2);
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.sidebar a.active {
+  background: linear-gradient(90deg, rgba(79, 163, 255, 0.3), transparent);
+  color: #4fa3ff;
+  border-left: 2px solid #4fa3ff;
+}
+
+/* MAIN */
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* SEÇÃO */
+.section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #e2e8f0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title span {
+  background: rgba(79, 163, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #4fa3ff;
+}
+
+/* SCROLL CONTAINER */
+.scroll-container {
+  position: relative;
+  margin: 0 -20px;
+  padding: 0 20px;
+}
+
+.scroll-wrapper {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(79, 163, 255, 0.15);
+  border-radius: 24px;
+  padding: 25px 20px;
+}
+
+.scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 10px 0 20px 0;
+}
+
+.scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #4fa3ff, #3b82f6);
+  border-radius: 10px;
+}
+
+/* CARD */
+.card {
+  flex: 0 0 auto;
+  width: 300px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(79, 163, 255, 0.25);
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79, 163, 255, 0.6);
+  box-shadow: 0 12px 28px rgba(79, 163, 255, 0.25);
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.card p {
+  font-size: 0.8rem;
+  color: #cbd5f5;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* STATUS BADGE */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.status-pendente {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.status-em_andamento {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.status-concluido {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.status-pago {
+  background: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+/* BOTÕES DO CARD */
+.card-actions {
   display: flex;
   gap: 10px;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-pagar {
@@ -55,7 +449,107 @@
   background: rgba(79, 163, 255, 0.3);
 }
 
-/* Modal de pagamento */
+/* SETA SCROLL */
+.scroll-arrow {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(79, 163, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid rgba(79, 163, 255, 0.4);
+  z-index: 10;
+}
+
+.scroll-arrow:hover {
+  background: #4fa3ff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.scroll-arrow span {
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 50px 30px;
+  color: #94a3b8;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.empty-state-icon {
+  font-size: 56px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+}
+
+/* LOADING */
+.loading-state {
+  text-align: center;
+  padding: 50px;
+  width: 100%;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(79, 163, 255, 0.3);
+  border-top-color: #4fa3ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #10b981;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  z-index: 2000;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.toast.error {
+  background: #ef4444;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* MODAL PAGAMENTO */
 .modal-pagamento {
   display: none;
   position: fixed;
@@ -103,7 +597,6 @@
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s;
 }
 
 .pagamento-option:hover {
@@ -140,14 +633,33 @@
   background: #3b8be3;
 }
 
-.pix-code {
-  background: #f1f5f9;
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 15px;
-  word-break: break-all;
-  font-family: monospace;
-  font-size: 0.9rem;
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .manutencoes-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .sidebar h3 {
+    width: 100%;
+  }
+  .sidebar a {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+  .card {
+    width: 280px;
+  }
+  .scroll-arrow {
+    right: 15px;
+    width: 38px;
+    height: 38px;
+  }
 }
 </style>
 </head>
@@ -227,7 +739,7 @@
     <p id="pagamentoServicoNome"></p>
     <p id="pagamentoValor" style="font-size: 1.5rem; color: #4fa3ff; font-weight: bold;"></p>
     
-    <div class="pagamento-options" id="pagamentoOptions">
+    <div class="pagamento-options">
       <div class="pagamento-option">
         <input type="radio" name="metodoPagamento" value="pix" id="pix" checked>
         <label for="pix">📱 PIX (Instantâneo)</label>
@@ -242,12 +754,8 @@
       </div>
     </div>
     
-    <div id="pixInfo" style="display: none;">
-      <div class="pix-code">
-        <strong>Chave PIX:</strong><br>
-        contato@protech.com.br
-      </div>
-      <p style="font-size: 0.75rem; color: #64748b; margin-top: 10px;">Copie a chave e pague no seu app bancário</p>
+    <div id="pixInfo" style="display: none; margin-top: 15px; padding: 12px; background: #f1f5f9; border-radius: 12px;">
+      <p><strong>Chave PIX:</strong><br>contato@protech.com.br</p>
     </div>
     
     <button class="pagamento-btn" id="confirmarPagamentoBtn">Confirmar Pagamento</button>
@@ -255,12 +763,17 @@
 </div>
 
 <script>
+// ============================================
+// CONFIGURAÇÃO
+// ============================================
 const API_URL = 'https://protech-rt8q.onrender.com/api';
 let manutencoesDoUsuario = [];
 let filtroAtual = "all";
 let manutencaoPagando = null;
 
-// Funções auxiliares
+// ============================================
+// FUNÇÕES AUXILIARES
+// ============================================
 function getStatusIcon(status) {
   const icons = { 'pendente': '⏳', 'em_andamento': '🔄', 'concluido': '✅', 'pago': '💳' };
   return icons[status] || '📌';
@@ -277,6 +790,13 @@ function formatDate(dateString) {
   return date.toLocaleDateString('pt-BR');
 }
 
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function showToast(message, isError = false) {
   const toast = document.createElement('div');
   toast.className = `toast ${isError ? 'error' : ''}`;
@@ -285,31 +805,45 @@ function showToast(message, isError = false) {
   setTimeout(() => toast.remove(), 3000);
 }
 
-// Autenticação
+function scrollRow(elementId) {
+  const element = document.getElementById(elementId);
+  if (element) element.scrollBy({ left: 320, behavior: 'smooth' });
+}
+
+// ============================================
+// AUTENTICAÇÃO
+// ============================================
 function checkAuth() {
   const token = localStorage.getItem('protech_token');
   const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
-  if (!token) { window.location.href = 'login.html'; return false; }
+  
+  if (!token) {
+    window.location.href = 'login.html';
+    return false;
+  }
   
   const userMenu = document.getElementById('userMenuContainer');
   const authButtons = document.getElementById('authButtons');
   const avatarName = document.getElementById('avatarName');
+  
   if (userMenu && authButtons) {
     userMenu.style.display = 'block';
     authButtons.style.display = 'none';
-    if (avatarName) avatarName.textContent = user.name?.split(' ')[0] || 'Usuário';
+    if (avatarName && user.name) avatarName.textContent = user.name.split(' ')[0];
   }
+  
   return { token, user };
 }
 
-// Função para pagar manutenção
+// ============================================
+// PAGAMENTO
+// ============================================
 async function pagarManutencao(manutencao) {
   const auth = checkAuth();
   if (!auth) return;
   
   try {
-    // Atualizar status para "pago"
-    const response = await fetch(`${API_URL}/users/manutencoes/${manutencao._id || manutencao.id}/pagar`, {
+    const response = await fetch(`${API_URL}/users/manutencoes/${manutencao.id}/pagar`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -321,7 +855,8 @@ async function pagarManutencao(manutencao) {
       showToast(`✅ Pagamento de ${manutencao.nome} realizado com sucesso!`);
       carregarManutencoes();
     } else {
-      showToast('❌ Erro ao processar pagamento', true);
+      const data = await response.json();
+      showToast(data.error || 'Erro ao processar pagamento', true);
     }
   } catch (error) {
     console.error('Erro:', error);
@@ -329,7 +864,9 @@ async function pagarManutencao(manutencao) {
   }
 }
 
-// Criar card com botões
+// ============================================
+// RENDERIZAR CARDS
+// ============================================
 function criarCard(item) {
   const card = document.createElement("div");
   card.className = "card";
@@ -337,27 +874,27 @@ function criarCard(item) {
   const podePagar = item.status === 'pendente' || item.status === 'concluido';
   
   card.innerHTML = `
-    <h3>${escapeHtml(item.nome || item.servicoNome || 'Serviço')}</h3>
+    <h3>${escapeHtml(item.nome)}</h3>
     <p>📱 ${escapeHtml(item.dispositivo || 'Não especificado')}</p>
-    <p>💰 ${escapeHtml(item.preco || 'R$ 0')}</p>
-    <p>📅 ${formatDate(item.data || item.createdAt)}</p>
-    <div class="status-badge status-${item.status || 'pendente'}">
+    <p>💰 ${escapeHtml(item.preco)}</p>
+    <p>📅 ${formatDate(item.data)}</p>
+    <div class="status-badge status-${item.status}">
       ${getStatusIcon(item.status)} ${getStatusText(item.status)}
     </div>
-    <div class="card-actions-pagamento">
-      ${podePagar ? `<button class="btn-pagar" data-id="${item._id || item.id}">💳 Pagar Agora</button>` : ''}
-      <button class="btn-detalhes" data-id="${item._id || item.id}">📋 Ver Detalhes</button>
+    <div class="card-actions">
+      ${podePagar ? `<button class="btn-pagar" data-id="${item.id}">💳 Pagar Agora</button>` : ''}
+      <button class="btn-detalhes" data-id="${item.id}">📋 Detalhes</button>
     </div>
   `;
   
-  setTimeout(() => card.classList.add("show"), 0);
   return card;
 }
 
-// Renderizar manutenções
 function renderizarManutencoes() {
   const ativasContainer = document.getElementById("ativasScroll");
   const concluidasContainer = document.getElementById("concluidasScroll");
+  
+  if (!ativasContainer || !concluidasContainer) return;
   
   ativasContainer.innerHTML = "";
   concluidasContainer.innerHTML = "";
@@ -385,12 +922,12 @@ function renderizarManutencoes() {
     concluidas.forEach(item => concluidasContainer.appendChild(criarCard(item)));
   }
   
-  // Eventos dos botões
+  // Eventos dos botões de pagar
   document.querySelectorAll('.btn-pagar').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const id = btn.dataset.id;
-      manutencaoPagando = manutencoesDoUsuario.find(m => (m._id || m.id) == id);
+      const id = parseInt(btn.dataset.id);
+      manutencaoPagando = manutencoesDoUsuario.find(m => m.id === id);
       if (manutencaoPagando) {
         document.getElementById('pagamentoServicoNome').textContent = manutencaoPagando.nome;
         document.getElementById('pagamentoValor').textContent = manutencaoPagando.preco;
@@ -399,17 +936,25 @@ function renderizarManutencoes() {
     });
   });
   
+  // Eventos dos botões de detalhes
   document.querySelectorAll('.btn-detalhes').forEach(btn => {
     btn.addEventListener('click', () => {
-      showToast('🔍 Detalhes em breve', false);
+      showToast('📋 Em breve você poderá ver mais detalhes', false);
     });
   });
 }
 
-// Carregar manutenções do backend
+// ============================================
+// CARREGAR MANUTENÇÕES
+// ============================================
 async function carregarManutencoes() {
   const auth = checkAuth();
   if (!auth) return;
+  
+  const ativasContainer = document.getElementById("ativasScroll");
+  if (ativasContainer) {
+    ativasContainer.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><p>Carregando suas manutenções...</p></div>`;
+  }
   
   try {
     const response = await fetch(`${API_URL}/users/manutencoes`, {
@@ -419,34 +964,25 @@ async function carregarManutencoes() {
     if (response.ok) {
       manutencoesDoUsuario = await response.json();
       renderizarManutencoes();
+    } else if (response.status === 401) {
+      showToast('Sessão expirada. Faça login novamente.', true);
+      localStorage.removeItem('protech_token');
+      localStorage.removeItem('protech_user');
+      setTimeout(() => window.location.href = 'login.html', 1500);
+    } else {
+      throw new Error('Erro ao carregar manutenções');
     }
   } catch (error) {
     console.error('Erro:', error);
+    if (ativasContainer) {
+      ativasContainer.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Erro ao carregar manutenções</p></div>`;
+    }
   }
 }
 
-// Modal pagamento
-document.getElementById('confirmarPagamentoBtn')?.addEventListener('click', async () => {
-  document.getElementById('modalPagamento').classList.remove('active');
-  if (manutencaoPagando) {
-    await pagarManutencao(manutencaoPagando);
-    manutencaoPagando = null;
-  }
-});
-
-// Fechar modal
-document.getElementById('modalPagamento')?.addEventListener('click', (e) => {
-  if (e.target === document.getElementById('modalPagamento')) {
-    document.getElementById('modalPagamento').classList.remove('active');
-  }
-});
-
-// Filtros e scroll
-function scrollRow(elementId) {
-  const element = document.getElementById(elementId);
-  if (element) element.scrollBy({ left: 320, behavior: 'smooth' });
-}
-
+// ============================================
+// FILTROS
+// ============================================
 function configurarFiltros() {
   document.querySelectorAll('.sidebar a').forEach(filtro => {
     filtro.addEventListener('click', (e) => {
@@ -459,7 +995,36 @@ function configurarFiltros() {
   });
 }
 
-// Menu dropdown e logout
+// ============================================
+// MODAL PAGAMENTO
+// ============================================
+document.getElementById('confirmarPagamentoBtn')?.addEventListener('click', async () => {
+  document.getElementById('modalPagamento').classList.remove('active');
+  if (manutencaoPagando) {
+    await pagarManutencao(manutencaoPagando);
+    manutencaoPagando = null;
+  }
+});
+
+document.getElementById('modalPagamento')?.addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalPagamento')) {
+    document.getElementById('modalPagamento').classList.remove('active');
+  }
+});
+
+// Mostrar PIX info quando selecionado
+document.querySelectorAll('input[name="metodoPagamento"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const pixInfo = document.getElementById('pixInfo');
+    if (pixInfo) {
+      pixInfo.style.display = document.getElementById('pix').checked ? 'block' : 'none';
+    }
+  });
+});
+
+// ============================================
+// MENU USUÁRIO
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
   checkAuth();
   carregarManutencoes();
@@ -467,7 +1032,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const userAvatar = document.getElementById('userAvatar');
   const userMenu = document.getElementById('userMenuContainer');
-  if (userAvatar) {
+  if (userAvatar && userMenu) {
     userAvatar.addEventListener('click', (e) => {
       e.stopPropagation();
       userMenu.classList.toggle('active');
@@ -475,33 +1040,69 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', () => userMenu.classList.remove('active'));
   }
   
-  document.getElementById('dropdownLogoutBtn')?.addEventListener('click', () => {
-    localStorage.removeItem('protech_token');
-    localStorage.removeItem('protech_user');
-    window.location.href = 'index.html';
-  });
+  const logoutBtn = document.getElementById('dropdownLogoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('protech_token');
+      localStorage.removeItem('protech_user');
+      window.location.href = 'index.html';
+    });
+  }
 });
 
-// Partículas
+// ============================================
+// PARTÍCULAS
+// ============================================
 const canvas = document.getElementById('particles');
 if(canvas) {
   let ctx = canvas.getContext('2d');
   let particles = [];
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  let animationId;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
   function createParticles() {
     const count = window.innerWidth < 768 ? 40 : 80;
     particles = [];
     for(let i = 0; i < count; i++) {
-      particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 3 + 1, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.3, op: Math.random() * 0.4 + 0.1 });
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 3 + 1,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.3,
+        op: Math.random() * 0.4 + 0.1
+      });
     }
   }
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(79, 163, 255, ${p.op})`; ctx.fill(); p.x += p.vx; p.y += p.vy; if(p.x < 0) p.x = canvas.width; if(p.x > canvas.width) p.x = 0; if(p.y < 0) p.y = canvas.height; if(p.y > canvas.height) p.y = 0; });
-    requestAnimationFrame(draw);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(79, 163, 255, ${p.op})`;
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if(p.x < 0) p.x = canvas.width;
+      if(p.x > canvas.width) p.x = 0;
+      if(p.y < 0) p.y = canvas.height;
+      if(p.y > canvas.height) p.y = 0;
+    });
+    animationId = requestAnimationFrame(draw);
   }
-  resize(); createParticles(); draw();
-  window.addEventListener("resize", () => { resize(); createParticles(); });
+
+  resize();
+  createParticles();
+  draw();
+  window.addEventListener("resize", () => {
+    resize();
+    createParticles();
+  });
 }
 </script>
 </body>

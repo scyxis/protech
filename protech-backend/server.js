@@ -36,6 +36,32 @@ try {
 
 console.log('✅ Banco de dados pronto!');
 
+// ==================== CRIAR ADMIN AUTOMATICAMENTE ====================
+async function criarAdminSeNaoExistir() {
+  try {
+    const email = 'admin@protech.com';
+    const password = 'admin123';
+    const name = 'Administrador';
+    
+    const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
+    
+    if (!existing) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      db.prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)').run(name, email, hashedPassword, 'admin');
+      console.log('✅ Usuário admin criado automaticamente!');
+      console.log('📧 Email: admin@protech.com');
+      console.log('🔑 Senha: admin123');
+    } else {
+      console.log('ℹ️ Usuário admin já existe');
+    }
+  } catch (error) {
+    console.error('Erro ao criar admin:', error);
+  }
+}
+
+// Chamar a função
+criarAdminSeNaoExistir();
+
 // ==================== ROTA DE TESTE ====================
 app.get('/', (req, res) => {
   const count = db.prepare('SELECT COUNT(*) as total FROM users').get();
@@ -334,5 +360,37 @@ app.listen(PORT, () => {
   console.log(`   GET    /api/admin/usuarios    - Listar usuários (admin)`);
   console.log(`\n💡 Use Ctrl+C para parar\n`);
 });
-
+// ==================== ROTA PARA CRIAR ADMIN (apenas para setup) ====================
+app.post('/api/setup/create-admin', async (req, res) => {
+  try {
+    const { secret } = req.body;
+    
+    // Chave secreta para segurança (mude para algo mais seguro)
+    const SETUP_SECRET = 'protech_admin_setup_2024';
+    
+    if (secret !== SETUP_SECRET) {
+      return res.status(401).json({ error: 'Chave secreta inválida' });
+    }
+    
+    const email = 'admin@protech.com';
+    const password = 'admin123';
+    const name = 'Administrador';
+    
+    // Verificar se já existe
+    const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    if (existing) {
+      db.prepare('UPDATE users SET password = ?, role = ?, name = ? WHERE email = ?').run(hashedPassword, 'admin', name, email);
+      res.json({ message: '✅ Usuário admin atualizado!', email, password });
+    } else {
+      db.prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)').run(name, email, hashedPassword, 'admin');
+      res.json({ message: '✅ Usuário admin criado!', email, password });
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 module.exports = app;

@@ -5,16 +5,14 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Carregar variáveis de ambiente
 dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ==================== MODELO DO USUÁRIO ====================
+// Modelo do Usuário
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -30,7 +28,6 @@ const UserSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-// Criptografar senha antes de salvar
 UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(10);
@@ -38,36 +35,28 @@ UserSchema.pre('save', async function(next) {
   next();
 });
 
-// Método para comparar senha
 UserSchema.methods.comparePassword = async function(candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
 const User = mongoose.model('User', UserSchema);
 
-// ==================== CONEXÃO COM MONGODB ====================
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/protech';
+// Conexão com MongoDB
+const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose.connect(MONGODB_URI)
-  .then(() => console.log('✅ Conectado ao MongoDB'))
-  .catch(err => {
-    console.error('❌ Erro ao conectar MongoDB:', err.message);
-    console.log('💡 Dica: Certifique-se que o MongoDB está rodando ou use MongoDB Atlas');
-  });
+  .then(() => console.log('✅ Conectado ao MongoDB!'))
+  .catch(err => console.error('❌ Erro:', err.message));
 
-// ==================== ROTAS ====================
-
-// Rota de teste
+// Rotas
 app.get('/', (req, res) => {
-  res.json({ message: 'API ProTech funcionando! 🚀' });
+  res.json({ message: 'API ProTech funcionando! 🚀', status: 'online' });
 });
 
-// Cadastro
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
     
-    // Validar dados
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
     }
@@ -76,31 +65,24 @@ app.post('/api/auth/register', async (req, res) => {
       return res.status(400).json({ message: 'Senha deve ter no mínimo 6 caracteres' });
     }
     
-    // Verificar se usuário já existe
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'Email já cadastrado' });
     }
     
-    // Criar novo usuário
     const user = new User({ name, email, password });
     await user.save();
     
-    // Gerar token
     const token = jwt.sign(
       { userId: user._id, email: user.email },
-      process.env.JWT_SECRET || 'secret_key_temporaria',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
     
     res.status(201).json({
       message: 'Usuário cadastrado com sucesso',
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
+      user: { id: user._id, name: user.name, email: user.email }
     });
   } catch (error) {
     console.error(error);
@@ -108,55 +90,41 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// Login
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    // Buscar usuário
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Email ou senha inválidos' });
     }
     
-    // Verificar senha
     const isValid = await user.comparePassword(password);
     if (!isValid) {
       return res.status(401).json({ message: 'Email ou senha inválidos' });
     }
     
-    // Gerar token
     const token = jwt.sign(
       { userId: user._id, email: user.email },
-      process.env.JWT_SECRET || 'secret_key_temporaria',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
     
     res.json({
       message: 'Login realizado com sucesso',
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
+      user: { id: user._id, name: user.name, email: user.email }
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Erro ao fazer login' });
   }
 });
 
-// Middleware para autenticação
 const authMiddleware = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
-  
-  if (!token) {
-    return res.status(401).json({ message: 'Token não fornecido' });
-  }
-  
+  if (!token) return res.status(401).json({ message: 'Token não fornecido' });
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret_key_temporaria');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded.userId;
     next();
   } catch (error) {
@@ -164,46 +132,15 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-// Obter dados do usuário logado
 app.get('/api/users/me', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
-    if (!user) {
-      return res.status(404).json({ message: 'Usuário não encontrado' });
-    }
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Erro ao buscar usuário' });
   }
 });
 
-// Adicionar manutenção
-app.post('/api/users/manutencoes', authMiddleware, async (req, res) => {
-  try {
-    const { servicoId, nome, preco, dispositivo } = req.body;
-    
-    const user = await User.findById(req.userId);
-    if (!user) {
-      return res.status(404).json({ message: 'Usuário não encontrado' });
-    }
-    
-    user.manutencoes.push({
-      servicoId,
-      nome,
-      preco,
-      dispositivo,
-      data: new Date(),
-      status: 'pendente'
-    });
-    
-    await user.save();
-    res.json({ message: 'Manutenção adicionada com sucesso', manutencoes: user.manutencoes });
-  } catch (error) {
-    res.status(500).json({ message: 'Erro ao adicionar manutenção' });
-  }
-});
-
-// Listar manutenções do usuário
 app.get('/api/users/manutencoes', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('manutencoes');
@@ -213,14 +150,31 @@ app.get('/api/users/manutencoes', authMiddleware, async (req, res) => {
   }
 });
 
-// ==================== INICIAR SERVIDOR ====================
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${3000}`);
-  console.log(`📝 Rotas disponíveis:`);
-  console.log(`   POST   /api/auth/register - Cadastro`);
-  console.log(`   POST   /api/auth/login    - Login`);
-  console.log(`   GET    /api/users/me      - Dados do usuário`);
-  console.log(`   GET    /api/users/manutencoes - Manutenções`);
-  console.log(`   POST   /api/users/manutencoes - Adicionar manutenção`);
+app.post('/api/users/manutencoes', authMiddleware, async (req, res) => {
+  try {
+    const { servicoId, nome, preco, dispositivo } = req.body;
+    const user = await User.findById(req.userId);
+    
+    user.manutencoes.push({
+      servicoId, nome, preco, dispositivo,
+      data: new Date(),
+      status: 'pendente'
+    });
+    
+    await user.save();
+    res.json({ message: 'Manutenção adicionada', manutencoes: user.manutencoes });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao adicionar' });
+  }
 });
+
+// Exportar para Vercel
+module.exports = app;
+
+// Rodar localmente
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  });
+}

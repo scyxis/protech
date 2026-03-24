@@ -6,6 +6,7 @@
 <title>ProTech - Administração</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+/* Mantenha os estilos existentes do admin.html */
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +18,9 @@ body {
   background: linear-gradient(135deg, #0a0f1a 0%, #0f1420 100%);
   color: #fff;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #particles {
@@ -30,7 +34,7 @@ body {
   opacity: 0.3;
 }
 
-/* HEADER */
+/* Header e estilos básicos (manter os mesmos do admin anterior) */
 header {
   position: sticky;
   top: 0;
@@ -41,7 +45,7 @@ header {
 }
 
 .navbar {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 16px 24px;
   display: flex;
@@ -67,7 +71,7 @@ header {
 
 nav {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -79,20 +83,21 @@ nav a {
   font-size: 14px;
   font-weight: 500;
   transition: all 0.3s;
-  border-radius: 8px;
+  border-radius: 40px;
 }
 
-nav a:hover {
+nav a:hover, nav a.active {
   color: #4fa3ff;
   background: rgba(79, 163, 255, 0.1);
 }
 
 .btn {
   padding: 8px 20px;
-  border-radius: 8px;
+  border-radius: 40px;
   font-weight: 600;
   font-size: 14px;
   transition: all 0.3s;
+  cursor: pointer;
   text-decoration: none;
   display: inline-block;
 }
@@ -103,20 +108,10 @@ nav a:hover {
   color: #4fa3ff;
 }
 
-.btn-outline:hover {
-  background: rgba(79, 163, 255, 0.1);
-  transform: translateY(-1px);
-}
-
 .btn-primary {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
   border: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
 }
 
 /* MENU USUÁRIO */
@@ -200,13 +195,10 @@ nav a:hover {
   color: #f87171;
 }
 
-.logout-item:hover {
-  color: #ef4444;
-}
-
 /* MAIN CONTAINER */
 .main-container {
-  max-width: 1200px;
+  flex: 1;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 40px 24px;
   position: relative;
@@ -385,11 +377,6 @@ nav a:hover {
   cursor: pointer;
 }
 
-.role-select:focus {
-  outline: none;
-  border-color: #4fa3ff;
-}
-
 .btn-salvar {
   background: #4fa3ff;
   color: white;
@@ -405,7 +392,6 @@ nav a:hover {
 
 .btn-salvar:hover {
   background: #3b82f6;
-  transform: translateY(-1px);
 }
 
 /* CATEGORIAS GRID */
@@ -510,11 +496,6 @@ nav a:hover {
   font-size: 14px;
 }
 
-.form-group input:focus, .form-group select:focus {
-  outline: none;
-  border-color: #4fa3ff;
-}
-
 .btn-adicionar {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
@@ -524,11 +505,6 @@ nav a:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-}
-
-.btn-adicionar:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
 }
 
 /* MODAL */
@@ -560,17 +536,6 @@ nav a:hover {
   animation: modalFadeIn 0.3s ease;
 }
 
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 .modal-content h3 {
   font-size: 20px;
   margin-bottom: 8px;
@@ -594,11 +559,6 @@ nav a:hover {
   margin-bottom: 24px;
 }
 
-.modal-input:focus {
-  outline: none;
-  border-color: #4fa3ff;
-}
-
 .modal-actions {
   display: flex;
   gap: 12px;
@@ -620,21 +580,10 @@ nav a:hover {
   color: white;
 }
 
-.modal-btn-confirm:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
-}
-
 .modal-btn-cancel {
   background: rgba(255, 255, 255, 0.05);
   color: #94a3b8;
   border: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.modal-btn-cancel:hover {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  border-color: #ef4444;
 }
 
 /* ACCESS DENIED */
@@ -650,16 +599,6 @@ nav a:hover {
   font-size: 64px;
   color: #ef4444;
   margin-bottom: 20px;
-}
-
-.access-denied h2 {
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-
-.access-denied p {
-  color: #94a3b8;
-  margin-bottom: 24px;
 }
 
 /* LOADING */
@@ -710,7 +649,11 @@ nav a:hover {
   to { transform: translateX(0); opacity: 1; }
 }
 
-/* FOOTER */
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 footer {
   background: #050a12;
   text-align: center;
@@ -718,10 +661,9 @@ footer {
   color: #5a6e8a;
   font-size: 12px;
   border-top: 1px solid rgba(79, 163, 255, 0.1);
-  margin-top: 60px;
+  margin-top: auto;
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -736,10 +678,6 @@ footer {
   .page-header {
     flex-direction: column;
     text-align: center;
-  }
-  
-  .tabs {
-    justify-content: center;
   }
   
   .usuarios-table {
@@ -761,10 +699,8 @@ footer {
     <h1 class="logo"><span class="pro">Pro</span><span class="tech">Tech</span></h1>
     <nav>
       <a href="index.html"><i class="fas fa-home"></i> Início</a>
-      <a href="index.html#servicos"><i class="fas fa-tools"></i> Serviços</a>
-      <a href="manutencoes.html"><i class="fas fa-clipboard-list"></i> Manutenções</a>
-      <a href="tecnico.html" id="tecnicoLink" style="display: none;"><i class="fas fa-user-cog"></i> Técnico</a>
-      <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-crown"></i> Admin</a>
+      <a href="admin.html" class="active"><i class="fas fa-crown"></i> Admin</a>
+      <a href="manutencoes.html"><i class="fas fa-clipboard-list"></i> Ordens</a>
       
       <div class="user-menu" id="userMenu" style="display: none;">
         <div class="user-avatar" id="userAvatar">
@@ -773,9 +709,8 @@ footer {
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="user-dropdown">
-          <a href="manutencoes.html" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Minhas Manutenções</a>
-          <a href="tecnico.html" id="dropdownTecnicoLink" class="dropdown-item" style="display: none;"><i class="fas fa-user-cog"></i> Painel Técnico</a>
-          <a href="admin.html" id="dropdownAdminLink" class="dropdown-item" style="display: none;"><i class="fas fa-crown"></i> Administração</a>
+          <a href="admin.html" class="dropdown-item"><i class="fas fa-crown"></i> Dashboard</a>
+          <a href="manutencoes.html" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Ordens</a>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
@@ -790,53 +725,7 @@ footer {
 </header>
 
 <div class="main-container" id="mainContainer">
-  <div class="loading-state"><div class="spinner"></div><p>Verificando permissões...</p></div>
-</div>
-
-<!-- Modal para Editar Categoria -->
-<div class="modal" id="modalEditarCategoria">
-  <div class="modal-content">
-    <h3><i class="fas fa-edit"></i> Editar Categoria</h3>
-    <p class="modal-subtitle">Altere o nome da categoria</p>
-    <input type="text" class="modal-input" id="modalEditarInput" placeholder="Novo nome">
-    <div class="modal-actions">
-      <button class="modal-btn modal-btn-cancel" id="modalEditarCancelar">Cancelar</button>
-      <button class="modal-btn modal-btn-confirm" id="modalEditarConfirmar">Salvar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal para Adicionar Categoria -->
-<div class="modal" id="modalAdicionarCategoria">
-  <div class="modal-content">
-    <h3><i class="fas fa-plus-circle"></i> Adicionar Categoria</h3>
-    <p class="modal-subtitle">Crie uma nova categoria</p>
-    <div class="form-group" style="margin-bottom: 16px;">
-      <label>Tipo</label>
-      <select id="modalAdicionarTipo">
-        <option value="dispositivo"><i class="fas fa-mobile-alt"></i> Dispositivo</option>
-        <option value="servico"><i class="fas fa-wrench"></i> Serviço</option>
-        <option value="marca"><i class="fas fa-tag"></i> Marca</option>
-      </select>
-    </div>
-    <input type="text" class="modal-input" id="modalAdicionarInput" placeholder="Nome da categoria">
-    <div class="modal-actions">
-      <button class="modal-btn modal-btn-cancel" id="modalAdicionarCancelar">Cancelar</button>
-      <button class="modal-btn modal-btn-confirm" id="modalAdicionarConfirmar">Adicionar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal para Excluir Categoria -->
-<div class="modal" id="modalExcluirCategoria">
-  <div class="modal-content">
-    <h3><i class="fas fa-trash-alt"></i> Excluir Categoria</h3>
-    <p class="modal-subtitle" id="modalExcluirMensagem">Tem certeza que deseja excluir esta categoria?</p>
-    <div class="modal-actions">
-      <button class="modal-btn modal-btn-cancel" id="modalExcluirCancelar">Cancelar</button>
-      <button class="modal-btn modal-btn-confirm" id="modalExcluirConfirmar">Excluir</button>
-    </div>
-  </div>
+  <div class="loading-state"><div class="spinner"></div><p>Carregando dados...</p></div>
 </div>
 
 <footer>
@@ -844,24 +733,13 @@ footer {
 </footer>
 
 <script>
-// Dados iniciais das categorias
+const API_URL = 'https://protech-rt8q.onrender.com/api';
+
 let categorias = {
   dispositivos: ['celular', 'tablet', 'computador', 'smartwatch'],
   servicos: ['tela', 'bateria', 'conector', 'software', 'camera', 'pelicula', 'placa', 'audio'],
   marcas: ['iphone', 'samsung', 'xiaomi', 'motorola', 'dell', 'hp', 'lenovo', 'asus', 'acer', 'lg']
 };
-
-// Usuários mock para demonstração (enquanto API não está pronta)
-const usuariosMock = [
-  { id: 1, name: 'Administrador', email: 'admin@protech.com', role: 'admin', created_at: '2024-01-01T00:00:00' },
-  { id: 2, name: 'João Silva', email: 'joao@email.com', role: 'user', created_at: '2024-02-15T00:00:00' },
-  { id: 3, name: 'Maria Santos', email: 'maria@email.com', role: 'tecnico', created_at: '2024-02-20T00:00:00' },
-  { id: 4, name: 'Pedro Oliveira', email: 'pedro@email.com', role: 'user', created_at: '2024-03-01T00:00:00' },
-  { id: 5, name: 'Ana Costa', email: 'ana@email.com', role: 'tecnico', created_at: '2024-03-10T00:00:00' }
-];
-
-let categoriaEditando = { tipo: null, index: null, nome: null };
-let categoriaExcluindo = { tipo: null, index: null, nome: null };
 
 function showToast(message, isError = false) {
   const toast = document.createElement('div');
@@ -883,27 +761,14 @@ function updateUserMenu() {
   const userMenu = document.getElementById('userMenu');
   const authButtons = document.getElementById('authButtons');
   const userName = document.getElementById('userName');
-  const tecnicoLink = document.getElementById('tecnicoLink');
-  const adminLink = document.getElementById('adminLink');
-  const dropdownTecnicoLink = document.getElementById('dropdownTecnicoLink');
-  const dropdownAdminLink = document.getElementById('dropdownAdminLink');
   
   if (user && user.name) {
-    userMenu.style.display = 'block';
-    authButtons.style.display = 'none';
-    userName.textContent = user.name.split(' ')[0];
-    
-    if (user.role === 'tecnico' || user.role === 'admin') {
-      if (tecnicoLink) tecnicoLink.style.display = 'block';
-      if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'flex';
-    }
-    if (user.role === 'admin') {
-      if (adminLink) adminLink.style.display = 'block';
-      if (dropdownAdminLink) dropdownAdminLink.style.display = 'flex';
-    }
+    if (userMenu) userMenu.style.display = 'block';
+    if (authButtons) authButtons.style.display = 'none';
+    if (userName) userName.textContent = user.name.split(' ')[0];
   } else {
-    userMenu.style.display = 'none';
-    authButtons.style.display = 'flex';
+    if (userMenu) userMenu.style.display = 'none';
+    if (authButtons) authButtons.style.display = 'flex';
   }
 }
 
@@ -924,7 +789,7 @@ function checkPermissions() {
         <h2>Acesso Negado</h2>
         <p>Você não tem permissão para acessar esta área.</p>
         <p>Esta página é restrita para <strong>Administradores</strong>.</p>
-        <a href="index.html" class="btn btn-primary" style="margin-top: 24px;"><i class="fas fa-home"></i> Voltar para o início</a>
+        <a href="index.html" class="btn btn-primary" style="margin-top: 24px;"><i class="fas fa-home"></i> Voltar</a>
       </div>
     `;
     return false;
@@ -933,7 +798,63 @@ function checkPermissions() {
   return true;
 }
 
-function renderizarDashboard() {
+async function carregarEstatisticas() {
+  const token = localStorage.getItem('protech_token');
+  try {
+    const response = await fetch(`${API_URL}/admin/stats`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error('Erro ao carregar stats:', error);
+  }
+  return { totalUsuarios: 0, totalTecnicos: 0, totalAdmins: 0, totalOrdens: 0 };
+}
+
+async function carregarUsuarios() {
+  const token = localStorage.getItem('protech_token');
+  try {
+    const response = await fetch(`${API_URL}/admin/usuarios`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error('Erro ao carregar usuários:', error);
+  }
+  return [];
+}
+
+async function alterarRole(userId, novaRole) {
+  const token = localStorage.getItem('protech_token');
+  try {
+    const response = await fetch(`${API_URL}/admin/usuarios/${userId}/role`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ role: novaRole })
+    });
+    
+    if (response.ok) {
+      showToast('✅ Papel alterado com sucesso!');
+      await carregarDashboard();
+      return true;
+    } else {
+      showToast('❌ Erro ao alterar papel', true);
+      return false;
+    }
+  } catch (error) {
+    showToast('Erro de conexão', true);
+    return false;
+  }
+}
+
+function renderizarDashboard(stats, usuarios) {
   const container = document.getElementById('mainContainer');
   const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
   
@@ -951,15 +872,16 @@ function renderizarDashboard() {
     
     <div class="tab-content active" id="tab-dashboard">
       <div class="stats-grid">
-        <div class="stat-card"><i class="fas fa-users"></i><div class="number">${usuariosMock.length}</div><div class="label">Total Usuários</div></div>
-        <div class="stat-card"><i class="fas fa-user-cog"></i><div class="number">${usuariosMock.filter(u => u.role === 'tecnico').length}</div><div class="label">Técnicos</div></div>
-        <div class="stat-card"><i class="fas fa-crown"></i><div class="number">${usuariosMock.filter(u => u.role === 'admin').length}</div><div class="label">Administradores</div></div>
-        <div class="stat-card"><i class="fas fa-clipboard-list"></i><div class="number">12</div><div class="label">Ordens de Serviço</div></div>
+        <div class="stat-card"><i class="fas fa-users"></i><div class="number">${stats.totalUsuarios}</div><div class="label">Total Usuários</div></div>
+        <div class="stat-card"><i class="fas fa-user-cog"></i><div class="number">${stats.totalTecnicos}</div><div class="label">Técnicos</div></div>
+        <div class="stat-card"><i class="fas fa-crown"></i><div class="number">${stats.totalAdmins}</div><div class="label">Administradores</div></div>
+        <div class="stat-card"><i class="fas fa-clipboard-list"></i><div class="number">${stats.totalOrdens || 0}</div><div class="label">Ordens de Serviço</div></div>
       </div>
       <div style="background: rgba(255,255,255,0.03); border-radius: 20px; padding: 24px; text-align: center;">
         <i class="fas fa-chart-line" style="font-size: 48px; color: #4fa3ff; margin-bottom: 16px; opacity: 0.5;"></i>
         <h3>Bem-vindo ao Painel Administrativo</h3>
         <p style="color: #94a3b8; margin-top: 8px;">Gerencie usuários, categorias e acompanhe as estatísticas do sistema.</p>
+        <p style="color: #4fa3ff; margin-top: 16px; font-size: 12px;">⚡ As alterações são sincronizadas em tempo real com todas as páginas!</p>
       </div>
     </div>
     
@@ -977,20 +899,20 @@ function renderizarDashboard() {
             </tr>
           </thead>
           <tbody>
-            ${usuariosMock.map(user => `
+            ${usuarios.map(user => `
               <tr>
                 <td>${user.id}</td>
                 <td>${escapeHtml(user.name)}</td>
                 <td>${escapeHtml(user.email)}</td>
-                <td><span class="role-badge ${user.role}">${user.role === 'admin' ? '👑 Admin' : user.role === 'tecnico' ? '🔧 Técnico' : '👤 Usuário'}</span>}</td>
+                <td><span class="role-badge ${user.role}">${user.role === 'admin' ? '👑 Admin' : user.role === 'tecnico' ? '🔧 Técnico' : '👤 Usuário'}</span></td>
                 <td>${new Date(user.created_at).toLocaleDateString('pt-BR')}</td>
                 <td>
                   <select class="role-select" data-id="${user.id}">
                     <option value="user" ${user.role === 'user' ? 'selected' : ''}>👤 Usuário</option>
                     <option value="tecnico" ${user.role === 'tecnico' ? 'selected' : ''}>🔧 Técnico</option>
-                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>👑 Admin </option>
+                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>👑 Admin</option>
                   </select>
-                  <button class="btn-salvar" onclick="salvarRoleMock(${user.id})">Salvar</button>
+                  <button class="btn-salvar" onclick="salvarRole(${user.id})">Salvar</button>
                 </td>
               </tr>
             `).join('')}
@@ -1030,18 +952,6 @@ function renderizarDashboard() {
   
   renderizarCategorias();
   configurarTabs();
-}
-
-function salvarRoleMock(userId) {
-  const select = document.querySelector(`.role-select[data-id="${userId}"]`);
-  const novaRole = select.value;
-  const userIndex = usuariosMock.findIndex(u => u.id === userId);
-  
-  if (userIndex !== -1) {
-    usuariosMock[userIndex].role = novaRole;
-    showToast(`✅ Papel alterado para ${novaRole === 'admin' ? 'Administrador' : novaRole === 'tecnico' ? 'Técnico' : 'Usuário'}!`);
-    renderizarDashboard();
-  }
 }
 
 function renderizarCategorias() {
@@ -1095,30 +1005,6 @@ function renderizarCategorias() {
   }
 }
 
-function salvarCategorias() {
-  localStorage.setItem('protech_filtros', JSON.stringify(categorias));
-  showToast('✅ Categorias salvas!');
-}
-
-function carregarCategoriasSalvas() {
-  const saved = localStorage.getItem('protech_filtros');
-  if (saved) {
-    const parsed = JSON.parse(saved);
-    categorias = { ...categorias, ...parsed };
-  }
-}
-
-function configurarTabs() {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
-    });
-  });
-}
-
 function adicionarCategoriaDireto() {
   const tipo = document.getElementById('categoriaTipo').value;
   const nome = document.getElementById('categoriaNome').value.trim();
@@ -1142,51 +1028,80 @@ function adicionarCategoriaDireto() {
   showToast(`✅ "${nome}" adicionado com sucesso!`);
 }
 
-function abrirModalEditar(tipo, index, nomeAtual) {
-  categoriaEditando = { tipo, index, nome: nomeAtual };
-  document.getElementById('modalEditarInput').value = nomeAtual;
-  document.getElementById('modalEditarCategoria').classList.add('active');
+function salvarCategorias() {
+  localStorage.setItem('protech_filtros', JSON.stringify(categorias));
+  // Disparar evento para atualizar outras páginas
+  window.dispatchEvent(new CustomEvent('protech_categorias_updated', { detail: categorias }));
+}
+
+function carregarCategoriasSalvas() {
+  const saved = localStorage.getItem('protech_filtros');
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    categorias = { ...categorias, ...parsed };
+  }
+}
+
+function configurarTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    });
+  });
+}
+
+async function salvarRole(userId) {
+  const select = document.querySelector(`.role-select[data-id="${userId}"]`);
+  const novaRole = select.value;
+  const sucesso = await alterarRole(userId, novaRole);
+  if (sucesso) {
+    await carregarDashboard();
+  }
+}
+
+async function carregarDashboard() {
+  if (!checkPermissions()) return;
+  
+  const container = document.getElementById('mainContainer');
+  container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Carregando dados...</p></div>`;
+  
+  const [stats, usuarios] = await Promise.all([
+    carregarEstatisticas(),
+    carregarUsuarios()
+  ]);
+  
+  renderizarDashboard(stats, usuarios);
+}
+
+// Modal handlers (simplificados)
+let categoriaEditando = { tipo: null, index: null };
+let categoriaExcluindo = { tipo: null, index: null };
+
+function abrirModalEditar(tipo, index, nome) {
+  categoriaEditando = { tipo, index };
+  const novoNome = prompt('Digite o novo nome:', nome);
+  if (novoNome && novoNome.trim()) {
+    const lista = tipo === 'dispositivo' ? categorias.dispositivos : 
+                  tipo === 'servico' ? categorias.servicos : categorias.marcas;
+    lista[index] = novoNome.trim();
+    salvarCategorias();
+    renderizarCategorias();
+    showToast(`✅ Categoria alterada para "${novoNome}"`);
+  }
 }
 
 function abrirModalExcluir(tipo, index, nome) {
-  categoriaExcluindo = { tipo, index, nome };
-  document.getElementById('modalExcluirMensagem').innerHTML = `Tem certeza que deseja excluir a categoria "<strong>${escapeHtml(nome)}</strong>"?`;
-  document.getElementById('modalExcluirCategoria').classList.add('active');
-}
-
-function salvarEdicaoCategoria() {
-  const novoNome = document.getElementById('modalEditarInput').value.trim();
-  
-  if (!novoNome) {
-    showToast('Digite um nome válido', true);
-    return;
+  if (confirm(`Tem certeza que deseja excluir "${nome}"?`)) {
+    const lista = tipo === 'dispositivo' ? categorias.dispositivos : 
+                  tipo === 'servico' ? categorias.servicos : categorias.marcas;
+    lista.splice(index, 1);
+    salvarCategorias();
+    renderizarCategorias();
+    showToast(`🗑️ "${nome}" removido com sucesso!`);
   }
-  
-  const { tipo, index } = categoriaEditando;
-  const lista = tipo === 'dispositivo' ? categorias.dispositivos : 
-                tipo === 'servico' ? categorias.servicos : categorias.marcas;
-  
-  lista[index] = novoNome;
-  salvarCategorias();
-  renderizarCategorias();
-  showToast(`✅ Categoria alterada para "${novoNome}"`);
-  fecharModal('modalEditarCategoria');
-}
-
-function confirmarExcluirCategoria() {
-  const { tipo, index, nome } = categoriaExcluindo;
-  const lista = tipo === 'dispositivo' ? categorias.dispositivos : 
-                tipo === 'servico' ? categorias.servicos : categorias.marcas;
-  
-  lista.splice(index, 1);
-  salvarCategorias();
-  renderizarCategorias();
-  showToast(`🗑️ "${nome}" removido com sucesso!`);
-  fecharModal('modalExcluirCategoria');
-}
-
-function fecharModal(modalId) {
-  document.getElementById(modalId).classList.remove('active');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1194,46 +1109,8 @@ document.addEventListener('DOMContentLoaded', () => {
   carregarCategoriasSalvas();
   
   if (checkPermissions()) {
-    renderizarDashboard();
+    carregarDashboard();
   }
-  
-  // Eventos dos modais
-  document.getElementById('modalEditarConfirmar')?.addEventListener('click', salvarEdicaoCategoria);
-  document.getElementById('modalEditarCancelar')?.addEventListener('click', () => fecharModal('modalEditarCategoria'));
-  document.getElementById('modalExcluirConfirmar')?.addEventListener('click', confirmarExcluirCategoria);
-  document.getElementById('modalExcluirCancelar')?.addEventListener('click', () => fecharModal('modalExcluirCategoria'));
-  document.getElementById('modalAdicionarConfirmar')?.addEventListener('click', () => {
-    const tipo = document.getElementById('modalAdicionarTipo').value;
-    const nome = document.getElementById('modalAdicionarInput').value.trim();
-    
-    if (!nome) {
-      showToast('Digite um nome para a categoria', true);
-      return;
-    }
-    
-    if (tipo === 'dispositivo') {
-      categorias.dispositivos.push(nome);
-    } else if (tipo === 'servico') {
-      categorias.servicos.push(nome);
-    } else {
-      categorias.marcas.push(nome);
-    }
-    
-    salvarCategorias();
-    renderizarCategorias();
-    showToast(`✅ "${nome}" adicionado com sucesso!`);
-    fecharModal('modalAdicionarCategoria');
-  });
-  document.getElementById('modalAdicionarCancelar')?.addEventListener('click', () => fecharModal('modalAdicionarCategoria'));
-  
-  // Fechar modais ao clicar fora
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-      }
-    });
-  });
   
   const userAvatar = document.querySelector('.user-avatar');
   const userMenu = document.querySelector('.user-menu');
@@ -1284,5 +1161,6 @@ if (canvas) {
   window.addEventListener('resize', () => { resize(); createParticles(); });
 }
 </script>
+<script src="script-global.js"></script>
 </body>
 </html>

@@ -2,23 +2,25 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ProTech - Minhas Manutenções</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+/* Estilos similares ao index.html, mantendo o design */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0a0f1a;
+  background: linear-gradient(135deg, #0a0f1a 0%, #0f1420 100%);
   color: #fff;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
 #particles {
   position: fixed;
   top: 0;
@@ -29,622 +31,86 @@ body {
   z-index: 0;
   opacity: 0.3;
 }
-
-/* HEADER */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(10, 15, 26, 0.9);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.navbar {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
+/* Header e estilos básicos (mesmo do index.html) */
+header { position: sticky; top: 0; z-index: 100; background: rgba(10, 15, 26, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(79, 163, 255, 0.2); }
+.navbar { max-width: 1280px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.logo { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
 .logo .pro { color: #fff; }
-.logo .tech {
-  background: linear-gradient(135deg, #4fa3ff, #9bd4ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-nav {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-nav a {
-  padding: 8px 16px;
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
-  border-radius: 8px;
-}
-
-nav a:hover {
-  color: #4fa3ff;
-  background: rgba(79, 163, 255, 0.1);
-}
-
-.btn {
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.btn-outline {
-  border: 1px solid rgba(79, 163, 255, 0.5);
-  background: transparent;
-  color: #4fa3ff;
-}
-
-.btn-outline:hover {
-  background: rgba(79, 163, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
-}
-
-/* MENU USUÁRIO */
-.user-menu {
-  position: relative;
-}
-
-.user-avatar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.user-avatar:hover {
-  background: rgba(79, 163, 255, 0.1);
-  border-color: #4fa3ff;
-}
-
-.user-name {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.user-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 8px;
-  background: #1e293b;
-  border-radius: 12px;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: all 0.3s;
-  z-index: 1000;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.user-menu.active .user-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  color: #cbd5e1;
-  text-decoration: none;
-  font-size: 14px;
-  transition: all 0.2s;
-  cursor: pointer;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-}
-
-.dropdown-item:hover {
-  background: rgba(79, 163, 255, 0.15);
-  color: #4fa3ff;
-}
-
-.dropdown-divider {
-  height: 1px;
-  background: rgba(79, 163, 255, 0.2);
-  margin: 8px 0;
-}
-
-.logout-item {
-  color: #f87171;
-}
-
-.logout-item:hover {
-  color: #ef4444;
-}
-
-/* MAIN CONTAINER */
-.main-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px;
-  position: relative;
-  z-index: 2;
-}
-
-/* HEADER DA PÁGINA */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.page-header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #fff, #4fa3ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.page-header a {
-  color: #4fa3ff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-
-.page-header a:hover {
-  transform: translateX(-4px);
-}
-
-/* FILTROS */
-.filters-bar {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.filter-chip {
-  padding: 8px 20px;
-  border-radius: 40px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(79, 163, 255, 0.2);
-  color: #94a3b8;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.filter-chip:hover {
-  background: rgba(79, 163, 255, 0.1);
-  border-color: #4fa3ff;
-  color: #fff;
-}
-
-.filter-chip.active {
-  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
-  border-color: transparent;
-  color: white;
-}
-
-/* STATS CARDS */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.stat-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  border: 1px solid rgba(79, 163, 255, 0.15);
-  transition: all 0.3s;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(79, 163, 255, 0.3);
-}
-
-.stat-card i {
-  font-size: 28px;
-  color: #4fa3ff;
-  margin-bottom: 12px;
-}
-
-.stat-card .number {
-  font-size: 32px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 4px;
-}
-
-.stat-card .label {
-  font-size: 13px;
-  color: #94a3b8;
-}
-
-/* MANUTENÇÕES GRID */
-.manutencoes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 24px;
-}
-
-.manutencao-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(79, 163, 255, 0.15);
-  overflow: hidden;
-  transition: all 0.3s;
-}
-
-.manutencao-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(79, 163, 255, 0.4);
-  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
-}
-
-.card-header {
-  padding: 20px 20px 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.card-header h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  flex: 1;
-}
-
-.status {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.status.pendente {
-  background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.status.em_andamento {
-  background: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.status.concluido {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.status.pago {
-  background: rgba(139, 92, 246, 0.15);
-  color: #8b5cf6;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-}
-
-.card-body {
-  padding: 16px 20px;
-}
-
-.info-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  color: #94a3b8;
-  font-size: 14px;
-}
-
-.info-row i {
-  width: 20px;
-  color: #4fa3ff;
-}
-
-.info-row strong {
-  color: #fff;
-  font-weight: 500;
-}
-
-.card-footer {
-  padding: 16px 20px 20px;
-  border-top: 1px solid rgba(79, 163, 255, 0.1);
-  display: flex;
-  gap: 12px;
-}
-
-.btn-action {
-  flex: 1;
-  padding: 10px;
-  border-radius: 40px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
-}
-
-.btn-pay {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  border: none;
-}
-
-.btn-pay:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-.btn-details {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(79, 163, 255, 0.3);
-  color: #4fa3ff;
-}
-
-.btn-details:hover {
-  background: rgba(79, 163, 255, 0.15);
-}
-
-/* EMPTY STATE */
-.empty-state {
-  text-align: center;
-  padding: 80px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  border: 1px solid rgba(79, 163, 255, 0.15);
-}
-
-.empty-state i {
-  font-size: 64px;
-  color: #4fa3ff;
-  margin-bottom: 20px;
-  opacity: 0.5;
-}
-
-.empty-state h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.empty-state p {
-  color: #94a3b8;
-  margin-bottom: 24px;
-}
-
-.empty-state .btn {
-  display: inline-block;
-}
-
-/* LOADING */
-.loading-state {
-  text-align: center;
-  padding: 80px;
-}
-
-.spinner {
-  width: 48px;
-  height: 48px;
-  border: 3px solid rgba(79, 163, 255, 0.2);
-  border-top-color: #4fa3ff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* TOAST */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #1e293b;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 14px;
-  z-index: 2000;
-  animation: slideIn 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  border-left: 3px solid #4fa3ff;
-}
-
-.toast.error {
-  border-left-color: #ef4444;
-}
-
-@keyframes slideIn {
-  from { transform: translateX(100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-.modal.active {
-  display: flex;
-}
-
-.modal-content {
-  background: #1e293b;
-  border-radius: 24px;
-  padding: 32px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  border: 1px solid rgba(79, 163, 255, 0.3);
-}
-
-.modal-content h3 {
-  font-size: 20px;
-  margin-bottom: 16px;
-  color: #4fa3ff;
-}
-
-.modal-content p {
-  color: #94a3b8;
-  margin-bottom: 8px;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 24px;
-}
-
-.modal-btn {
-  padding: 10px 24px;
-  border-radius: 40px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-}
-
-.modal-btn.confirm {
-  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
-  color: white;
-}
-
-.modal-btn.cancel {
-  background: rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
-}
-
-/* FOOTER */
-footer {
-  background: #050a12;
-  text-align: center;
-  padding: 24px;
-  color: #5a6e8a;
-  font-size: 12px;
-  border-top: 1px solid rgba(79, 163, 255, 0.1);
-  margin-top: 60px;
-}
-
-/* RESPONSIVIDADE */
+.logo .tech { background: linear-gradient(135deg, #4fa3ff, #9bd4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+nav a { padding: 8px 16px; color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.3s; border-radius: 40px; }
+nav a:hover { color: #4fa3ff; background: rgba(79, 163, 255, 0.1); }
+.btn { padding: 8px 20px; border-radius: 40px; font-weight: 600; font-size: 14px; transition: all 0.3s; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn-outline { border: 1px solid rgba(79, 163, 255, 0.5); background: transparent; color: #4fa3ff; }
+.btn-primary { background: linear-gradient(135deg, #4fa3ff, #3b82f6); color: white; border: none; }
+.user-menu { position: relative; }
+.user-avatar { display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 40px; cursor: pointer; transition: all 0.3s; border: 1px solid rgba(79, 163, 255, 0.2); }
+.user-avatar:hover { background: rgba(79, 163, 255, 0.1); border-color: #4fa3ff; }
+.user-name { font-size: 14px; font-weight: 500; }
+.user-dropdown { position: absolute; top: 100%; right: 0; margin-top: 8px; background: #1e293b; border-radius: 12px; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.3s; z-index: 1000; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); border: 1px solid rgba(79, 163, 255, 0.2); }
+.user-menu.active .user-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #cbd5e1; text-decoration: none; font-size: 14px; transition: all 0.2s; cursor: pointer; background: none; border: none; width: 100%; text-align: left; }
+.dropdown-item:hover { background: rgba(79, 163, 255, 0.15); color: #4fa3ff; }
+.dropdown-divider { height: 1px; background: rgba(79, 163, 255, 0.2); margin: 8px 0; }
+.logout-item { color: #f87171; }
+/* Layout principal */
+.manutencoes-container { flex: 1; max-width: 1280px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 2; }
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+.page-header h1 { font-size: 28px; font-weight: 700; background: linear-gradient(135deg, #fff, #4fa3ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.filters-bar { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid rgba(79, 163, 255, 0.2); }
+.filter-chip { padding: 8px 20px; border-radius: 40px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(79, 163, 255, 0.2); color: #94a3b8; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+.filter-chip:hover { background: rgba(79, 163, 255, 0.1); border-color: #4fa3ff; color: #fff; }
+.filter-chip.active { background: linear-gradient(135deg, #4fa3ff, #3b82f6); border-color: transparent; color: white; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+.stat-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center; border: 1px solid rgba(79, 163, 255, 0.15); transition: all 0.3s; }
+.stat-card i { font-size: 28px; color: #4fa3ff; margin-bottom: 12px; }
+.stat-card .number { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.stat-card .label { font-size: 13px; color: #94a3b8; }
+.manutencoes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
+.manutencao-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(79, 163, 255, 0.15); overflow: hidden; transition: all 0.3s; position: relative; }
+.card-status-bar { height: 4px; width: 100%; }
+.card-status-bar.pendente { background: #f59e0b; }
+.card-status-bar.em_andamento { background: #3b82f6; }
+.card-status-bar.concluido { background: #10b981; }
+.card-status-bar.pago { background: #8b5cf6; }
+.card-header { padding: 20px 20px 0 20px; display: flex; justify-content: space-between; align-items: flex-start; }
+.card-header h3 { font-size: 18px; font-weight: 600; color: #fff; flex: 1; }
+.status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.status.pendente { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.status.em_andamento { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
+.status.concluido { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.status.pago { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.3); }
+.card-body { padding: 16px 20px; }
+.info-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: #94a3b8; font-size: 14px; }
+.info-row i { width: 20px; color: #4fa3ff; }
+.info-row strong { color: #fff; font-weight: 500; }
+.card-footer { padding: 16px 20px 20px; border-top: 1px solid rgba(79, 163, 255, 0.1); display: flex; gap: 12px; }
+.btn-pagar { flex: 1; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; }
+.btn-pagar:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+.btn-detalhes { flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(79, 163, 255, 0.3); color: #4fa3ff; padding: 10px; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; }
+.btn-detalhes:hover { background: rgba(79, 163, 255, 0.15); }
+.empty-state { text-align: center; padding: 60px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; }
+.empty-state i { font-size: 64px; color: #4fa3ff; margin-bottom: 16px; opacity: 0.5; }
+.loading-state { text-align: center; padding: 80px; }
+.spinner { width: 48px; height: 48px; border: 3px solid rgba(79, 163, 255, 0.2); border-top-color: #4fa3ff; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.toast { position: fixed; bottom: 24px; right: 24px; background: #1e293b; color: white; padding: 12px 20px; border-radius: 12px; font-size: 14px; z-index: 2000; animation: slideIn 0.3s; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); border-left: 3px solid #4fa3ff; }
+.toast.error { border-left-color: #ef4444; }
+@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.modal-pagamento { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); align-items: center; justify-content: center; z-index: 2000; }
+.modal-pagamento.active { display: flex; }
+.pagamento-content { background: #1e293b; border-radius: 24px; padding: 32px; max-width: 400px; width: 90%; text-align: center; border: 1px solid rgba(79, 163, 255, 0.3); }
+.pagamento-content h3 { color: #4fa3ff; margin-bottom: 20px; }
+.pagamento-options { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.pagamento-option { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid rgba(79, 163, 255, 0.2); border-radius: 12px; cursor: pointer; }
+.pagamento-option input { width: 18px; height: 18px; accent-color: #4fa3ff; }
+.pagamento-btn { background: linear-gradient(135deg, #4fa3ff, #3b82f6); color: white; border: none; padding: 12px; border-radius: 40px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 20px; }
+footer { background: #050a12; text-align: center; padding: 24px; color: #5a6e8a; font-size: 12px; border-top: 1px solid rgba(79, 163, 255, 0.1); margin-top: auto; }
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  
-  .manutencoes-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .filters-bar {
-    gap: 8px;
-  }
-  
-  .filter-chip {
-    padding: 6px 14px;
-    font-size: 12px;
-  }
-  
-  .page-header {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .card-footer {
-    flex-direction: column;
-  }
-  
-  .main-container {
-    padding: 24px 16px;
-  }
+  .navbar { flex-direction: column; text-align: center; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .manutencoes-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
@@ -659,7 +125,8 @@ footer {
       <a href="index.html"><i class="fas fa-home"></i> Início</a>
       <a href="index.html#servicos"><i class="fas fa-tools"></i> Serviços</a>
       <a href="manutencoes.html"><i class="fas fa-clipboard-list"></i> Manutenções</a>
-      
+      <a href="tecnico.html" id="tecnicoLink" style="display: none;"><i class="fas fa-user-cog"></i> Técnico</a>
+      <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-crown"></i> Admin</a>
       <div class="user-menu" id="userMenu" style="display: none;">
         <div class="user-avatar" id="userAvatar">
           <i class="fas fa-user-circle"></i>
@@ -668,11 +135,12 @@ footer {
         </div>
         <div class="user-dropdown">
           <a href="manutencoes.html" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Minhas Manutenções</a>
+          <a href="tecnico.html" id="dropdownTecnicoLink" class="dropdown-item" style="display: none;"><i class="fas fa-user-cog"></i> Painel Técnico</a>
+          <a href="admin.html" id="dropdownAdminLink" class="dropdown-item" style="display: none;"><i class="fas fa-crown"></i> Administração</a>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
       </div>
-      
       <div id="authButtons">
         <a href="login.html" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a>
         <a href="cadastro.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Cadastro</a>
@@ -681,12 +149,11 @@ footer {
   </div>
 </header>
 
-<div class="main-container">
+<div class="manutencoes-container">
   <div class="page-header">
     <h1><i class="fas fa-clipboard-list"></i> Minhas Manutenções</h1>
-    <a href="index.html#servicos"><i class="fas fa-arrow-left"></i> Voltar aos serviços</a>
+    <a href="index.html#servicos" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Voltar aos serviços</a>
   </div>
-
   <div class="filters-bar" id="filtersBar">
     <button class="filter-chip active" data-filter="all">Todas</button>
     <button class="filter-chip" data-filter="pendente">Pendentes</button>
@@ -694,25 +161,24 @@ footer {
     <button class="filter-chip" data-filter="concluido">Concluídas</button>
     <button class="filter-chip" data-filter="pago">Pagas</button>
   </div>
-
-  <div id="manutencoesContent"></div>
+  <div id="manutencoesContent"><div class="loading-state"><div class="spinner"></div><p>Carregando suas manutenções...</p></div></div>
 </div>
 
-<div class="modal" id="pagamentoModal">
-  <div class="modal-content">
+<div class="modal-pagamento" id="modalPagamento">
+  <div class="pagamento-content">
     <h3><i class="fas fa-credit-card"></i> Realizar Pagamento</h3>
     <p id="modalServicoNome"></p>
     <p id="modalServicoValor" style="font-size: 20px; color: #4fa3ff; font-weight: bold;"></p>
-    <div class="modal-buttons">
-      <button class="modal-btn confirm" id="confirmarPagamento">Confirmar</button>
-      <button class="modal-btn cancel" id="cancelarPagamento">Cancelar</button>
+    <div class="pagamento-options">
+      <label class="pagamento-option"><input type="radio" name="metodoPagamento" value="pix" checked><span><i class="fas fa-qrcode"></i> PIX (Instantâneo)</span></label>
+      <label class="pagamento-option"><input type="radio" name="metodoPagamento" value="cartao"><span><i class="fas fa-credit-card"></i> Cartão de Crédito</span></label>
+      <label class="pagamento-option"><input type="radio" name="metodoPagamento" value="boleto"><span><i class="fas fa-barcode"></i> Boleto Bancário</span></label>
     </div>
+    <button class="pagamento-btn" id="confirmarPagamentoBtn">Confirmar Pagamento</button>
   </div>
 </div>
 
-<footer>
-  <p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p>
-</footer>
+<footer><p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p></footer>
 
 <script>
 const API_URL = 'https://protech-rt8q.onrender.com/api';
@@ -731,7 +197,7 @@ function showToast(message, isError = false) {
 function formatDate(dateString) {
   if (!dateString) return 'Data não informada';
   const date = new Date(dateString);
-  return date.toLocaleDateString('pt-BR');
+  return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 }
 
 function getStatusText(status) {
@@ -751,14 +217,30 @@ function updateUserMenu() {
   const userMenu = document.getElementById('userMenu');
   const authButtons = document.getElementById('authButtons');
   const userName = document.getElementById('userName');
+  const tecnicoLink = document.getElementById('tecnicoLink');
+  const adminLink = document.getElementById('adminLink');
+  const dropdownTecnicoLink = document.getElementById('dropdownTecnicoLink');
+  const dropdownAdminLink = document.getElementById('dropdownAdminLink');
   
   if (user && user.name) {
     userMenu.style.display = 'block';
     authButtons.style.display = 'none';
     userName.textContent = user.name.split(' ')[0];
+    if (user.role === 'tecnico' || user.role === 'admin') {
+      if (tecnicoLink) tecnicoLink.style.display = 'block';
+      if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'flex';
+    }
+    if (user.role === 'admin') {
+      if (adminLink) adminLink.style.display = 'block';
+      if (dropdownAdminLink) dropdownAdminLink.style.display = 'flex';
+    }
   } else {
     userMenu.style.display = 'none';
     authButtons.style.display = 'flex';
+    if (tecnicoLink) tecnicoLink.style.display = 'none';
+    if (adminLink) adminLink.style.display = 'none';
+    if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'none';
+    if (dropdownAdminLink) dropdownAdminLink.style.display = 'none';
   }
 }
 
@@ -773,16 +255,13 @@ function checkAuth() {
 
 async function carregarManutencoes() {
   if (!checkAuth()) return;
-  
   const token = localStorage.getItem('protech_token');
   const container = document.getElementById('manutencoesContent');
   container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Carregando suas manutenções...</p></div>`;
-  
   try {
     const response = await fetch(`${API_URL}/users/manutencoes`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    
     if (response.ok) {
       manutencoes = await response.json();
       renderizarManutencoes();
@@ -798,19 +277,37 @@ async function carregarManutencoes() {
   }
 }
 
+async function pagarManutencao(manutencaoId) {
+  const token = localStorage.getItem('protech_token');
+  try {
+    const response = await fetch(`${API_URL}/users/manutencoes/${manutencaoId}/pagar`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+    });
+    if (response.ok) {
+      showToast(`✅ Pagamento realizado com sucesso!`);
+      await carregarManutencoes();
+      return true;
+    } else {
+      showToast('❌ Erro ao processar pagamento', true);
+      return false;
+    }
+  } catch (error) {
+    showToast('Erro de conexão', true);
+    return false;
+  }
+}
+
 function renderizarManutencoes() {
   const container = document.getElementById('manutencoesContent');
-  
   let filtradas = manutencoes;
   if (filtroAtual !== "all") {
     filtradas = manutencoes.filter(m => m.status === filtroAtual);
   }
-  
   const pendentes = manutencoes.filter(m => m.status === 'pendente').length;
   const emAndamento = manutencoes.filter(m => m.status === 'em_andamento').length;
   const concluidas = manutencoes.filter(m => m.status === 'concluido').length;
   const pagas = manutencoes.filter(m => m.status === 'pago').length;
-  
   if (filtradas.length === 0) {
     container.innerHTML = `
       <div class="stats-grid">
@@ -819,16 +316,10 @@ function renderizarManutencoes() {
         <div class="stat-card"><i class="fas fa-check-circle"></i><div class="number">${concluidas}</div><div class="label">Concluídas</div></div>
         <div class="stat-card"><i class="fas fa-credit-card"></i><div class="number">${pagas}</div><div class="label">Pagas</div></div>
       </div>
-      <div class="empty-state">
-        <i class="fas fa-tools"></i>
-        <h3>Nenhuma manutenção encontrada</h3>
-        <p>Você ainda não contratou nenhum serviço</p>
-        <a href="index.html#servicos" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Contratar serviço</a>
-      </div>
+      <div class="empty-state"><i class="fas fa-tools"></i><h3>Nenhuma manutenção encontrada</h3><p>Você ainda não contratou nenhum serviço</p><a href="index.html#servicos" class="btn btn-primary" style="margin-top: 20px;"><i class="fas fa-shopping-cart"></i> Contratar serviço</a></div>
     `;
     return;
   }
-  
   container.innerHTML = `
     <div class="stats-grid">
       <div class="stat-card"><i class="fas fa-clock"></i><div class="number">${pendentes}</div><div class="label">Pendentes</div></div>
@@ -839,6 +330,7 @@ function renderizarManutencoes() {
     <div class="manutencoes-grid">
       ${filtradas.map(item => `
         <div class="manutencao-card">
+          <div class="card-status-bar ${item.status}"></div>
           <div class="card-header">
             <h3>${escapeHtml(item.nome)}</h3>
             <span class="status ${item.status}">${getStatusText(item.status)}</span>
@@ -850,16 +342,14 @@ function renderizarManutencoes() {
             <div class="info-row"><i class="fas fa-dollar-sign"></i> <span><strong>Valor:</strong> ${escapeHtml(item.preco)}</span></div>
           </div>
           <div class="card-footer">
-            ${item.status === 'pendente' || item.status === 'concluido' ? 
-              `<button class="btn-action btn-pay" data-id="${item.id}"><i class="fas fa-credit-card"></i> Pagar</button>` : ''}
-            <button class="btn-action btn-details" data-id="${item.id}"><i class="fas fa-info-circle"></i> Detalhes</button>
+            ${item.status === 'pendente' || item.status === 'concluido' ? `<button class="btn-pagar" data-id="${item.id}"><i class="fas fa-credit-card"></i> Pagar</button>` : ''}
+            <button class="btn-detalhes" data-id="${item.id}"><i class="fas fa-info-circle"></i> Detalhes</button>
           </div>
         </div>
       `).join('')}
     </div>
   `;
-  
-  document.querySelectorAll('.btn-pay').forEach(btn => {
+  document.querySelectorAll('.btn-pagar').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const id = parseInt(btn.dataset.id);
@@ -867,41 +357,13 @@ function renderizarManutencoes() {
       if (manutencaoSelecionada) {
         document.getElementById('modalServicoNome').innerHTML = `<i class="fas fa-tools"></i> ${manutencaoSelecionada.nome}`;
         document.getElementById('modalServicoValor').innerHTML = manutencaoSelecionada.preco;
-        document.getElementById('pagamentoModal').classList.add('active');
+        document.getElementById('modalPagamento').classList.add('active');
       }
     });
   });
-  
-  document.querySelectorAll('.btn-details').forEach(btn => {
-    btn.addEventListener('click', () => {
-      showToast('📋 Mais detalhes em breve');
-    });
+  document.querySelectorAll('.btn-detalhes').forEach(btn => {
+    btn.addEventListener('click', () => showToast('📋 Mais detalhes em breve'));
   });
-}
-
-async function pagarManutencao() {
-  if (!manutencaoSelecionada) return;
-  
-  const token = localStorage.getItem('protech_token');
-  try {
-    const response = await fetch(`${API_URL}/users/manutencoes/${manutencaoSelecionada.id}/pagar`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    if (response.ok) {
-      showToast(`✅ Pagamento de ${manutencaoSelecionada.nome} realizado com sucesso!`);
-      carregarManutencoes();
-    } else {
-      showToast('❌ Erro ao processar pagamento', true);
-    }
-  } catch (error) {
-    showToast('Erro de conexão', true);
-  }
-  manutencaoSelecionada = null;
 }
 
 function configurarFiltros() {
@@ -919,7 +381,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateUserMenu();
   carregarManutencoes();
   configurarFiltros();
-  
   const userAvatar = document.querySelector('.user-avatar');
   const userMenu = document.querySelector('.user-menu');
   if (userAvatar && userMenu) {
@@ -929,21 +390,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.addEventListener('click', () => userMenu.classList.remove('active'));
   }
-  
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
     localStorage.removeItem('protech_token');
     localStorage.removeItem('protech_user');
     window.location.href = 'index.html';
   });
-  
-  document.getElementById('confirmarPagamento')?.addEventListener('click', () => {
-    document.getElementById('pagamentoModal').classList.remove('active');
-    pagarManutencao();
+  document.getElementById('confirmarPagamentoBtn')?.addEventListener('click', async () => {
+    document.getElementById('modalPagamento').classList.remove('active');
+    if (manutencaoSelecionada) {
+      await pagarManutencao(manutencaoSelecionada.id);
+      manutencaoSelecionada = null;
+    }
   });
-  
-  document.getElementById('cancelarPagamento')?.addEventListener('click', () => {
-    document.getElementById('pagamentoModal').classList.remove('active');
-    manutencaoSelecionada = null;
+  document.getElementById('modalPagamento')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modalPagamento')) {
+      document.getElementById('modalPagamento').classList.remove('active');
+    }
   });
 });
 

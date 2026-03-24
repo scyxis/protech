@@ -6,10 +6,6 @@
 <title>ProTech - Assistência Técnica Especializada</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-/* ============================================ */
-/* PRO TECH - CSS COMPLETO */
-/* ============================================ */
-
 * {
   margin: 0;
   padding: 0;
@@ -42,7 +38,6 @@ body {
   z-index: 2;
 }
 
-/* HEADER */
 header {
   position: sticky;
   top: 0;
@@ -68,7 +63,6 @@ header {
   font-weight: 700;
   letter-spacing: -0.5px;
 }
-
 .logo .pro { color: #fff; }
 .logo .tech {
   background: linear-gradient(135deg, #4fa3ff, #9bd4ff);
@@ -83,7 +77,6 @@ nav {
   align-items: center;
   flex-wrap: wrap;
 }
-
 nav a {
   padding: 8px 16px;
   color: #94a3b8;
@@ -93,7 +86,6 @@ nav a {
   transition: all 0.3s;
   border-radius: 40px;
 }
-
 nav a:hover {
   color: #4fa3ff;
   background: rgba(79, 163, 255, 0.1);
@@ -108,13 +100,11 @@ nav a:hover {
   transition: all 0.3s;
   border: 1px solid rgba(79, 163, 255, 0.2);
 }
-
 .cart-icon:hover {
   background: rgba(79, 163, 255, 0.1);
   border-color: #4fa3ff;
   transform: scale(1.05);
 }
-
 .cart-count {
   position: absolute;
   top: -8px;
@@ -127,7 +117,6 @@ nav a:hover {
   border-radius: 20px;
   min-width: 18px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
 }
 
 .btn {
@@ -140,35 +129,29 @@ nav a:hover {
   text-decoration: none;
   display: inline-block;
 }
-
 .btn-outline {
   border: 1px solid rgba(79, 163, 255, 0.5);
   background: transparent;
   color: #4fa3ff;
 }
-
 .btn-outline:hover {
   background: rgba(79, 163, 255, 0.1);
   transform: translateY(-2px);
 }
-
 .btn-primary {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
   border: none;
   box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
 }
-
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(79, 163, 255, 0.4);
 }
 
-/* MENU USUÁRIO */
 .user-menu {
   position: relative;
 }
-
 .user-avatar {
   display: flex;
   align-items: center;
@@ -180,17 +163,14 @@ nav a:hover {
   transition: all 0.3s;
   border: 1px solid rgba(79, 163, 255, 0.2);
 }
-
 .user-avatar:hover {
   background: rgba(79, 163, 255, 0.1);
   border-color: #4fa3ff;
 }
-
 .user-name {
   font-size: 14px;
   font-weight: 500;
 }
-
 .user-dropdown {
   position: absolute;
   top: 100%;
@@ -207,13 +187,11 @@ nav a:hover {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(79, 163, 255, 0.2);
 }
-
 .user-menu.active .user-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-
 .dropdown-item {
   display: flex;
   align-items: center;
@@ -229,27 +207,22 @@ nav a:hover {
   width: 100%;
   text-align: left;
 }
-
 .dropdown-item:hover {
   background: rgba(79, 163, 255, 0.15);
   color: #4fa3ff;
 }
-
 .dropdown-divider {
   height: 1px;
   background: rgba(79, 163, 255, 0.2);
   margin: 8px 0;
 }
-
 .logout-item {
   color: #f87171;
 }
-
 .logout-item:hover {
   color: #ef4444;
 }
 
-/* HERO */
 .hero {
   height: 85vh;
   min-height: 600px;
@@ -260,7 +233,6 @@ nav a:hover {
   position: relative;
   background: radial-gradient(circle at 50% 50%, rgba(79, 163, 255, 0.1), transparent);
 }
-
 .slide {
   position: absolute;
   opacity: 0;
@@ -269,13 +241,11 @@ nav a:hover {
   padding: 0 20px;
   transform: scale(0.95);
 }
-
 .slide.active {
   opacity: 1;
   position: relative;
   transform: scale(1);
 }
-
 .hero h1 {
   font-size: 3.5rem;
   font-weight: 800;
@@ -286,18 +256,15 @@ nav a:hover {
   margin-bottom: 20px;
   letter-spacing: -1px;
 }
-
 .hero p {
   font-size: 1.2rem;
   color: #94a3b8;
 }
 
-/* SERVICES */
 .services {
   background: #0f1420;
   padding: 80px 0;
 }
-
 .services h2 {
   text-align: center;
   font-size: 2.5rem;
@@ -308,7 +275,6 @@ nav a:hover {
   color: transparent;
   margin-bottom: 12px;
 }
-
 .section-subtitle {
   text-align: center;
   color: #94a3b8;
@@ -324,7 +290,6 @@ nav a:hover {
   flex-wrap: wrap;
   gap: 16px;
 }
-
 .toggle-filters {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(79, 163, 255, 0.2);
@@ -339,14 +304,12 @@ nav a:hover {
   gap: 10px;
   transition: all 0.3s;
 }
-
 .toggle-filters:hover {
   border-color: #4fa3ff;
   color: #4fa3ff;
   background: rgba(79, 163, 255, 0.05);
 }
 
-/* FILTROS */
 .filters-panel {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
@@ -356,22 +319,18 @@ nav a:hover {
   transition: all 0.3s;
   border: 1px solid rgba(79, 163, 255, 0.15);
 }
-
 .filters-panel.collapsed {
   display: none;
 }
-
 .filters-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
 }
-
 .filter-section {
   flex: 1;
   min-width: 180px;
 }
-
 .filter-section h4 {
   font-size: 14px;
   font-weight: 600;
@@ -380,9 +339,7 @@ nav a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  letter-spacing: 0.5px;
 }
-
 .filter-badge {
   background: rgba(79, 163, 255, 0.2);
   color: #4fa3ff;
@@ -390,13 +347,11 @@ nav a:hover {
   padding: 2px 8px;
   border-radius: 20px;
 }
-
 .filter-options {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .filter-option {
   display: flex;
   align-items: center;
@@ -408,19 +363,16 @@ nav a:hover {
   border-radius: 8px;
   transition: all 0.2s;
 }
-
 .filter-option:hover {
   background: rgba(79, 163, 255, 0.1);
   color: #fff;
 }
-
 .filter-option input {
   width: 16px;
   height: 16px;
   cursor: pointer;
   accent-color: #4fa3ff;
 }
-
 .filter-count {
   margin-left: auto;
   font-size: 11px;
@@ -429,14 +381,12 @@ nav a:hover {
   padding: 2px 6px;
   border-radius: 12px;
 }
-
 .filter-actions {
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid rgba(79, 163, 255, 0.15);
   text-align: right;
 }
-
 .clear-filters {
   background: transparent;
   border: 1px solid rgba(239, 68, 68, 0.3);
@@ -447,19 +397,16 @@ nav a:hover {
   color: #f87171;
   transition: all 0.3s;
 }
-
 .clear-filters:hover {
   background: rgba(239, 68, 68, 0.15);
   border-color: #ef4444;
 }
 
-/* SERVICES GRID */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 28px;
 }
-
 .card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
@@ -470,7 +417,6 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
-
 .card::before {
   content: '';
   position: absolute;
@@ -482,17 +428,14 @@ nav a:hover {
   transform: scaleX(0);
   transition: transform 0.5s ease;
 }
-
 .card:hover::before {
   transform: scaleX(1);
 }
-
 .card:hover {
   transform: translateY(-8px);
   border-color: rgba(79, 163, 255, 0.4);
   box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.3);
 }
-
 .card-badge {
   position: absolute;
   top: 20px;
@@ -505,7 +448,6 @@ nav a:hover {
   padding: 4px 12px;
   border-radius: 20px;
 }
-
 .card h3 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -513,14 +455,12 @@ nav a:hover {
   margin-bottom: 12px;
   padding-right: 70px;
 }
-
 .card p {
   color: #94a3b8;
   font-size: 0.85rem;
   line-height: 1.5;
   margin-bottom: 20px;
 }
-
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -529,7 +469,6 @@ nav a:hover {
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(79, 163, 255, 0.1);
 }
-
 .price {
   font-size: 1.3rem;
   font-weight: 700;
@@ -538,7 +477,6 @@ nav a:hover {
   background-clip: text;
   color: transparent;
 }
-
 .duration {
   font-size: 0.75rem;
   color: #5a6e8a;
@@ -546,12 +484,10 @@ nav a:hover {
   align-items: center;
   gap: 4px;
 }
-
 .card-actions {
   display: flex;
   gap: 12px;
 }
-
 .btn-card-primary {
   flex: 1;
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
@@ -564,12 +500,10 @@ nav a:hover {
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .btn-card-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
 }
-
 .btn-card-secondary {
   flex: 1;
   background: rgba(255, 255, 255, 0.05);
@@ -582,13 +516,11 @@ nav a:hover {
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .btn-card-secondary:hover {
   background: rgba(79, 163, 255, 0.15);
   transform: translateY(-2px);
 }
 
-/* MODAL CARRINHO */
 .cart-modal {
   display: none;
   position: fixed;
@@ -602,11 +534,9 @@ nav a:hover {
   justify-content: center;
   z-index: 2000;
 }
-
 .cart-modal.active {
   display: flex;
 }
-
 .cart-modal-content {
   background: #1e293b;
   border-radius: 32px;
@@ -618,7 +548,6 @@ nav a:hover {
   border: 1px solid rgba(79, 163, 255, 0.3);
   animation: modalFadeIn 0.3s ease;
 }
-
 .cart-modal-content h3 {
   font-size: 1.5rem;
   color: #4fa3ff;
@@ -627,13 +556,11 @@ nav a:hover {
   align-items: center;
   gap: 12px;
 }
-
 .cart-items {
   margin: 24px 0;
   max-height: 400px;
   overflow-y: auto;
 }
-
 .cart-item {
   display: flex;
   justify-content: space-between;
@@ -642,33 +569,23 @@ nav a:hover {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 16px;
   margin-bottom: 12px;
-  transition: all 0.2s;
 }
-
-.cart-item:hover {
-  background: rgba(79, 163, 255, 0.05);
-}
-
 .cart-item-info {
   flex: 2;
 }
-
 .cart-item-info h4 {
   font-size: 1rem;
   margin-bottom: 4px;
 }
-
 .cart-item-info p {
   font-size: 0.75rem;
   color: #94a3b8;
 }
-
 .cart-item-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .cart-item-actions button {
   width: 32px;
   height: 32px;
@@ -678,34 +595,28 @@ nav a:hover {
   transition: all 0.2s;
   font-size: 14px;
 }
-
 .btn-qty-minus {
   background: rgba(239, 68, 68, 0.2);
   color: #f87171;
 }
-
 .btn-qty-minus:hover {
   background: #ef4444;
   color: white;
 }
-
 .btn-qty-plus {
   background: rgba(79, 163, 255, 0.2);
   color: #4fa3ff;
 }
-
 .btn-qty-plus:hover {
   background: #4fa3ff;
   color: white;
 }
-
 .cart-item-price {
   min-width: 80px;
   text-align: right;
   font-weight: bold;
   color: #4fa3ff;
 }
-
 .cart-total {
   margin-top: 20px;
   padding-top: 20px;
@@ -716,18 +627,15 @@ nav a:hover {
   font-size: 1.2rem;
   font-weight: bold;
 }
-
 .cart-total span:last-child {
   font-size: 1.5rem;
   color: #4fa3ff;
 }
-
 .cart-actions {
   display: flex;
   gap: 12px;
   margin-top: 24px;
 }
-
 .btn-cart {
   flex: 1;
   padding: 12px;
@@ -738,45 +646,37 @@ nav a:hover {
   border: none;
   font-size: 14px;
 }
-
 .btn-cart-secondary {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(79, 163, 255, 0.3);
   color: #94a3b8;
 }
-
 .btn-cart-secondary:hover {
   background: rgba(79, 163, 255, 0.1);
   color: #4fa3ff;
 }
-
 .btn-cart-primary {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
 }
-
 .btn-cart-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
 }
-
 .empty-cart {
   text-align: center;
   padding: 40px;
 }
-
 .empty-cart i {
   font-size: 64px;
   color: #4fa3ff;
   opacity: 0.5;
   margin-bottom: 16px;
 }
-
 .empty-cart p {
   color: #94a3b8;
 }
 
-/* MODAIS DE CONFIRMAÇÃO */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -791,7 +691,6 @@ nav a:hover {
   z-index: 3000;
   animation: fadeIn 0.3s ease;
 }
-
 .modal-container {
   background: #1e293b;
   border-radius: 24px;
@@ -801,56 +700,46 @@ nav a:hover {
   animation: modalSlideIn 0.3s ease;
   overflow: hidden;
 }
-
 .modal-confirmacao {
   max-width: 450px;
 }
-
 .modal-finalizar {
   max-width: 550px;
 }
-
 .modal-header {
   padding: 24px 24px 0 24px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .modal-header i {
   font-size: 28px;
   color: #4fa3ff;
 }
-
 .modal-header h3 {
   font-size: 1.3rem;
   color: #fff;
   margin: 0;
 }
-
 .modal-body {
   padding: 20px 24px;
 }
-
 .servico-info {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 20px;
 }
-
 .servico-info h4 {
   font-size: 1.1rem;
   color: #fff;
   margin-bottom: 8px;
 }
-
 .servico-info p {
   font-size: 0.85rem;
   color: #94a3b8;
   margin-bottom: 12px;
 }
-
 .servico-detalhes {
   display: flex;
   justify-content: space-between;
@@ -858,7 +747,6 @@ nav a:hover {
   padding-top: 12px;
   border-top: 1px solid rgba(79, 163, 255, 0.2);
 }
-
 .preco-destaque {
   font-size: 1.3rem;
   font-weight: bold;
@@ -867,68 +755,22 @@ nav a:hover {
   background-clip: text;
   color: transparent;
 }
-
 .tempo {
   font-size: 0.8rem;
   color: #94a3b8;
 }
-
 .confirmacao-texto {
   font-size: 1rem;
   color: #fff;
   margin: 16px 0 8px 0;
   text-align: center;
 }
-
-.confirmacao-obs {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  text-align: center;
-}
-
-.resumo-compra {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.resumo-compra h4 {
-  font-size: 0.9rem;
-  color: #4fa3ff;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.resumo-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  font-size: 0.85rem;
-  color: #cbd5e1;
-}
-
-.resumo-total {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 12px;
-  margin-top: 8px;
-  border-top: 1px solid rgba(79, 163, 255, 0.2);
-  font-size: 1rem;
-}
-
-.resumo-total strong {
-  color: #4fa3ff;
-}
-
 .modal-footer {
   padding: 16px 24px 24px 24px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
-
 .btn-modal {
   padding: 12px 20px;
   border-radius: 40px;
@@ -944,40 +786,33 @@ nav a:hover {
   justify-content: center;
   gap: 8px;
 }
-
 .btn-modal-primary {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
 }
-
 .btn-modal-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
 }
-
 .btn-modal-secondary {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(79, 163, 255, 0.3);
   color: #94a3b8;
 }
-
 .btn-modal-secondary:hover {
   background: rgba(79, 163, 255, 0.1);
   color: #4fa3ff;
 }
-
 .btn-modal-carrinho {
   background: rgba(251, 191, 36, 0.15);
   border: 1px solid rgba(251, 191, 36, 0.3);
   color: #fbbf24;
 }
-
 .btn-modal-carrinho:hover {
   background: rgba(251, 191, 36, 0.25);
   transform: translateY(-2px);
 }
 
-/* TOAST */
 .toast {
   position: fixed;
   bottom: 24px;
@@ -995,21 +830,17 @@ nav a:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border-left: 3px solid #4fa3ff;
 }
-
 .toast.error {
   border-left-color: #ef4444;
 }
-
 @keyframes slideIn {
   from { transform: translateX(100px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes modalSlideIn {
   from {
     opacity: 0;
@@ -1021,7 +852,6 @@ nav a:hover {
   }
 }
 
-/* NO RESULTS */
 .no-results {
   text-align: center;
   padding: 60px;
@@ -1029,7 +859,6 @@ nav a:hover {
   border-radius: 24px;
   border: 1px solid rgba(79, 163, 255, 0.15);
 }
-
 .no-results i {
   font-size: 48px;
   color: #4fa3ff;
@@ -1037,12 +866,10 @@ nav a:hover {
   opacity: 0.5;
 }
 
-/* TESTIMONIALS */
 .testimonials {
   background: #0f1420;
   padding: 80px 0;
 }
-
 .testimonials h2 {
   text-align: center;
   font-size: 2rem;
@@ -1050,19 +877,16 @@ nav a:hover {
   color: #fff;
   margin-bottom: 8px;
 }
-
 .testimonials .subtitle {
   text-align: center;
   color: #94a3b8;
   margin-bottom: 48px;
 }
-
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
-
 .testimonial-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
@@ -1072,35 +896,29 @@ nav a:hover {
   border: 1px solid rgba(79, 163, 255, 0.15);
   transition: all 0.3s;
 }
-
 .testimonial-card:hover {
   transform: translateY(-4px);
   border-color: rgba(79, 163, 255, 0.3);
 }
-
 .testimonial-card i {
   color: #fbbf24;
   margin-bottom: 16px;
   letter-spacing: 2px;
 }
-
 .testimonial-card p {
   font-style: italic;
   color: #94a3b8;
   margin: 16px 0;
   line-height: 1.6;
 }
-
 .testimonial-card strong {
   color: #4fa3ff;
 }
 
-/* CONTACT */
 .contact {
   background: #0a0f1a;
   padding: 80px 0;
 }
-
 .contact h2 {
   text-align: center;
   font-size: 2rem;
@@ -1108,25 +926,21 @@ nav a:hover {
   color: #fff;
   margin-bottom: 8px;
 }
-
 .contact .subtitle {
   text-align: center;
   color: #94a3b8;
   margin-bottom: 48px;
 }
-
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
 }
-
 .contact-info {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
 .info-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
@@ -1135,30 +949,25 @@ nav a:hover {
   transition: all 0.3s;
   border: 1px solid rgba(79, 163, 255, 0.15);
 }
-
 .info-card:hover {
   transform: translateX(5px);
   border-color: rgba(79, 163, 255, 0.3);
 }
-
 .info-card i {
   font-size: 28px;
   color: #4fa3ff;
   margin-bottom: 12px;
 }
-
 .info-card h4 {
   color: #fff;
   margin-bottom: 8px;
   font-size: 1rem;
 }
-
 .info-card p {
   color: #94a3b8;
   font-size: 0.85rem;
   line-height: 1.5;
 }
-
 .contact-form {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
@@ -1169,7 +978,6 @@ nav a:hover {
   gap: 16px;
   border: 1px solid rgba(79, 163, 255, 0.15);
 }
-
 .contact-form input,
 .contact-form textarea {
   padding: 12px 16px;
@@ -1180,13 +988,11 @@ nav a:hover {
   font-family: inherit;
   font-size: 14px;
 }
-
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: #4fa3ff;
 }
-
 .contact-form button {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
@@ -1197,7 +1003,6 @@ nav a:hover {
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .contact-form button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
@@ -1212,53 +1017,36 @@ footer {
   border-top: 1px solid rgba(79, 163, 255, 0.1);
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     text-align: center;
   }
-  
   .hero h1 {
     font-size: 2rem;
   }
-  
   .services-grid {
     grid-template-columns: 1fr;
   }
-  
   .contact-layout {
     grid-template-columns: 1fr;
   }
-  
   .filters-grid {
     flex-direction: column;
   }
-  
   .card-actions {
     flex-direction: column;
   }
-  
   .cart-item {
     flex-direction: column;
     text-align: center;
     gap: 12px;
   }
-  
   .cart-item-actions {
     justify-content: center;
   }
-  
   .cart-item-price {
     text-align: center;
-  }
-  
-  .modal-footer {
-    flex-direction: column;
-  }
-  
-  .btn-modal {
-    width: 100%;
   }
 }
 </style>
@@ -1307,58 +1095,29 @@ footer {
 </header>
 
 <section class="hero">
-  <div class="slide active">
-    <h1>Reparo Rápido e Confiável</h1>
-    <p>Especialistas em celulares, tablets e computadores com garantia de 6 meses</p>
-  </div>
-  <div class="slide">
-    <h1>Tecnologia que você confia</h1>
-    <p>Manutenção profissional com peças originais e técnicos certificados</p>
-  </div>
-  <div class="slide">
-    <h1>Seu dispositivo como novo</h1>
-    <p>Atendimento rápido, eficiente e com total transparência</p>
-  </div>
+  <div class="slide active"><h1>Reparo Rápido e Confiável</h1><p>Especialistas em celulares, tablets e computadores com garantia de 6 meses</p></div>
+  <div class="slide"><h1>Tecnologia que você confia</h1><p>Manutenção profissional com peças originais e técnicos certificados</p></div>
+  <div class="slide"><h1>Seu dispositivo como novo</h1><p>Atendimento rápido, eficiente e com total transparência</p></div>
 </section>
 
 <section class="services" id="servicos">
   <div class="container">
     <div class="services-header">
-      <div>
-        <h2>Nossos Serviços</h2>
-        <p class="section-subtitle">Escolha o serviço ideal para seu dispositivo</p>
-      </div>
-      <button class="toggle-filters" id="toggleFilters">
-        <i class="fas fa-sliders-h"></i> Filtros
-        <i class="fas fa-chevron-up" id="filterArrow"></i>
-      </button>
+      <div><h2>Nossos Serviços</h2><p class="section-subtitle">Escolha o serviço ideal para seu dispositivo</p></div>
+      <button class="toggle-filters" id="toggleFilters"><i class="fas fa-sliders-h"></i> Filtros <i class="fas fa-chevron-up" id="filterArrow"></i></button>
     </div>
-
     <div class="filters-panel" id="filtersPanel">
       <div class="filters-grid">
-        <div class="filter-section">
-          <h4><i class="fas fa-mobile-alt"></i> Dispositivo <span class="filter-badge" id="deviceCount">0</span></h4>
-          <div class="filter-options" id="deviceFilters"></div>
-        </div>
-        <div class="filter-section">
-          <h4><i class="fas fa-wrench"></i> Serviço <span class="filter-badge" id="serviceCount">0</span></h4>
-          <div class="filter-options" id="serviceFilters"></div>
-        </div>
-        <div class="filter-section">
-          <h4><i class="fas fa-tag"></i> Marca <span class="filter-badge" id="brandCount">0</span></h4>
-          <div class="filter-options" id="brandFilters"></div>
-        </div>
+        <div class="filter-section"><h4><i class="fas fa-mobile-alt"></i> Dispositivo <span class="filter-badge" id="deviceCount">0</span></h4><div class="filter-options" id="deviceFilters"></div></div>
+        <div class="filter-section"><h4><i class="fas fa-wrench"></i> Serviço <span class="filter-badge" id="serviceCount">0</span></h4><div class="filter-options" id="serviceFilters"></div></div>
+        <div class="filter-section"><h4><i class="fas fa-tag"></i> Marca <span class="filter-badge" id="brandCount">0</span></h4><div class="filter-options" id="brandFilters"></div></div>
       </div>
-      <div class="filter-actions">
-        <button class="clear-filters" id="clearFilters"><i class="fas fa-eraser"></i> Limpar Filtros</button>
-      </div>
+      <div class="filter-actions"><button class="clear-filters" id="clearFilters"><i class="fas fa-eraser"></i> Limpar Filtros</button></div>
     </div>
-
     <div class="services-grid" id="servicesGrid"></div>
   </div>
 </section>
 
-<!-- MODAL CARRINHO -->
 <div class="cart-modal" id="cartModal">
   <div class="cart-modal-content">
     <h3><i class="fas fa-shopping-cart"></i> Meu Carrinho</h3>
@@ -1372,74 +1131,35 @@ footer {
 </div>
 
 <section class="testimonials">
-  <div class="container">
-    <h2>O Que Nossos Clientes Dizem</h2>
-    <p class="subtitle">+5.000 clientes satisfeitos</p>
+  <div class="container"><h2>O Que Nossos Clientes Dizem</h2><p class="subtitle">+5.000 clientes satisfeitos</p>
     <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <p>"Excelente atendimento! Meu notebook voltou como novo em apenas 2 dias."</p>
-        <strong>Maria Silva</strong>
-      </div>
-      <div class="testimonial-card">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <p>"Preço justo, serviço rápido e garantia de qualidade. Recomendo demais!"</p>
-        <strong>João Santos</strong>
-      </div>
-      <div class="testimonial-card">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <p>"Recuperaram meus arquivos importantes. Salvou meu semestre acadêmico."</p>
-        <strong>Ana Costa</strong>
-      </div>
+      <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Excelente atendimento! Meu notebook voltou como novo em apenas 2 dias."</p><strong>Maria Silva</strong></div>
+      <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Preço justo, serviço rápido e garantia de qualidade. Recomendo demais!"</p><strong>João Santos</strong></div>
+      <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Recuperaram meus arquivos importantes. Salvou meu semestre acadêmico."</p><strong>Ana Costa</strong></div>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contato">
-  <div class="container">
-    <h2>Entre em Contato</h2>
-    <p class="subtitle">Estamos prontos para ajudar você</p>
+  <div class="container"><h2>Entre em Contato</h2><p class="subtitle">Estamos prontos para ajudar você</p>
     <div class="contact-layout">
       <div class="contact-info">
-        <div class="info-card">
-          <i class="fas fa-map-marker-alt"></i>
-          <h4>Endereço</h4>
-          <p>Av. Paulista, 1000<br>São Paulo - SP</p>
-        </div>
-        <div class="info-card">
-          <i class="fas fa-phone-alt"></i>
-          <h4>Telefone</h4>
-          <p>(11) 98765-4321<br>(11) 3456-7890</p>
-        </div>
-        <div class="info-card">
-          <i class="fas fa-clock"></i>
-          <h4>Horário</h4>
-          <p>Seg - Sex: 9h às 18h<br>Sábado: 9h às 13h</p>
-        </div>
+        <div class="info-card"><i class="fas fa-map-marker-alt"></i><h4>Endereço</h4><p>Av. Paulista, 1000<br>São Paulo - SP</p></div>
+        <div class="info-card"><i class="fas fa-phone-alt"></i><h4>Telefone</h4><p>(11) 98765-4321<br>(11) 3456-7890</p></div>
+        <div class="info-card"><i class="fas fa-clock"></i><h4>Horário</h4><p>Seg - Sex: 9h às 18h<br>Sábado: 9h às 13h</p></div>
       </div>
       <form class="contact-form" id="contactForm">
-        <input type="text" placeholder="Nome completo">
-        <input type="email" placeholder="Email">
-        <input type="tel" placeholder="Telefone">
-        <textarea placeholder="Descreva seu problema..." rows="4"></textarea>
-        <button type="submit"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
+        <input type="text" placeholder="Nome completo"><input type="email" placeholder="Email"><input type="tel" placeholder="Telefone"><textarea placeholder="Descreva seu problema..." rows="4"></textarea><button type="submit"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
       </form>
     </div>
   </div>
 </section>
 
-<footer>
-  <p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p>
-</footer>
+<footer><p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p></footer>
 
 <script>
-// ============================================
-// PRO TECH - JAVASCRIPT COMPLETO
-// ============================================
-
 const API_URL = 'https://protech-rt8q.onrender.com/api';
 
-// Dados dos serviços
 const servicesData = [
   { id: 1, device: 'celular', service: 'tela', brand: 'iphone', name: 'Troca de Tela - iPhone', desc: 'Tela original com garantia de 6 meses', price: 'R$ 399', time: '2h', badge: 'iPhone' },
   { id: 2, device: 'celular', service: 'bateria', brand: 'iphone', name: 'Troca de Bateria - iPhone', desc: 'Bateria original com 1 ano de garantia', price: 'R$ 229', time: '1h', badge: 'iPhone' },
@@ -1451,732 +1171,148 @@ const servicesData = [
 
 let filtrosAtivos = { devices: [], services: [], brands: [] };
 let carrinho = [];
-let servicoPendente = null;
 
-// ============================================
-// FUNÇÕES DE UTILIDADE
-// ============================================
+function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+function showToast(message, isError = false) { const toast = document.createElement('div'); toast.className = `toast ${isError ? 'error' : ''}`; toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
 
-function escapeHtml(text) {
-  if (!text) return '';
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-function showToast(message, isError = false) {
-  const toast = document.createElement('div');
-  toast.className = `toast ${isError ? 'error' : ''}`;
-  toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
-}
-
-// ============================================
-// MODAIS DE CONFIRMAÇÃO
-// ============================================
-
-function mostrarModalConfirmacao(servico) {
-  servicoPendente = servico;
-  
-  const modalHtml = `
-    <div class="modal-overlay" id="modalConfirmacaoOverlay">
-      <div class="modal-container modal-confirmacao">
-        <div class="modal-header">
-          <i class="fas fa-clipboard-list"></i>
-          <h3>Confirmar Contratação</h3>
-        </div>
-        <div class="modal-body">
-          <div class="servico-info">
-            <h4>${escapeHtml(servico.name)}</h4>
-            <p>${escapeHtml(servico.desc)}</p>
-            <div class="servico-detalhes">
-              <span class="preco-destaque">${servico.price}</span>
-              <span class="tempo"><i class="far fa-clock"></i> ${servico.time}</span>
-            </div>
-          </div>
-          <p class="confirmacao-texto">Deseja realmente contratar este serviço?</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-modal btn-modal-secondary" id="btnCancelarContratacao">
-            <i class="fas fa-times"></i> Cancelar
-          </button>
-          <button class="btn-modal btn-modal-primary" id="btnConfirmarContratacao">
-            <i class="fas fa-check"></i> Confirmar Contratação
-          </button>
-          <button class="btn-modal btn-modal-carrinho" id="btnAdicionarCarrinhoConfirmacao">
-            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  const existingModal = document.getElementById('modalConfirmacaoOverlay');
-  if (existingModal) existingModal.remove();
-  
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const overlay = document.getElementById('modalConfirmacaoOverlay');
-  
-  document.getElementById('btnConfirmarContratacao').addEventListener('click', async () => {
-    overlay.remove();
-    await contratarServico(servico, 1);
-    setTimeout(() => {
-      window.location.href = 'manutencoes.html';
-    }, 1500);
-  });
-  
-  document.getElementById('btnAdicionarCarrinhoConfirmacao').addEventListener('click', () => {
-    overlay.remove();
-    adicionarAoCarrinho(servico);
-  });
-  
-  document.getElementById('btnCancelarContratacao').addEventListener('click', () => {
-    overlay.remove();
-    servicoPendente = null;
-  });
-  
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.remove();
-      servicoPendente = null;
-    }
-  });
-}
-
-function mostrarModalFinalizarCompra() {
-  if (carrinho.length === 0) {
-    showToast('🛒 Seu carrinho está vazio', true);
-    return;
-  }
-  
-  const total = carrinho.reduce((sum, item) => {
-    const valor = parseFloat(item.price.replace('R$ ', '').replace(',', '.'));
-    return sum + (valor * item.quantidade);
-  }, 0);
-  
-  const itensHtml = carrinho.map(item => `
-    <div class="resumo-item">
-      <span>${item.quantidade}x ${escapeHtml(item.name)}</span>
-      <span>${item.price}</span>
-    </div>
-  `).join('');
-  
-  const modalHtml = `
-    <div class="modal-overlay" id="modalFinalizarOverlay">
-      <div class="modal-container modal-finalizar">
-        <div class="modal-header">
-          <i class="fas fa-shopping-cart"></i>
-          <h3>Finalizar Compra</h3>
-        </div>
-        <div class="modal-body">
-          <div class="resumo-compra">
-            <h4>Resumo da Compra</h4>
-            ${itensHtml}
-            <div class="resumo-total">
-              <strong>Total</strong>
-              <strong>R$ ${total.toFixed(2)}</strong>
-            </div>
-          </div>
-          <p class="confirmacao-texto">Deseja realmente finalizar a compra?</p>
-          <p class="confirmacao-obs">Todos os serviços serão contratados imediatamente.</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-modal btn-modal-secondary" id="btnCancelarFinalizar">
-            <i class="fas fa-arrow-left"></i> Voltar
-          </button>
-          <button class="btn-modal btn-modal-primary" id="btnConfirmarFinalizar">
-            <i class="fas fa-check-circle"></i> Confirmar Compra
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  const existingModal = document.getElementById('modalFinalizarOverlay');
-  if (existingModal) existingModal.remove();
-  
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const overlay = document.getElementById('modalFinalizarOverlay');
-  
-  document.getElementById('btnConfirmarFinalizar').addEventListener('click', async () => {
-    overlay.remove();
-    await processarFinalizacaoCompra();
-  });
-  
-  document.getElementById('btnCancelarFinalizar').addEventListener('click', () => {
-    overlay.remove();
-  });
-  
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.remove();
-    }
-  });
-}
-
-async function processarFinalizacaoCompra() {
-  const token = localStorage.getItem('protech_token');
-  
-  if (!token) {
-    showToast('🔒 Faça login para finalizar a compra', true);
-    setTimeout(() => window.location.href = 'login.html', 1500);
-    return;
-  }
-  
-  if (carrinho.length === 0) {
-    showToast('🛒 Seu carrinho está vazio', true);
-    return;
-  }
-  
-  showToast('🔄 Processando sua compra...');
-  
-  let totalSucessos = 0;
-  let totalItens = 0;
-  
-  for (const item of carrinho) {
-    totalItens += item.quantidade;
-    const sucesso = await contratarServico(item, item.quantidade);
-    if (sucesso) {
-      totalSucessos += item.quantidade;
-    }
-  }
-  
-  if (totalSucessos === totalItens && totalItens > 0) {
-    showToast(`✅ ${totalSucessos} serviço(s) contratado(s) com sucesso!`);
-    carrinho = [];
-    salvarCarrinho();
-    document.getElementById('cartModal').classList.remove('active');
-    setTimeout(() => {
-      window.location.href = 'manutencoes.html';
-    }, 1500);
-  } else if (totalSucessos > 0) {
-    showToast(`⚠️ ${totalSucessos} de ${totalItens} serviços contratados. Alguns falharam.`, true);
-  } else {
-    showToast('❌ Erro ao finalizar compra. Tente novamente.', true);
-  }
-}
-
-// ============================================
-// CARRINHO DE COMPRAS
-// ============================================
-
-function carregarCarrinho() {
-  const saved = localStorage.getItem('protech_carrinho');
-  if (saved) {
-    try {
-      carrinho = JSON.parse(saved);
-    } catch(e) {
-      carrinho = [];
-    }
-  }
-  atualizarContadorCarrinho();
-}
-
-function salvarCarrinho() {
-  localStorage.setItem('protech_carrinho', JSON.stringify(carrinho));
-  atualizarContadorCarrinho();
-}
-
-function atualizarContadorCarrinho() {
-  const cartCount = document.getElementById('cartCount');
-  if (cartCount) {
-    const total = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
-    cartCount.textContent = total;
-  }
-}
+function carregarCarrinho() { const saved = localStorage.getItem('protech_carrinho'); if (saved) { try { carrinho = JSON.parse(saved); } catch(e) { carrinho = []; } } atualizarContadorCarrinho(); }
+function salvarCarrinho() { localStorage.setItem('protech_carrinho', JSON.stringify(carrinho)); atualizarContadorCarrinho(); }
+function atualizarContadorCarrinho() { const cartCount = document.getElementById('cartCount'); if (cartCount) { const total = carrinho.reduce((sum, item) => sum + item.quantidade, 0); cartCount.textContent = total; } }
 
 function adicionarAoCarrinho(servico) {
   const existing = carrinho.find(item => item.id === servico.id);
-  if (existing) {
-    existing.quantidade++;
-    showToast(`✨ ${servico.name} quantidade aumentada para ${existing.quantidade}`);
-  } else {
-    carrinho.push({ 
-      ...servico, 
-      quantidade: 1,
-      desc: servico.desc || '',
-      time: servico.time || '',
-      badge: servico.badge || ''
-    });
-    showToast(`✨ ${servico.name} adicionado ao carrinho!`);
-  }
-  salvarCarrinho();
-  renderizarCarrinho();
+  if (existing) { existing.quantidade++; showToast(`✨ ${servico.name} quantidade aumentada para ${existing.quantidade}`); }
+  else { carrinho.push({ ...servico, quantidade: 1 }); showToast(`✨ ${servico.name} adicionado ao carrinho!`); }
+  salvarCarrinho(); renderizarCarrinho();
 }
 
 function removerDoCarrinho(servicoId) {
   const index = carrinho.findIndex(item => item.id === servicoId);
   if (index !== -1) {
-    if (carrinho[index].quantidade > 1) {
-      carrinho[index].quantidade--;
-      showToast(`🛒 Quantidade reduzida para ${carrinho[index].quantidade}`);
-    } else {
-      const nome = carrinho[index].name;
-      carrinho.splice(index, 1);
-      showToast(`🗑️ ${nome} removido do carrinho`);
-    }
-    salvarCarrinho();
-    renderizarCarrinho();
+    if (carrinho[index].quantidade > 1) { carrinho[index].quantidade--; showToast(`🛒 Quantidade reduzida para ${carrinho[index].quantidade}`); }
+    else { const nome = carrinho[index].name; carrinho.splice(index, 1); showToast(`🗑️ ${nome} removido do carrinho`); }
+    salvarCarrinho(); renderizarCarrinho();
   }
 }
 
 function renderizarCarrinho() {
-  const container = document.getElementById('cartItems');
-  const totalContainer = document.getElementById('cartTotal');
-  
+  const container = document.getElementById('cartItems'); const totalContainer = document.getElementById('cartTotal');
   if (!container) return;
-  
-  if (carrinho.length === 0) {
-    container.innerHTML = `
-      <div class="empty-cart">
-        <i class="fas fa-shopping-cart"></i>
-        <p>Seu carrinho está vazio</p>
-        <p style="font-size: 12px; margin-top: 8px;">Adicione serviços para continuar</p>
-      </div>
-    `;
-    if (totalContainer) totalContainer.innerHTML = '';
-    return;
-  }
-  
+  if (carrinho.length === 0) { container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Seu carrinho está vazio</p></div>`; if (totalContainer) totalContainer.innerHTML = ''; return; }
   let total = 0;
-  container.innerHTML = carrinho.map(item => {
-    const valor = parseFloat(item.price.replace('R$ ', '').replace(',', '.'));
-    const subtotal = valor * item.quantidade;
-    total += subtotal;
-    return `
-      <div class="cart-item">
-        <div class="cart-item-info">
-          <h4>${escapeHtml(item.name)}</h4>
-          <p>${item.price} cada</p>
-        </div>
-        <div class="cart-item-actions">
-          <button class="btn-qty-minus" onclick="removerDoCarrinho(${item.id})">-</button>
-          <span style="min-width: 30px; text-align: center;">${item.quantidade}</span>
-          <button class="btn-qty-plus" onclick="adicionarAoCarrinho(${JSON.stringify(item).replace(/"/g, '&quot;')})">+</button>
-        </div>
-        <div class="cart-item-price">R$ ${subtotal.toFixed(2)}</div>
-      </div>
-    `;
-  }).join('');
-  
-  if (totalContainer) {
-    totalContainer.innerHTML = `
-      <span>Total</span>
-      <span>R$ ${total.toFixed(2)}</span>
-    `;
-  }
+  container.innerHTML = carrinho.map(item => { const valor = parseFloat(item.price.replace('R$ ', '').replace(',', '.')); const subtotal = valor * item.quantidade; total += subtotal; return `<div class="cart-item"><div class="cart-item-info"><h4>${escapeHtml(item.name)}</h4><p>${item.price} cada</p></div><div class="cart-item-actions"><button class="btn-qty-minus" onclick="removerDoCarrinho(${item.id})">-</button><span>${item.quantidade}</span><button class="btn-qty-plus" onclick="adicionarAoCarrinho(${JSON.stringify(item).replace(/"/g, '&quot;')})">+</button></div><div class="cart-item-price">R$ ${subtotal.toFixed(2)}</div></div>`; }).join('');
+  if (totalContainer) totalContainer.innerHTML = `<span>Total</span><span>R$ ${total.toFixed(2)}</span>`;
 }
-
-// ============================================
-// CONTRATAÇÃO DE SERVIÇOS
-// ============================================
 
 async function contratarServico(servico, quantidade = 1) {
   const token = localStorage.getItem('protech_token');
-  
-  if (!token) {
-    showToast('🔒 Faça login para contratar um serviço', true);
-    setTimeout(() => window.location.href = 'login.html', 1500);
-    return false;
-  }
-  
+  if (!token) { showToast('🔒 Faça login para contratar um serviço', true); setTimeout(() => window.location.href = 'login.html', 1500); return false; }
   let sucessos = 0;
-  
   for (let i = 0; i < quantidade; i++) {
-    const manutencao = {
-      servicoId: servico.id,
-      nome: servico.name,
-      dispositivo: servico.device,
-      preco: servico.price,
-      status: 'pendente',
-      data: new Date().toISOString()
-    };
-    
-    try {
-      const response = await fetch(`${API_URL}/users/manutencoes`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(manutencao)
-      });
-      
-      if (response.ok) {
-        sucessos++;
-      }
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-    }
+    const manutencao = { servicoId: servico.id, nome: servico.name, dispositivo: servico.device, preco: servico.price, status: 'pendente', data: new Date().toISOString() };
+    try { const response = await fetch(`${API_URL}/users/manutencoes`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify(manutencao) }); if (response.ok) sucessos++; } catch (error) { console.error('Erro:', error); }
   }
-  
-  return sucessos === quantidade;
+  if (sucessos > 0) { showToast(`✅ ${servico.name} contratado com sucesso!`); return true; }
+  showToast('❌ Erro ao contratar serviço', true); return false;
 }
 
-// ============================================
-// RENDERIZAÇÃO DOS CARDS
-// ============================================
+function mostrarModalConfirmacao(servico) {
+  const modalHtml = `<div class="modal-overlay" id="modalConfirmacaoOverlay"><div class="modal-container modal-confirmacao"><div class="modal-header"><i class="fas fa-clipboard-list"></i><h3>Confirmar Contratação</h3></div><div class="modal-body"><div class="servico-info"><h4>${escapeHtml(servico.name)}</h4><p>${escapeHtml(servico.desc)}</p><div class="servico-detalhes"><span class="preco-destaque">${servico.price}</span><span class="tempo"><i class="far fa-clock"></i> ${servico.time}</span></div></div><p class="confirmacao-texto">Deseja realmente contratar este serviço?</p></div><div class="modal-footer"><button class="btn-modal btn-modal-secondary" id="btnCancelarContratacao"><i class="fas fa-times"></i> Cancelar</button><button class="btn-modal btn-modal-primary" id="btnConfirmarContratacao"><i class="fas fa-check"></i> Confirmar</button><button class="btn-modal btn-modal-carrinho" id="btnAdicionarCarrinhoConfirmacao"><i class="fas fa-cart-plus"></i> Carrinho</button></div></div></div>`;
+  const existingModal = document.getElementById('modalConfirmacaoOverlay'); if (existingModal) existingModal.remove();
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  const overlay = document.getElementById('modalConfirmacaoOverlay');
+  document.getElementById('btnConfirmarContratacao').addEventListener('click', async () => { overlay.remove(); const sucesso = await contratarServico(servico, 1); if (sucesso) setTimeout(() => window.location.href = 'manutencoes.html', 1500); });
+  document.getElementById('btnAdicionarCarrinhoConfirmacao').addEventListener('click', () => { overlay.remove(); adicionarAoCarrinho(servico); });
+  document.getElementById('btnCancelarContratacao').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+}
+
+function mostrarModalFinalizarCompra() {
+  if (carrinho.length === 0) { showToast('🛒 Seu carrinho está vazio', true); return; }
+  const total = carrinho.reduce((sum, item) => { const valor = parseFloat(item.price.replace('R$ ', '').replace(',', '.')); return sum + (valor * item.quantidade); }, 0);
+  const itensHtml = carrinho.map(item => `<div class="resumo-item"><span>${item.quantidade}x ${escapeHtml(item.name)}</span><span>${item.price}</span></div>`).join('');
+  const modalHtml = `<div class="modal-overlay" id="modalFinalizarOverlay"><div class="modal-container modal-finalizar"><div class="modal-header"><i class="fas fa-shopping-cart"></i><h3>Finalizar Compra</h3></div><div class="modal-body"><div class="resumo-compra"><h4>Resumo da Compra</h4>${itensHtml}<div class="resumo-total"><strong>Total</strong><strong>R$ ${total.toFixed(2)}</strong></div></div><p class="confirmacao-texto">Deseja realmente finalizar a compra?</p><p class="confirmacao-obs">Todos os serviços serão contratados imediatamente.</p></div><div class="modal-footer"><button class="btn-modal btn-modal-secondary" id="btnCancelarFinalizar"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn-modal btn-modal-primary" id="btnConfirmarFinalizar"><i class="fas fa-check-circle"></i> Confirmar</button></div></div></div>`;
+  const existingModal = document.getElementById('modalFinalizarOverlay'); if (existingModal) existingModal.remove();
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  const overlay = document.getElementById('modalFinalizarOverlay');
+  document.getElementById('btnConfirmarFinalizar').addEventListener('click', async () => { overlay.remove(); await processarFinalizacaoCompra(); });
+  document.getElementById('btnCancelarFinalizar').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+}
+
+async function processarFinalizacaoCompra() {
+  const token = localStorage.getItem('protech_token');
+  if (!token) { showToast('🔒 Faça login para finalizar a compra', true); setTimeout(() => window.location.href = 'login.html', 1500); return; }
+  if (carrinho.length === 0) { showToast('🛒 Seu carrinho está vazio', true); return; }
+  showToast('🔄 Processando sua compra...');
+  let totalSucessos = 0, totalItens = 0;
+  for (const item of carrinho) { totalItens += item.quantidade; const sucesso = await contratarServico(item, item.quantidade); if (sucesso) totalSucessos += item.quantidade; }
+  if (totalSucessos === totalItens && totalItens > 0) { showToast(`✅ ${totalSucessos} serviço(s) contratado(s) com sucesso!`); carrinho = []; salvarCarrinho(); document.getElementById('cartModal').classList.remove('active'); setTimeout(() => window.location.href = 'manutencoes.html', 1500); }
+  else if (totalSucessos > 0) showToast(`⚠️ ${totalSucessos} de ${totalItens} serviços contratados.`, true);
+  else showToast('❌ Erro ao finalizar compra.', true);
+}
 
 function renderCards() {
-  const grid = document.getElementById('servicesGrid');
-  if (!grid) return;
-  
+  const grid = document.getElementById('servicesGrid'); if (!grid) return;
   let filtered = servicesData;
   if (filtrosAtivos.devices.length) filtered = filtered.filter(s => filtrosAtivos.devices.includes(s.device));
   if (filtrosAtivos.services.length) filtered = filtered.filter(s => filtrosAtivos.services.includes(s.service));
   if (filtrosAtivos.brands.length) filtered = filtered.filter(s => filtrosAtivos.brands.includes(s.brand));
-  
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>Nenhum serviço encontrado</p></div>`;
-    return;
-  }
-  
-  grid.innerHTML = filtered.map(service => `
-    <div class="card">
-      <div class="card-badge">${service.badge}</div>
-      <h3>${service.name}</h3>
-      <p>${service.desc}</p>
-      <div class="card-footer">
-        <span class="price">${service.price}</span>
-        <span class="duration"><i class="far fa-clock"></i> ${service.time}</span>
-      </div>
-      <div class="card-actions">
-        <button class="btn-card-primary" data-id="${service.id}" data-name="${service.name}" data-device="${service.device}" data-price="${service.price}" data-desc="${service.desc}" data-time="${service.time}">
-          <i class="fas fa-bolt"></i> Contratar
-        </button>
-        <button class="btn-card-secondary" data-id="${service.id}" data-name="${service.name}" data-device="${service.device}" data-price="${service.price}" data-desc="${service.desc}" data-time="${service.time}">
-          <i class="fas fa-cart-plus"></i> Carrinho
-        </button>
-      </div>
-    </div>
-  `).join('');
-  
-  document.querySelectorAll('.btn-card-primary').forEach(btn => {
-    btn.removeEventListener('click', handleContratarClick);
-    btn.addEventListener('click', handleContratarClick);
-  });
-  
-  document.querySelectorAll('.btn-card-secondary').forEach(btn => {
-    btn.removeEventListener('click', handleCarrinhoClick);
-    btn.addEventListener('click', handleCarrinhoClick);
-  });
+  if (filtered.length === 0) { grid.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>Nenhum serviço encontrado</p></div>`; return; }
+  grid.innerHTML = filtered.map(service => `<div class="card"><div class="card-badge">${service.badge}</div><h3>${service.name}</h3><p>${service.desc}</p><div class="card-footer"><span class="price">${service.price}</span><span class="duration"><i class="far fa-clock"></i> ${service.time}</span></div><div class="card-actions"><button class="btn-card-primary" data-id="${service.id}" data-name="${service.name}" data-device="${service.device}" data-price="${service.price}" data-desc="${service.desc}" data-time="${service.time}"><i class="fas fa-bolt"></i> Contratar</button><button class="btn-card-secondary" data-id="${service.id}" data-name="${service.name}" data-device="${service.device}" data-price="${service.price}" data-desc="${service.desc}" data-time="${service.time}"><i class="fas fa-cart-plus"></i> Carrinho</button></div></div>`).join('');
+  document.querySelectorAll('.btn-card-primary').forEach(btn => btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); const servico = servicesData.find(s => s.id === id); if (servico) mostrarModalConfirmacao(servico); }));
+  document.querySelectorAll('.btn-card-secondary').forEach(btn => btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); const servico = servicesData.find(s => s.id === id); if (servico) adicionarAoCarrinho(servico); }));
 }
 
-function handleContratarClick(e) {
-  const btn = e.currentTarget;
-  const servico = {
-    id: parseInt(btn.dataset.id),
-    name: btn.dataset.name,
-    device: btn.dataset.device,
-    price: btn.dataset.price,
-    desc: btn.dataset.desc,
-    time: btn.dataset.time
-  };
-  mostrarModalConfirmacao(servico);
-}
-
-function handleCarrinhoClick(e) {
-  const btn = e.currentTarget;
-  const servico = {
-    id: parseInt(btn.dataset.id),
-    name: btn.dataset.name,
-    device: btn.dataset.device,
-    price: btn.dataset.price,
-    desc: btn.dataset.desc,
-    time: btn.dataset.time,
-    badge: servicesData.find(s => s.id === parseInt(btn.dataset.id))?.badge || ''
-  };
-  adicionarAoCarrinho(servico);
-}
-
-// ============================================
-// FILTROS
-// ============================================
-
-function updateCounters() {
-  document.getElementById('deviceCount').textContent = filtrosAtivos.devices.length;
-  document.getElementById('serviceCount').textContent = filtrosAtivos.services.length;
-  document.getElementById('brandCount').textContent = filtrosAtivos.brands.length;
-}
+function updateCounters() { document.getElementById('deviceCount').textContent = filtrosAtivos.devices.length; document.getElementById('serviceCount').textContent = filtrosAtivos.services.length; document.getElementById('brandCount').textContent = filtrosAtivos.brands.length; }
 
 function initFilters() {
-  const deviceContainer = document.getElementById('deviceFilters');
-  const serviceContainer = document.getElementById('serviceFilters');
-  const brandContainer = document.getElementById('brandFilters');
-  
-  const devices = ['celular', 'tablet', 'computador'];
-  const services = ['tela', 'bateria', 'software', 'pelicula'];
-  const brands = ['iphone', 'samsung', 'xiaomi', 'dell'];
-  
+  const deviceContainer = document.getElementById('deviceFilters'); const serviceContainer = document.getElementById('serviceFilters'); const brandContainer = document.getElementById('brandFilters');
+  const devices = ['celular', 'tablet', 'computador']; const services = ['tela', 'bateria', 'software', 'pelicula']; const brands = ['iphone', 'samsung', 'xiaomi', 'dell'];
   const getCount = (type, value) => servicesData.filter(s => s[type] === value).length;
-  
-  if (deviceContainer) {
-    deviceContainer.innerHTML = devices.map(d => `
-      <label class="filter-option">
-        <input type="checkbox" value="${d}" class="filter-checkbox" data-type="device">
-        <span>${d.charAt(0).toUpperCase() + d.slice(1)}</span>
-        <span class="filter-count">${getCount('device', d)}</span>
-      </label>
-    `).join('');
-  }
-  
-  if (serviceContainer) {
-    serviceContainer.innerHTML = services.map(s => `
-      <label class="filter-option">
-        <input type="checkbox" value="${s}" class="filter-checkbox" data-type="service">
-        <span>${s.charAt(0).toUpperCase() + s.slice(1)}</span>
-        <span class="filter-count">${getCount('service', s)}</span>
-      </label>
-    `).join('');
-  }
-  
-  if (brandContainer) {
-    brandContainer.innerHTML = brands.map(b => `
-      <label class="filter-option">
-        <input type="checkbox" value="${b}" class="filter-checkbox" data-type="brand">
-        <span>${b.charAt(0).toUpperCase() + b.slice(1)}</span>
-        <span class="filter-count">${getCount('brand', b)}</span>
-      </label>
-    `).join('');
-  }
-  
-  document.querySelectorAll('.filter-checkbox').forEach(cb => {
-    cb.addEventListener('change', () => {
-      const type = cb.dataset.type;
-      const value = cb.value;
-      if (cb.checked) {
-        if (!filtrosAtivos[`${type}s`].includes(value)) filtrosAtivos[`${type}s`].push(value);
-      } else {
-        filtrosAtivos[`${type}s`] = filtrosAtivos[`${type}s`].filter(v => v !== value);
-      }
-      updateCounters();
-      renderCards();
-    });
-  });
-  
-  const clearBtn = document.getElementById('clearFilters');
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-checkbox:checked').forEach(cb => cb.checked = false);
-      filtrosAtivos = { devices: [], services: [], brands: [] };
-      updateCounters();
-      renderCards();
-    });
-  }
+  if (deviceContainer) deviceContainer.innerHTML = devices.map(d => `<label class="filter-option"><input type="checkbox" value="${d}" class="filter-checkbox" data-type="device"><span>${d.charAt(0).toUpperCase() + d.slice(1)}</span><span class="filter-count">${getCount('device', d)}</span></label>`).join('');
+  if (serviceContainer) serviceContainer.innerHTML = services.map(s => `<label class="filter-option"><input type="checkbox" value="${s}" class="filter-checkbox" data-type="service"><span>${s.charAt(0).toUpperCase() + s.slice(1)}</span><span class="filter-count">${getCount('service', s)}</span></label>`).join('');
+  if (brandContainer) brandContainer.innerHTML = brands.map(b => `<label class="filter-option"><input type="checkbox" value="${b}" class="filter-checkbox" data-type="brand"><span>${b.charAt(0).toUpperCase() + b.slice(1)}</span><span class="filter-count">${getCount('brand', b)}</span></label>`).join('');
+  document.querySelectorAll('.filter-checkbox').forEach(cb => { cb.addEventListener('change', () => { const type = cb.dataset.type; const value = cb.value; if (cb.checked) { if (!filtrosAtivos[`${type}s`].includes(value)) filtrosAtivos[`${type}s`].push(value); } else { filtrosAtivos[`${type}s`] = filtrosAtivos[`${type}s`].filter(v => v !== value); } updateCounters(); renderCards(); }); });
+  document.getElementById('clearFilters')?.addEventListener('click', () => { document.querySelectorAll('.filter-checkbox:checked').forEach(cb => cb.checked = false); filtrosAtivos = { devices: [], services: [], brands: [] }; updateCounters(); renderCards(); });
 }
-
-// ============================================
-// MENU DO USUÁRIO (COM LINKS DINÂMICOS)
-// ============================================
 
 function updateUserMenu() {
   const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
-  const userMenu = document.getElementById('userMenu');
-  const authButtons = document.getElementById('authButtons');
-  const userName = document.getElementById('userName');
-  
-  // Links específicos
-  const tecnicoLink = document.getElementById('tecnicoLink');
-  const adminLink = document.getElementById('adminLink');
-  const dropdownTecnicoLink = document.getElementById('dropdownTecnicoLink');
-  const dropdownAdminLink = document.getElementById('dropdownAdminLink');
-  
+  const userMenu = document.getElementById('userMenu'); const authButtons = document.getElementById('authButtons'); const userName = document.getElementById('userName');
+  const tecnicoLink = document.getElementById('tecnicoLink'); const adminLink = document.getElementById('adminLink');
+  const dropdownTecnicoLink = document.getElementById('dropdownTecnicoLink'); const dropdownAdminLink = document.getElementById('dropdownAdminLink');
   if (user && user.name) {
-    if (userMenu) userMenu.style.display = 'block';
-    if (authButtons) authButtons.style.display = 'none';
-    if (userName) userName.textContent = user.name.split(' ')[0];
-    
-    // Mostrar links baseado na role
-    if (user.role === 'tecnico' || user.role === 'admin') {
-      if (tecnicoLink) tecnicoLink.style.display = 'block';
-      if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'flex';
-    }
-    
-    if (user.role === 'admin') {
-      if (adminLink) adminLink.style.display = 'block';
-      if (dropdownAdminLink) dropdownAdminLink.style.display = 'flex';
-    }
+    if (userMenu) userMenu.style.display = 'block'; if (authButtons) authButtons.style.display = 'none'; if (userName) userName.textContent = user.name.split(' ')[0];
+    if (user.role === 'tecnico' || user.role === 'admin') { if (tecnicoLink) tecnicoLink.style.display = 'block'; if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'flex'; }
+    if (user.role === 'admin') { if (adminLink) adminLink.style.display = 'block'; if (dropdownAdminLink) dropdownAdminLink.style.display = 'flex'; }
   } else {
-    if (userMenu) userMenu.style.display = 'none';
-    if (authButtons) authButtons.style.display = 'flex';
-    
-    // Esconder links
-    if (tecnicoLink) tecnicoLink.style.display = 'none';
-    if (adminLink) adminLink.style.display = 'none';
-    if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'none';
-    if (dropdownAdminLink) dropdownAdminLink.style.display = 'none';
+    if (userMenu) userMenu.style.display = 'none'; if (authButtons) authButtons.style.display = 'flex';
+    if (tecnicoLink) tecnicoLink.style.display = 'none'; if (adminLink) adminLink.style.display = 'none';
+    if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'none'; if (dropdownAdminLink) dropdownAdminLink.style.display = 'none';
   }
 }
 
-function logout() {
-  localStorage.removeItem('protech_token');
-  localStorage.removeItem('protech_user');
-  window.location.href = 'index.html';
-}
-
-// ============================================
-// INICIALIZAÇÃO
-// ============================================
+function logout() { localStorage.removeItem('protech_token'); localStorage.removeItem('protech_user'); window.location.href = 'index.html'; }
 
 document.addEventListener('DOMContentLoaded', () => {
-  carregarCarrinho();
-  renderCards();
-  initFilters();
-  updateUserMenu();
-  
-  // Toggle filtros
-  const toggleBtn = document.getElementById('toggleFilters');
-  const filtersPanel = document.getElementById('filtersPanel');
-  const filterArrow = document.getElementById('filterArrow');
-  
-  if (toggleBtn && filtersPanel) {
-    toggleBtn.addEventListener('click', () => {
-      if (filtersPanel.classList.contains('collapsed')) {
-        filtersPanel.classList.remove('collapsed');
-        if (filterArrow) filterArrow.className = 'fas fa-chevron-up';
-      } else {
-        filtersPanel.classList.add('collapsed');
-        if (filterArrow) filterArrow.className = 'fas fa-chevron-down';
-      }
-    });
-  }
-  
-  // Menu dropdown
-  const userAvatar = document.querySelector('.user-avatar');
-  const userMenu = document.querySelector('.user-menu');
-  if (userAvatar && userMenu) {
-    userAvatar.addEventListener('click', (e) => {
-      e.stopPropagation();
-      userMenu.classList.toggle('active');
-    });
-    document.addEventListener('click', () => {
-      userMenu.classList.remove('active');
-    });
-  }
-  
-  // Logout
-  const logoutBtn = document.getElementById('logoutBtn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', logout);
-  }
-  
-  // Formulário de contato
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      showToast('Mensagem enviada! Entraremos em contato em breve.');
-      contactForm.reset();
-    });
-  }
-  
-  // Carrinho
-  const cartIcon = document.getElementById('cartIcon');
-  const cartModal = document.getElementById('cartModal');
-  const closeCartBtn = document.getElementById('closeCartBtn');
-  const checkoutBtn = document.getElementById('checkoutBtn');
-  
-  if (cartIcon && cartModal) {
-    cartIcon.addEventListener('click', () => {
-      renderizarCarrinho();
-      cartModal.classList.add('active');
-    });
-  }
-  
-  if (closeCartBtn && cartModal) {
-    closeCartBtn.addEventListener('click', () => {
-      cartModal.classList.remove('active');
-    });
-  }
-  
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', () => {
-      cartModal.classList.remove('active');
-      mostrarModalFinalizarCompra();
-    });
-  }
-  
-  if (cartModal) {
-    cartModal.addEventListener('click', (e) => {
-      if (e.target === cartModal) {
-        cartModal.classList.remove('active');
-      }
-    });
-  }
+  carregarCarrinho(); renderCards(); initFilters(); updateUserMenu();
+  const toggleBtn = document.getElementById('toggleFilters'); const filtersPanel = document.getElementById('filtersPanel'); const filterArrow = document.getElementById('filterArrow');
+  if (toggleBtn && filtersPanel) { toggleBtn.addEventListener('click', () => { if (filtersPanel.classList.contains('collapsed')) { filtersPanel.classList.remove('collapsed'); if (filterArrow) filterArrow.className = 'fas fa-chevron-up'; } else { filtersPanel.classList.add('collapsed'); if (filterArrow) filterArrow.className = 'fas fa-chevron-down'; } }); }
+  const userAvatar = document.querySelector('.user-avatar'); const userMenu = document.querySelector('.user-menu');
+  if (userAvatar && userMenu) { userAvatar.addEventListener('click', (e) => { e.stopPropagation(); userMenu.classList.toggle('active'); }); document.addEventListener('click', () => userMenu.classList.remove('active')); }
+  document.getElementById('logoutBtn')?.addEventListener('click', logout);
+  document.getElementById('contactForm')?.addEventListener('submit', (e) => { e.preventDefault(); showToast('Mensagem enviada! Entraremos em contato em breve.'); e.target.reset(); });
+  const cartIcon = document.getElementById('cartIcon'); const cartModal = document.getElementById('cartModal'); const closeCartBtn = document.getElementById('closeCartBtn'); const checkoutBtn = document.getElementById('checkoutBtn');
+  if (cartIcon && cartModal) { cartIcon.addEventListener('click', () => { renderizarCarrinho(); cartModal.classList.add('active'); }); }
+  if (closeCartBtn && cartModal) closeCartBtn.addEventListener('click', () => cartModal.classList.remove('active'));
+  if (checkoutBtn) checkoutBtn.addEventListener('click', () => { cartModal.classList.remove('active'); mostrarModalFinalizarCompra(); });
+  if (cartModal) cartModal.addEventListener('click', (e) => { if (e.target === cartModal) cartModal.classList.remove('active'); });
 });
 
-// ============================================
-// SLIDER DO HERO
-// ============================================
+let slides = document.querySelectorAll('.slide'); if (slides.length) { let current = 0; setInterval(() => { slides[current].classList.remove('active'); current = (current + 1) % slides.length; slides[current].classList.add('active'); }, 5000); }
 
-let slides = document.querySelectorAll('.slide');
-if (slides.length) {
-  let current = 0;
-  setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }, 5000);
-}
-
-// ============================================
-// PARTÍCULAS
-// ============================================
-
-const canvas = document.getElementById('particles');
-if (canvas) {
-  let ctx = canvas.getContext('2d');
-  let particles = [];
-  let animationId;
-  
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  
-  function createParticles() {
-    const count = window.innerWidth < 768 ? 40 : 80;
-    particles = [];
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.2,
-        op: Math.random() * 0.3 + 0.1
-      });
-    }
-  }
-  
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(79, 163, 255, ${p.op})`;
-      ctx.fill();
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-    });
-    animationId = requestAnimationFrame(draw);
-  }
-  
-  resize();
-  createParticles();
-  draw();
-  window.addEventListener('resize', () => {
-    resize();
-    createParticles();
-  });
-}
+const canvas = document.getElementById('particles'); if (canvas) { let ctx = canvas.getContext('2d'); let particles = []; function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } function createParticles() { const count = window.innerWidth < 768 ? 40 : 80; particles = []; for (let i = 0; i < count; i++) { particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 2 + 1, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.2, op: Math.random() * 0.3 + 0.1 }); } } function draw() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(79, 163, 255, ${p.op})`; ctx.fill(); p.x += p.vx; p.y += p.vy; if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0; if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0; }); requestAnimationFrame(draw); } resize(); createParticles(); draw(); window.addEventListener('resize', () => { resize(); createParticles(); }); }
 </script>
 </body>
 </html>

@@ -2,10 +2,14 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>ProTech - Minhas Manutenções</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProTech - Painel do Técnico</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+/* ============================================ */
+/* PRO TECH - PAINEL DO TÉCNICO */
+/* ============================================ */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,9 +18,12 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0a0f1a;
+  background: linear-gradient(135deg, #0a0f1a 0%, #0f1420 100%);
   color: #fff;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #particles {
@@ -41,7 +48,7 @@ header {
 }
 
 .navbar {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 16px 24px;
   display: flex;
@@ -67,7 +74,7 @@ header {
 
 nav {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -79,7 +86,7 @@ nav a {
   font-size: 14px;
   font-weight: 500;
   transition: all 0.3s;
-  border-radius: 8px;
+  border-radius: 40px;
 }
 
 nav a:hover {
@@ -89,10 +96,11 @@ nav a:hover {
 
 .btn {
   padding: 8px 20px;
-  border-radius: 8px;
+  border-radius: 40px;
   font-weight: 600;
   font-size: 14px;
   transition: all 0.3s;
+  cursor: pointer;
   text-decoration: none;
   display: inline-block;
 }
@@ -103,20 +111,10 @@ nav a:hover {
   color: #4fa3ff;
 }
 
-.btn-outline:hover {
-  background: rgba(79, 163, 255, 0.1);
-  transform: translateY(-1px);
-}
-
 .btn-primary {
   background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
   border: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
 }
 
 /* MENU USUÁRIO */
@@ -134,11 +132,6 @@ nav a:hover {
   cursor: pointer;
   transition: all 0.3s;
   border: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.user-avatar:hover {
-  background: rgba(79, 163, 255, 0.1);
-  border-color: #4fa3ff;
 }
 
 .user-name {
@@ -200,20 +193,16 @@ nav a:hover {
   color: #f87171;
 }
 
-.logout-item:hover {
-  color: #ef4444;
-}
-
 /* MAIN CONTAINER */
 .main-container {
-  max-width: 1200px;
+  flex: 1;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 40px 24px;
   position: relative;
   z-index: 2;
 }
 
-/* HEADER DA PÁGINA */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -232,50 +221,9 @@ nav a:hover {
   color: transparent;
 }
 
-.page-header a {
+.tec-info {
   color: #4fa3ff;
-  text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-
-.page-header a:hover {
-  transform: translateX(-4px);
-}
-
-/* FILTROS */
-.filters-bar {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(79, 163, 255, 0.2);
-}
-
-.filter-chip {
-  padding: 8px 20px;
-  border-radius: 40px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(79, 163, 255, 0.2);
-  color: #94a3b8;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.filter-chip:hover {
-  background: rgba(79, 163, 255, 0.1);
-  border-color: #4fa3ff;
-  color: #fff;
-}
-
-.filter-chip.active {
-  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
-  border-color: transparent;
-  color: white;
 }
 
 /* STATS CARDS */
@@ -319,14 +267,14 @@ nav a:hover {
   color: #94a3b8;
 }
 
-/* MANUTENÇÕES GRID */
-.manutencoes-grid {
+/* ORDENS GRID */
+.ordens-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 24px;
 }
 
-.manutencao-card {
+.ordem-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border-radius: 20px;
@@ -335,7 +283,7 @@ nav a:hover {
   transition: all 0.3s;
 }
 
-.manutencao-card:hover {
+.ordem-card:hover {
   transform: translateY(-4px);
   border-color: rgba(79, 163, 255, 0.4);
   box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
@@ -386,8 +334,33 @@ nav a:hover {
   border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
-.card-body {
+.cliente-info {
   padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  margin: 12px 20px;
+  border-radius: 12px;
+}
+
+.cliente-info p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.cliente-info p:last-child {
+  margin-bottom: 0;
+}
+
+.cliente-info i {
+  width: 20px;
+  color: #4fa3ff;
+}
+
+.card-body {
+  padding: 0 20px;
 }
 
 .info-row {
@@ -409,73 +382,69 @@ nav a:hover {
   font-weight: 500;
 }
 
+.status-select {
+  width: calc(100% - 40px);
+  margin: 16px 20px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(79, 163, 255, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #4fa3ff;
+}
+
 .card-footer {
   padding: 16px 20px 20px;
   border-top: 1px solid rgba(79, 163, 255, 0.1);
-  display: flex;
-  gap: 12px;
 }
 
-.btn-action {
-  flex: 1;
-  padding: 10px;
-  border-radius: 40px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
-}
-
-.btn-pay {
-  background: linear-gradient(135deg, #10b981, #059669);
+.btn-atualizar {
+  width: 100%;
+  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
   color: white;
   border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.btn-pay:hover {
+.btn-atualizar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.3);
 }
 
-.btn-details {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(79, 163, 255, 0.3);
-  color: #4fa3ff;
-}
-
-.btn-details:hover {
-  background: rgba(79, 163, 255, 0.15);
-}
-
-/* EMPTY STATE */
-.empty-state {
+/* ACCESS DENIED */
+.access-denied {
   text-align: center;
   padding: 80px 20px;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  border: 1px solid rgba(79, 163, 255, 0.15);
+  border-radius: 24px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-.empty-state i {
+.access-denied i {
   font-size: 64px;
-  color: #4fa3ff;
+  color: #ef4444;
   margin-bottom: 20px;
-  opacity: 0.5;
 }
 
-.empty-state h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
+.access-denied h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
 }
 
-.empty-state p {
+.access-denied p {
   color: #94a3b8;
   margin-bottom: 24px;
-}
-
-.empty-state .btn {
-  display: inline-block;
 }
 
 /* LOADING */
@@ -526,72 +495,6 @@ nav a:hover {
   to { transform: translateX(0); opacity: 1; }
 }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-.modal.active {
-  display: flex;
-}
-
-.modal-content {
-  background: #1e293b;
-  border-radius: 24px;
-  padding: 32px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  border: 1px solid rgba(79, 163, 255, 0.3);
-}
-
-.modal-content h3 {
-  font-size: 20px;
-  margin-bottom: 16px;
-  color: #4fa3ff;
-}
-
-.modal-content p {
-  color: #94a3b8;
-  margin-bottom: 8px;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 24px;
-}
-
-.modal-btn {
-  padding: 10px 24px;
-  border-radius: 40px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-}
-
-.modal-btn.confirm {
-  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
-  color: white;
-}
-
-.modal-btn.cancel {
-  background: rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
-}
-
-/* FOOTER */
 footer {
   background: #050a12;
   text-align: center;
@@ -599,7 +502,7 @@ footer {
   color: #5a6e8a;
   font-size: 12px;
   border-top: 1px solid rgba(79, 163, 255, 0.1);
-  margin-top: 60px;
+  margin-top: auto;
 }
 
 /* RESPONSIVIDADE */
@@ -614,36 +517,13 @@ footer {
     gap: 12px;
   }
   
-  .manutencoes-grid {
+  .ordens-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .filters-bar {
-    gap: 8px;
-  }
-  
-  .filter-chip {
-    padding: 6px 14px;
-    font-size: 12px;
   }
   
   .page-header {
     flex-direction: column;
     text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .card-footer {
-    flex-direction: column;
-  }
-  
-  .main-container {
-    padding: 24px 16px;
   }
 }
 </style>
@@ -658,7 +538,10 @@ footer {
     <nav>
       <a href="index.html"><i class="fas fa-home"></i> Início</a>
       <a href="index.html#servicos"><i class="fas fa-tools"></i> Serviços</a>
+      <a href="index.html#contato"><i class="fas fa-envelope"></i> Contato</a>
       <a href="manutencoes.html"><i class="fas fa-clipboard-list"></i> Manutenções</a>
+      <a href="tecnico.html" id="tecnicoLink" style="display: none;"><i class="fas fa-user-cog"></i> Técnico</a>
+      <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-crown"></i> Admin</a>
       
       <div class="user-menu" id="userMenu" style="display: none;">
         <div class="user-avatar" id="userAvatar">
@@ -668,6 +551,8 @@ footer {
         </div>
         <div class="user-dropdown">
           <a href="manutencoes.html" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Minhas Manutenções</a>
+          <a href="tecnico.html" id="dropdownTecnicoLink" class="dropdown-item" style="display: none;"><i class="fas fa-user-cog"></i> Painel Técnico</a>
+          <a href="admin.html" id="dropdownAdminLink" class="dropdown-item" style="display: none;"><i class="fas fa-crown"></i> Administração</a>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
@@ -681,33 +566,8 @@ footer {
   </div>
 </header>
 
-<div class="main-container">
-  <div class="page-header">
-    <h1><i class="fas fa-clipboard-list"></i> Minhas Manutenções</h1>
-    <a href="index.html#servicos"><i class="fas fa-arrow-left"></i> Voltar aos serviços</a>
-  </div>
-
-  <div class="filters-bar" id="filtersBar">
-    <button class="filter-chip active" data-filter="all">Todas</button>
-    <button class="filter-chip" data-filter="pendente">Pendentes</button>
-    <button class="filter-chip" data-filter="em_andamento">Em andamento</button>
-    <button class="filter-chip" data-filter="concluido">Concluídas</button>
-    <button class="filter-chip" data-filter="pago">Pagas</button>
-  </div>
-
-  <div id="manutencoesContent"></div>
-</div>
-
-<div class="modal" id="pagamentoModal">
-  <div class="modal-content">
-    <h3><i class="fas fa-credit-card"></i> Realizar Pagamento</h3>
-    <p id="modalServicoNome"></p>
-    <p id="modalServicoValor" style="font-size: 20px; color: #4fa3ff; font-weight: bold;"></p>
-    <div class="modal-buttons">
-      <button class="modal-btn confirm" id="confirmarPagamento">Confirmar</button>
-      <button class="modal-btn cancel" id="cancelarPagamento">Cancelar</button>
-    </div>
-  </div>
+<div class="main-container" id="mainContainer">
+  <div class="loading-state"><div class="spinner"></div><p>Verificando permissões...</p></div>
 </div>
 
 <footer>
@@ -716,9 +576,6 @@ footer {
 
 <script>
 const API_URL = 'https://protech-rt8q.onrender.com/api';
-let manutencoes = [];
-let filtroAtual = "all";
-let manutencaoSelecionada = null;
 
 function showToast(message, isError = false) {
   const toast = document.createElement('div');
@@ -751,41 +608,83 @@ function updateUserMenu() {
   const userMenu = document.getElementById('userMenu');
   const authButtons = document.getElementById('authButtons');
   const userName = document.getElementById('userName');
+  const tecnicoLink = document.getElementById('tecnicoLink');
+  const adminLink = document.getElementById('adminLink');
+  const dropdownTecnicoLink = document.getElementById('dropdownTecnicoLink');
+  const dropdownAdminLink = document.getElementById('dropdownAdminLink');
   
   if (user && user.name) {
-    userMenu.style.display = 'block';
-    authButtons.style.display = 'none';
-    userName.textContent = user.name.split(' ')[0];
+    if (userMenu) userMenu.style.display = 'block';
+    if (authButtons) authButtons.style.display = 'none';
+    if (userName) userName.textContent = user.name.split(' ')[0];
+    
+    if (user.role === 'tecnico' || user.role === 'admin') {
+      if (tecnicoLink) tecnicoLink.style.display = 'block';
+      if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'flex';
+    }
+    if (user.role === 'admin') {
+      if (adminLink) adminLink.style.display = 'block';
+      if (dropdownAdminLink) dropdownAdminLink.style.display = 'flex';
+    }
   } else {
-    userMenu.style.display = 'none';
-    authButtons.style.display = 'flex';
+    if (userMenu) userMenu.style.display = 'none';
+    if (authButtons) authButtons.style.display = 'flex';
+    if (tecnicoLink) tecnicoLink.style.display = 'none';
+    if (adminLink) adminLink.style.display = 'none';
+    if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'none';
+    if (dropdownAdminLink) dropdownAdminLink.style.display = 'none';
   }
 }
 
-function checkAuth() {
+function checkPermissions() {
+  const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
   const token = localStorage.getItem('protech_token');
-  if (!token) {
+  
+  if (!token || !user || !user.name) {
     window.location.href = 'login.html';
     return false;
   }
+  
+  if (user.role !== 'tecnico' && user.role !== 'admin') {
+    const container = document.getElementById('mainContainer');
+    container.innerHTML = `
+      <div class="access-denied">
+        <i class="fas fa-lock"></i>
+        <h2>Acesso Negado</h2>
+        <p>Você não tem permissão para acessar esta área.</p>
+        <p>Esta página é restrita para <strong>Técnicos</strong> e <strong>Administradores</strong>.</p>
+        <a href="index.html" class="btn btn-primary" style="margin-top: 24px;"><i class="fas fa-home"></i> Voltar para o início</a>
+      </div>
+    `;
+    return false;
+  }
+  
   return true;
 }
 
-async function carregarManutencoes() {
-  if (!checkAuth()) return;
-  
+async function carregarOrdens() {
   const token = localStorage.getItem('protech_token');
-  const container = document.getElementById('manutencoesContent');
-  container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Carregando suas manutenções...</p></div>`;
+  const container = document.getElementById('mainContainer');
+  
+  container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Carregando ordens de serviço...</p></div>`;
   
   try {
-    const response = await fetch(`${API_URL}/users/manutencoes`, {
+    const response = await fetch(`${API_URL}/tecnico/ordens`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
     if (response.ok) {
-      manutencoes = await response.json();
-      renderizarManutencoes();
+      const ordens = await response.json();
+      renderizarOrdens(ordens);
+    } else if (response.status === 403) {
+      container.innerHTML = `
+        <div class="access-denied">
+          <i class="fas fa-lock"></i>
+          <h2>Acesso Negado</h2>
+          <p>Você não tem permissão para acessar esta área.</p>
+          <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> Voltar</a>
+        </div>
+      `;
     } else if (response.status === 401) {
       localStorage.removeItem('protech_token');
       localStorage.removeItem('protech_user');
@@ -794,131 +693,117 @@ async function carregarManutencoes() {
       throw new Error('Erro ao carregar');
     }
   } catch (error) {
-    container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>Erro ao carregar</h3><p>Tente novamente mais tarde</p></div>`;
+    container.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Erro ao carregar ordens</h3>
+        <p>Tente novamente mais tarde</p>
+      </div>
+    `;
   }
 }
 
-function renderizarManutencoes() {
-  const container = document.getElementById('manutencoesContent');
+function renderizarOrdens(ordens) {
+  const container = document.getElementById('mainContainer');
+  const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
   
-  let filtradas = manutencoes;
-  if (filtroAtual !== "all") {
-    filtradas = manutencoes.filter(m => m.status === filtroAtual);
-  }
-  
-  const pendentes = manutencoes.filter(m => m.status === 'pendente').length;
-  const emAndamento = manutencoes.filter(m => m.status === 'em_andamento').length;
-  const concluidas = manutencoes.filter(m => m.status === 'concluido').length;
-  const pagas = manutencoes.filter(m => m.status === 'pago').length;
-  
-  if (filtradas.length === 0) {
+  if (!ordens || ordens.length === 0) {
     container.innerHTML = `
-      <div class="stats-grid">
-        <div class="stat-card"><i class="fas fa-clock"></i><div class="number">${pendentes}</div><div class="label">Pendentes</div></div>
-        <div class="stat-card"><i class="fas fa-sync-alt"></i><div class="number">${emAndamento}</div><div class="label">Em andamento</div></div>
-        <div class="stat-card"><i class="fas fa-check-circle"></i><div class="number">${concluidas}</div><div class="label">Concluídas</div></div>
-        <div class="stat-card"><i class="fas fa-credit-card"></i><div class="number">${pagas}</div><div class="label">Pagas</div></div>
+      <div class="page-header">
+        <h1><i class="fas fa-user-cog"></i> Painel do Técnico</h1>
+        <span class="tec-info"><i class="fas fa-briefcase"></i> ${escapeHtml(user.name)}</span>
       </div>
       <div class="empty-state">
-        <i class="fas fa-tools"></i>
-        <h3>Nenhuma manutenção encontrada</h3>
-        <p>Você ainda não contratou nenhum serviço</p>
-        <a href="index.html#servicos" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Contratar serviço</a>
+        <i class="fas fa-check-circle"></i>
+        <h3>Nenhuma ordem pendente</h3>
+        <p>Todas as ordens foram atendidas!</p>
       </div>
     `;
     return;
   }
   
+  const pendentes = ordens.filter(o => o.status === 'pendente').length;
+  const emAndamento = ordens.filter(o => o.status === 'em_andamento').length;
+  const concluidas = ordens.filter(o => o.status === 'concluido').length;
+  const pagas = ordens.filter(o => o.status === 'pago').length;
+  
   container.innerHTML = `
+    <div class="page-header">
+      <h1><i class="fas fa-user-cog"></i> Painel do Técnico</h1>
+      <span class="tec-info"><i class="fas fa-briefcase"></i> ${escapeHtml(user.name)}</span>
+    </div>
+    
     <div class="stats-grid">
       <div class="stat-card"><i class="fas fa-clock"></i><div class="number">${pendentes}</div><div class="label">Pendentes</div></div>
       <div class="stat-card"><i class="fas fa-sync-alt"></i><div class="number">${emAndamento}</div><div class="label">Em andamento</div></div>
       <div class="stat-card"><i class="fas fa-check-circle"></i><div class="number">${concluidas}</div><div class="label">Concluídas</div></div>
       <div class="stat-card"><i class="fas fa-credit-card"></i><div class="number">${pagas}</div><div class="label">Pagas</div></div>
     </div>
-    <div class="manutencoes-grid">
-      ${filtradas.map(item => `
-        <div class="manutencao-card">
+    
+    <div class="ordens-grid">
+      ${ordens.map(ordem => `
+        <div class="ordem-card">
           <div class="card-header">
-            <h3>${escapeHtml(item.nome)}</h3>
-            <span class="status ${item.status}">${getStatusText(item.status)}</span>
+            <h3><i class="fas fa-tools"></i> ${escapeHtml(ordem.nome)}</h3>
+            <span class="status ${ordem.status}">${getStatusText(ordem.status)}</span>
+          </div>
+          <div class="cliente-info">
+            <p><i class="fas fa-user"></i> <strong>Cliente:</strong> ${escapeHtml(ordem.clienteNome)}</p>
+            <p><i class="fas fa-envelope"></i> ${escapeHtml(ordem.clienteEmail)}</p>
           </div>
           <div class="card-body">
-            <div class="info-row"><i class="fas fa-mobile-alt"></i> <span><strong>Dispositivo:</strong> ${escapeHtml(item.dispositivo || 'Não especificado')}</span></div>
-            <div class="info-row"><i class="fas fa-tag"></i> <span><strong>Código:</strong> #${item.servicoId || item.id}</span></div>
-            <div class="info-row"><i class="fas fa-calendar-alt"></i> <span><strong>Data:</strong> ${formatDate(item.data)}</span></div>
-            <div class="info-row"><i class="fas fa-dollar-sign"></i> <span><strong>Valor:</strong> ${escapeHtml(item.preco)}</span></div>
+            <div class="info-row"><i class="fas fa-mobile-alt"></i> <span><strong>Dispositivo:</strong> ${escapeHtml(ordem.dispositivo || 'Não especificado')}</span></div>
+            <div class="info-row"><i class="fas fa-tag"></i> <span><strong>Código:</strong> #${ordem.servicoId || ordem.id}</span></div>
+            <div class="info-row"><i class="fas fa-calendar-alt"></i> <span><strong>Data:</strong> ${formatDate(ordem.data)}</span></div>
+            <div class="info-row"><i class="fas fa-dollar-sign"></i> <span><strong>Valor:</strong> ${escapeHtml(ordem.preco)}</span></div>
           </div>
+          <select class="status-select" data-id="${ordem.id}">
+            <option value="pendente" ${ordem.status === 'pendente' ? 'selected' : ''}>⏳ Pendente</option>
+            <option value="em_andamento" ${ordem.status === 'em_andamento' ? 'selected' : ''}>🔄 Em andamento</option>
+            <option value="concluido" ${ordem.status === 'concluido' ? 'selected' : ''}>✅ Concluído</option>
+            <option value="pago" ${ordem.status === 'pago' ? 'selected' : ''}>💳 Pago</option>
+          </select>
           <div class="card-footer">
-            ${item.status === 'pendente' || item.status === 'concluido' ? 
-              `<button class="btn-action btn-pay" data-id="${item.id}"><i class="fas fa-credit-card"></i> Pagar</button>` : ''}
-            <button class="btn-action btn-details" data-id="${item.id}"><i class="fas fa-info-circle"></i> Detalhes</button>
+            <button class="btn-atualizar" onclick="atualizarStatus(${ordem.id})"><i class="fas fa-save"></i> Atualizar Status</button>
           </div>
         </div>
       `).join('')}
     </div>
   `;
-  
-  document.querySelectorAll('.btn-pay').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const id = parseInt(btn.dataset.id);
-      manutencaoSelecionada = manutencoes.find(m => m.id === id);
-      if (manutencaoSelecionada) {
-        document.getElementById('modalServicoNome').innerHTML = `<i class="fas fa-tools"></i> ${manutencaoSelecionada.nome}`;
-        document.getElementById('modalServicoValor').innerHTML = manutencaoSelecionada.preco;
-        document.getElementById('pagamentoModal').classList.add('active');
-      }
-    });
-  });
-  
-  document.querySelectorAll('.btn-details').forEach(btn => {
-    btn.addEventListener('click', () => {
-      showToast('📋 Mais detalhes em breve');
-    });
-  });
 }
 
-async function pagarManutencao() {
-  if (!manutencaoSelecionada) return;
-  
+async function atualizarStatus(ordemId) {
   const token = localStorage.getItem('protech_token');
+  const select = document.querySelector(`.status-select[data-id="${ordemId}"]`);
+  const novoStatus = select.value;
+  
   try {
-    const response = await fetch(`${API_URL}/users/manutencoes/${manutencaoSelecionada.id}/pagar`, {
+    const response = await fetch(`${API_URL}/tecnico/ordens/${ordemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({ status: novoStatus })
     });
     
     if (response.ok) {
-      showToast(`✅ Pagamento de ${manutencaoSelecionada.nome} realizado com sucesso!`);
-      carregarManutencoes();
+      showToast(`✅ Status atualizado para ${getStatusText(novoStatus)}`);
+      carregarOrdens();
     } else {
-      showToast('❌ Erro ao processar pagamento', true);
+      showToast('❌ Erro ao atualizar status', true);
     }
   } catch (error) {
     showToast('Erro de conexão', true);
   }
-  manutencaoSelecionada = null;
-}
-
-function configurarFiltros() {
-  document.querySelectorAll('.filter-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      filtroAtual = chip.dataset.filter;
-      renderizarManutencoes();
-    });
-  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   updateUserMenu();
-  carregarManutencoes();
-  configurarFiltros();
+  
+  if (checkPermissions()) {
+    carregarOrdens();
+  }
   
   const userAvatar = document.querySelector('.user-avatar');
   const userMenu = document.querySelector('.user-menu');
@@ -934,16 +819,6 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('protech_token');
     localStorage.removeItem('protech_user');
     window.location.href = 'index.html';
-  });
-  
-  document.getElementById('confirmarPagamento')?.addEventListener('click', () => {
-    document.getElementById('pagamentoModal').classList.remove('active');
-    pagarManutencao();
-  });
-  
-  document.getElementById('cancelarPagamento')?.addEventListener('click', () => {
-    document.getElementById('pagamentoModal').classList.remove('active');
-    manutencaoSelecionada = null;
   });
 });
 

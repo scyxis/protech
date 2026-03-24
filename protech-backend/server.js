@@ -1,5 +1,5 @@
 const express = require('express');
-const Database = require('better-sqlite3');
+const { Pool } = require('pg');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -9,66 +9,70 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ==================== BANCO DE DADOS ====================
-const db = new Database('protech.db');
-console.log('📁 Banco de dados: protech.db');
+// ==================== CONEXÃO POSTGRESQL ====================
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-// Criar tabela de usuários
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    role TEXT DEFAULT 'user',
-    manutencoes TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
-
-// Adicionar coluna role se não existir
-try {
-  db.exec(`ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user'`);
-  console.log('✅ Coluna role adicionada');
-} catch (e) {
-  console.log('ℹ️ Coluna role já existe');
-}
-
-console.log('✅ Banco de dados pronto!');
-
-// ==================== CRIAR ADMIN AUTOMATICAMENTE ====================
-async function criarAdminSeNaoExistir() {
+// Criar tabelas
+async function initDatabase() {
   try {
-    const email = 'admin@protech.com';
-    const password = 'admin123';
-    const name = 'Administrador';
+    // Tabela de usuários
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'user',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
     
-    const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
+    // Tabela de manutenções
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS manutencoes (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        servico_id INTEGER,
+        nome VARCHAR(255) NOT NULL,
+        dispositivo VARCHAR(255),
+        preco VARCHAR(50),
+        status VARCHAR(50) DEFAULT 'pendente',
+        data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        data_pagamento TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
     
-    if (!existing) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      db.prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)').run(name, email, hashedPassword, 'admin');
-      console.log('✅ Usuário admin criado automaticamente!');
+    console.log('✅ Tabelas criadas/verificadas!');
+    
+    // Criar admin se não existir
+    const adminExists = await pool.query('SELECT id FROM users WHERE email = $1', ['admin@protech.com']);
+    if (adminExists.rows.length === 0) {
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      await pool.query(
+        'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4)',
+        ['Administrador', 'admin@protech.com', hashedPassword, 'admin']
+      );
+      console.log('✅ Usuário admin criado!');
       console.log('📧 Email: admin@protech.com');
       console.log('🔑 Senha: admin123');
-    } else {
-      console.log('ℹ️ Usuário admin já existe');
     }
+    
   } catch (error) {
-    console.error('Erro ao criar admin:', error);
+    console.error('Erro ao criar tabelas:', error);
   }
 }
 
-// Chamar a função
-criarAdminSeNaoExistir();
+initDatabase();
 
 // ==================== ROTA DE TESTE ====================
 app.get('/', (req, res) => {
-  const count = db.prepare('SELECT COUNT(*) as total FROM users').get();
   res.json({ 
-    message: 'API ProTech com SQLite! 🚀',
-    usuarios: count.total,
-    database: 'SQLite'
+    message: 'API ProTech com PostgreSQL! 🚀',
+    database: 'PostgreSQL'
   });
 });
 
@@ -86,16 +90,20 @@ app.post('/api/auth/register', async (req, res) => {
       return res.status(400).json({ error: 'Senha deve ter no mínimo 6 caracteres' });
     }
     
-    const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
-    if (existing) {
+    const existing = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
+    if (existing.rows.length > 0) {
       return res.status(400).json({ error: 'Email já cadastrado' });
     }
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = db.prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)').run(name, email, hashedPassword);
+    const result = await pool.query(
+      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email, role',
+      [name, email, hashedPassword]
+    );
     
+    const user = result.rows[0];
     const token = jwt.sign(
-      { userId: result.lastInsertRowid, email, role: 'user' },
+      { userId: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET || 'protech_secret_2024',
       { expiresIn: '30d' }
     );
@@ -103,7 +111,7 @@ app.post('/api/auth/register', async (req, res) => {
     res.json({
       message: 'Cadastro realizado com sucesso!',
       token,
-      user: { id: result.lastInsertRowid, name, email, role: 'user' }
+      user
     });
   } catch (error) {
     console.error('Erro no cadastro:', error);
@@ -115,24 +123,21 @@ app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    console.log('Tentativa login:', email);
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     
-    const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
-    
-    if (!user) {
-      console.log('Usuário não encontrado');
+    if (result.rows.length === 0) {
       return res.status(401).json({ error: 'Email ou senha inválidos' });
     }
     
+    const user = result.rows[0];
     const valid = await bcrypt.compare(password, user.password);
-    console.log('Senha válida:', valid);
     
     if (!valid) {
       return res.status(401).json({ error: 'Email ou senha inválidos' });
     }
     
     const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role || 'user' },
+      { userId: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET || 'protech_secret_2024',
       { expiresIn: '30d' }
     );
@@ -140,7 +145,7 @@ app.post('/api/auth/login', async (req, res) => {
     res.json({
       message: 'Login realizado com sucesso!',
       token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role || 'user' }
+      user: { id: user.id, name: user.name, email: user.email, role: user.role }
     });
   } catch (error) {
     console.error('Erro no login:', error);
@@ -150,13 +155,13 @@ app.post('/api/auth/login', async (req, res) => {
 
 // ==================== MIDDLEWARES ====================
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'Token não fornecido' });
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'protech_secret_2024');
     req.userId = decoded.userId;
-    req.userRole = decoded.role || 'user';
+    req.userRole = decoded.role;
     next();
   } catch (error) {
     return res.status(401).json({ error: 'Token inválido' });
@@ -181,120 +186,92 @@ const adminMiddleware = (req, res, next) => {
 
 // ==================== ROTAS DO USUÁRIO ====================
 
-app.get('/api/users/me', authMiddleware, (req, res) => {
+app.get('/api/users/me', authMiddleware, async (req, res) => {
   try {
-    const user = db.prepare('SELECT id, name, email, role, created_at FROM users WHERE id = ?').get(req.userId);
-    if (!user) return res.status(404).json({ error: 'Usuário não encontrado' });
-    res.json(user);
+    const result = await pool.query('SELECT id, name, email, role, created_at FROM users WHERE id = $1', [req.userId]);
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado' });
+    res.json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.get('/api/users/manutencoes', authMiddleware, (req, res) => {
+app.get('/api/users/manutencoes', authMiddleware, async (req, res) => {
   try {
-    const user = db.prepare('SELECT manutencoes FROM users WHERE id = ?').get(req.userId);
-    const manutencoes = user?.manutencoes ? JSON.parse(user.manutencoes) : [];
-    res.json(manutencoes);
+    const result = await pool.query('SELECT * FROM manutencoes WHERE user_id = $1 ORDER BY created_at DESC', [req.userId]);
+    res.json(result.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.post('/api/users/manutencoes', authMiddleware, (req, res) => {
+app.post('/api/users/manutencoes', authMiddleware, async (req, res) => {
   try {
-    const { servicoId, nome, dispositivo, preco, status, data } = req.body;
+    const { servicoId, nome, dispositivo, preco, status } = req.body;
     
-    const user = db.prepare('SELECT manutencoes FROM users WHERE id = ?').get(req.userId);
-    let manutencoes = user?.manutencoes ? JSON.parse(user.manutencoes) : [];
+    const result = await pool.query(
+      `INSERT INTO manutencoes (user_id, servico_id, nome, dispositivo, preco, status) 
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [req.userId, servicoId, nome, dispositivo, preco, status || 'pendente']
+    );
     
-    const novaManutencao = {
-      id: Date.now(),
-      servicoId,
-      nome,
-      dispositivo,
-      preco,
-      status: status || 'pendente',
-      data: data || new Date().toISOString(),
-      createdAt: new Date().toISOString()
-    };
-    
-    manutencoes.push(novaManutencao);
-    db.prepare('UPDATE users SET manutencoes = ? WHERE id = ?').run(JSON.stringify(manutencoes), req.userId);
-    
-    res.json({ message: 'Manutenção adicionada!', manutencao: novaManutencao });
+    res.json({ message: 'Manutenção adicionada!', manutencao: result.rows[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.put('/api/users/manutencoes/:id/pagar', authMiddleware, (req, res) => {
+app.put('/api/users/manutencoes/:id/pagar', authMiddleware, async (req, res) => {
   try {
     const manutencaoId = parseInt(req.params.id);
     
-    const user = db.prepare('SELECT manutencoes FROM users WHERE id = ?').get(req.userId);
-    let manutencoes = user?.manutencoes ? JSON.parse(user.manutencoes) : [];
+    const result = await pool.query(
+      `UPDATE manutencoes SET status = 'pago', data_pagamento = CURRENT_TIMESTAMP 
+       WHERE id = $1 AND user_id = $2 RETURNING *`,
+      [manutencaoId, req.userId]
+    );
     
-    const index = manutencoes.findIndex(m => m.id === manutencaoId);
-    if (index === -1) return res.status(404).json({ error: 'Manutenção não encontrada' });
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Manutenção não encontrada' });
+    }
     
-    manutencoes[index].status = 'pago';
-    manutencoes[index].dataPagamento = new Date().toISOString();
-    
-    db.prepare('UPDATE users SET manutencoes = ? WHERE id = ?').run(JSON.stringify(manutencoes), req.userId);
-    
-    res.json({ message: 'Pagamento realizado!', manutencao: manutencoes[index] });
+    res.json({ message: 'Pagamento realizado!', manutencao: result.rows[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// ==================== ROTAS DO TÉCNICO ====================
+// ==================== ROTAS DO TÉCNICO (VÊ TODAS AS MANUTENÇÕES) ====================
 
-app.get('/api/tecnico/ordens', authMiddleware, tecnicoMiddleware, (req, res) => {
+app.get('/api/tecnico/ordens', authMiddleware, tecnicoMiddleware, async (req, res) => {
   try {
-    const users = db.prepare('SELECT id, name, email, manutencoes FROM users').all();
-    const todasOrdens = [];
-    
-    users.forEach(user => {
-      const manutencoes = user.manutencoes ? JSON.parse(user.manutencoes) : [];
-      manutencoes.forEach(ordem => {
-        todasOrdens.push({
-          ...ordem,
-          clienteId: user.id,
-          clienteNome: user.name,
-          clienteEmail: user.email
-        });
-      });
-    });
-    
-    res.json(todasOrdens);
+    const result = await pool.query(`
+      SELECT m.*, u.name as cliente_nome, u.email as cliente_email 
+      FROM manutencoes m
+      JOIN users u ON m.user_id = u.id
+      ORDER BY m.created_at DESC
+    `);
+    res.json(result.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.put('/api/tecnico/ordens/:id', authMiddleware, tecnicoMiddleware, (req, res) => {
+app.put('/api/tecnico/ordens/:id', authMiddleware, tecnicoMiddleware, async (req, res) => {
   try {
     const ordemId = parseInt(req.params.id);
     const { status } = req.body;
     
-    const users = db.prepare('SELECT id, manutencoes FROM users').all();
+    const result = await pool.query(
+      `UPDATE manutencoes SET status = $1 WHERE id = $2 RETURNING *`,
+      [status, ordemId]
+    );
     
-    for (const user of users) {
-      let manutencoes = user.manutencoes ? JSON.parse(user.manutencoes) : [];
-      const index = manutencoes.findIndex(m => m.id === ordemId);
-      
-      if (index !== -1) {
-        manutencoes[index].status = status;
-        manutencoes[index].dataAtualizacao = new Date().toISOString();
-        db.prepare('UPDATE users SET manutencoes = ? WHERE id = ?').run(JSON.stringify(manutencoes), user.id);
-        res.json({ message: 'Ordem atualizada', ordem: manutencoes[index] });
-        return;
-      }
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Ordem não encontrada' });
     }
     
-    res.status(404).json({ error: 'Ordem não encontrada' });
+    res.json({ message: 'Ordem atualizada', ordem: result.rows[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -302,42 +279,49 @@ app.put('/api/tecnico/ordens/:id', authMiddleware, tecnicoMiddleware, (req, res)
 
 // ==================== ROTAS DO ADMIN ====================
 
-app.get('/api/admin/usuarios', authMiddleware, adminMiddleware, (req, res) => {
+app.get('/api/admin/usuarios', authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    const users = db.prepare('SELECT id, name, email, role, created_at FROM users').all();
-    res.json(users);
+    const result = await pool.query('SELECT id, name, email, role, created_at FROM users ORDER BY id');
+    res.json(result.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.put('/api/admin/usuarios/:id/role', authMiddleware, adminMiddleware, (req, res) => {
+app.put('/api/admin/usuarios/:id/role', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const { role } = req.body;
     if (!['user', 'tecnico', 'admin'].includes(role)) {
       return res.status(400).json({ error: 'Papel inválido' });
     }
     
-    const result = db.prepare('UPDATE users SET role = ? WHERE id = ?').run(role, req.params.id);
-    if (result.changes === 0) {
+    const result = await pool.query(
+      'UPDATE users SET role = $1 WHERE id = $2 RETURNING *',
+      [role, req.params.id]
+    );
+    
+    if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
     }
-    res.json({ message: 'Papel atualizado com sucesso' });
+    
+    res.json({ message: 'Papel atualizado com sucesso', user: result.rows[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.get('/api/admin/stats', authMiddleware, adminMiddleware, (req, res) => {
+app.get('/api/admin/stats', authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    const totalUsers = db.prepare('SELECT COUNT(*) as total FROM users').get();
-    const tecnicos = db.prepare('SELECT COUNT(*) as total FROM users WHERE role = "tecnico"').get();
-    const admins = db.prepare('SELECT COUNT(*) as total FROM users WHERE role = "admin"').get();
+    const totalUsers = await pool.query('SELECT COUNT(*) as total FROM users');
+    const tecnicos = await pool.query('SELECT COUNT(*) as total FROM users WHERE role = $1', ['tecnico']);
+    const admins = await pool.query('SELECT COUNT(*) as total FROM users WHERE role = $1', ['admin']);
+    const totalOrdens = await pool.query('SELECT COUNT(*) as total FROM manutencoes');
     
     res.json({
-      totalUsuarios: totalUsers.total,
-      totalTecnicos: tecnicos.total,
-      totalAdmins: admins.total
+      totalUsuarios: parseInt(totalUsers.rows[0].total),
+      totalTecnicos: parseInt(tecnicos.rows[0].total),
+      totalAdmins: parseInt(admins.rows[0].total),
+      totalOrdens: parseInt(totalOrdens.rows[0].total)
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -356,41 +340,10 @@ app.listen(PORT, () => {
   console.log(`   GET    /api/users/me          - Meus dados`);
   console.log(`   GET    /api/users/manutencoes - Minhas manutenções`);
   console.log(`   POST   /api/users/manutencoes - Adicionar manutenção`);
-  console.log(`   GET    /api/tecnico/ordens    - Todas ordens (técnico)`);
+  console.log(`   GET    /api/tecnico/ordens    - Todas ordens (técnico/admin)`);
   console.log(`   GET    /api/admin/usuarios    - Listar usuários (admin)`);
+  console.log(`   PUT    /api/admin/usuarios/:id/role - Alterar papel (admin)`);
   console.log(`\n💡 Use Ctrl+C para parar\n`);
 });
-// ==================== ROTA PARA CRIAR ADMIN (apenas para setup) ====================
-app.post('/api/setup/create-admin', async (req, res) => {
-  try {
-    const { secret } = req.body;
-    
-    // Chave secreta para segurança (mude para algo mais seguro)
-    const SETUP_SECRET = 'protech_admin_setup_2024';
-    
-    if (secret !== SETUP_SECRET) {
-      return res.status(401).json({ error: 'Chave secreta inválida' });
-    }
-    
-    const email = 'admin@protech.com';
-    const password = 'admin123';
-    const name = 'Administrador';
-    
-    // Verificar se já existe
-    const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
-    
-    const hashedPassword = await bcrypt.hash(password, 10);
-    
-    if (existing) {
-      db.prepare('UPDATE users SET password = ?, role = ?, name = ? WHERE email = ?').run(hashedPassword, 'admin', name, email);
-      res.json({ message: '✅ Usuário admin atualizado!', email, password });
-    } else {
-      db.prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)').run(name, email, hashedPassword, 'admin');
-      res.json({ message: '✅ Usuário admin criado!', email, password });
-    }
-  } catch (error) {
-    console.error('Erro:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
+
 module.exports = app;

@@ -6,7 +6,6 @@
 <title>ProTech - Administração</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-/* Mantenha os estilos existentes do admin.html */
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +33,6 @@ body {
   opacity: 0.3;
 }
 
-/* Header e estilos básicos (manter os mesmos do admin anterior) */
 header {
   position: sticky;
   top: 0;
@@ -114,7 +112,6 @@ nav a:hover, nav a.active {
   border: none;
 }
 
-/* MENU USUÁRIO */
 .user-menu {
   position: relative;
 }
@@ -286,11 +283,6 @@ nav a:hover, nav a.active {
   transition: all 0.3s;
 }
 
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(79, 163, 255, 0.3);
-}
-
 .stat-card i {
   font-size: 28px;
   color: #4fa3ff;
@@ -368,13 +360,14 @@ nav a:hover, nav a.active {
 }
 
 .role-select {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(79, 163, 255, 0.2);
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(79, 163, 255, 0.4);
   border-radius: 8px;
   padding: 8px 12px;
   color: #fff;
   font-size: 13px;
   cursor: pointer;
+  font-family: inherit;
 }
 
 .btn-salvar {
@@ -392,6 +385,27 @@ nav a:hover, nav a.active {
 
 .btn-salvar:hover {
   background: #3b82f6;
+}
+
+/* BOTÃO ADICIONAR CATEGORIA */
+.btn-add-categoria {
+  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-add-categoria:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
 }
 
 /* CATEGORIAS GRID */
@@ -460,53 +474,6 @@ nav a:hover, nav a.active {
   background: rgba(239, 68, 68, 0.2);
 }
 
-/* FORMULÁRIO CATEGORIA */
-.form-categoria {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(79, 163, 255, 0.15);
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 32px;
-}
-
-.form-categoria h3 {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: #4fa3ff;
-}
-
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #94a3b8;
-  font-size: 13px;
-}
-
-.form-group input, .form-group select {
-  width: 100%;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(79, 163, 255, 0.2);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 14px;
-}
-
-.btn-adicionar {
-  background: linear-gradient(135deg, #4fa3ff, #3b82f6);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 40px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
 /* MODAL */
 .modal {
   display: none;
@@ -515,7 +482,7 @@ nav a:hover, nav a.active {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   align-items: center;
   justify-content: center;
@@ -536,10 +503,24 @@ nav a:hover, nav a.active {
   animation: modalFadeIn 0.3s ease;
 }
 
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .modal-content h3 {
   font-size: 20px;
   margin-bottom: 8px;
   color: #4fa3ff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .modal-content .modal-subtitle {
@@ -556,13 +537,33 @@ nav a:hover, nav a.active {
   border-radius: 12px;
   color: #fff;
   font-size: 14px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  font-family: inherit;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #4fa3ff;
+}
+
+.modal-select {
+  width: 100%;
+  padding: 14px;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(79, 163, 255, 0.4);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .modal-actions {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
+  margin-top: 24px;
 }
 
 .modal-btn {
@@ -580,10 +581,21 @@ nav a:hover, nav a.active {
   color: white;
 }
 
+.modal-btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 163, 255, 0.4);
+}
+
 .modal-btn-cancel {
   background: rgba(255, 255, 255, 0.05);
   color: #94a3b8;
   border: 1px solid rgba(79, 163, 255, 0.2);
+}
+
+.modal-btn-cancel:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: #ef4444;
 }
 
 /* ACCESS DENIED */
@@ -649,11 +661,6 @@ nav a:hover, nav a.active {
   to { transform: translateX(0); opacity: 1; }
 }
 
-@keyframes modalFadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
 footer {
   background: #050a12;
   text-align: center;
@@ -669,23 +676,22 @@ footer {
     flex-direction: column;
     text-align: center;
   }
-  
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-  
   .page-header {
     flex-direction: column;
     text-align: center;
   }
-  
   .usuarios-table {
     overflow-x: auto;
   }
-  
   .usuarios-table table {
     min-width: 600px;
+  }
+  .categorias-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -700,8 +706,6 @@ footer {
     <nav>
       <a href="index.html"><i class="fas fa-home"></i> Início</a>
       <a href="admin.html" class="active"><i class="fas fa-crown"></i> Admin</a>
-      <a href="manutencoes.html"><i class="fas fa-clipboard-list"></i> Ordens</a>
-      
       <div class="user-menu" id="userMenu" style="display: none;">
         <div class="user-avatar" id="userAvatar">
           <i class="fas fa-user-circle"></i>
@@ -710,12 +714,10 @@ footer {
         </div>
         <div class="user-dropdown">
           <a href="admin.html" class="dropdown-item"><i class="fas fa-crown"></i> Dashboard</a>
-          <a href="manutencoes.html" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Ordens</a>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
       </div>
-      
       <div id="authButtons">
         <a href="login.html" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a>
         <a href="cadastro.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Cadastro</a>
@@ -728,18 +730,64 @@ footer {
   <div class="loading-state"><div class="spinner"></div><p>Carregando dados...</p></div>
 </div>
 
-<footer>
-  <p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p>
-</footer>
+<!-- MODAL PARA ADICIONAR CATEGORIA -->
+<div class="modal" id="modalAddCategoria">
+  <div class="modal-content">
+    <h3><i class="fas fa-plus-circle"></i> Adicionar Categoria</h3>
+    <p class="modal-subtitle">Crie uma nova categoria para os filtros</p>
+    <select class="modal-select" id="modalAddTipo">
+      <option value="dispositivo">📱 Dispositivo</option>
+      <option value="servico">🔧 Serviço</option>
+      <option value="marca">🏷️ Marca</option>
+    </select>
+    <input type="text" class="modal-input" id="modalAddNome" placeholder="Nome da categoria (ex: Smartwatch, Reparo de Placa, Google...)" autocomplete="off">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" id="btnCancelAdd">Cancelar</button>
+      <button class="modal-btn modal-btn-confirm" id="btnConfirmAdd">Adicionar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARA EDITAR CATEGORIA -->
+<div class="modal" id="modalEditCategoria">
+  <div class="modal-content">
+    <h3><i class="fas fa-edit"></i> Editar Categoria</h3>
+    <p class="modal-subtitle">Altere o nome da categoria</p>
+    <input type="text" class="modal-input" id="modalEditNome" placeholder="Novo nome" autocomplete="off">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" id="btnCancelEdit">Cancelar</button>
+      <button class="modal-btn modal-btn-confirm" id="btnConfirmEdit">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARA EXCLUIR CATEGORIA -->
+<div class="modal" id="modalDeleteCategoria">
+  <div class="modal-content">
+    <h3><i class="fas fa-trash-alt"></i> Excluir Categoria</h3>
+    <p class="modal-subtitle" id="modalDeleteMensagem">Tem certeza que deseja excluir esta categoria?</p>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" id="btnCancelDelete">Cancelar</button>
+      <button class="modal-btn modal-btn-confirm" id="btnConfirmDelete">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p></footer>
 
 <script>
 const API_URL = 'https://protech-rt8q.onrender.com/api';
 
+// Dados das categorias
 let categorias = {
-  dispositivos: ['celular', 'tablet', 'computador', 'smartwatch'],
-  servicos: ['tela', 'bateria', 'conector', 'software', 'camera', 'pelicula', 'placa', 'audio'],
-  marcas: ['iphone', 'samsung', 'xiaomi', 'motorola', 'dell', 'hp', 'lenovo', 'asus', 'acer', 'lg']
+  dispositivos: ['celular', 'tablet', 'computador', 'smartwatch', 'fone', 'console'],
+  servicos: ['tela', 'bateria', 'conector', 'software', 'camera', 'pelicula', 'placa', 'audio', 'teclado', 'cooler'],
+  marcas: ['iphone', 'samsung', 'xiaomi', 'motorola', 'dell', 'hp', 'lenovo', 'asus', 'acer', 'lg', 'positivo']
 };
+
+// Variáveis para controle dos modais
+let editando = { tipo: null, index: null, nomeAtual: null };
+let excluindo = { tipo: null, index: null, nome: null };
 
 function showToast(message, isError = false) {
   const toast = document.createElement('div');
@@ -763,12 +811,12 @@ function updateUserMenu() {
   const userName = document.getElementById('userName');
   
   if (user && user.name) {
-    if (userMenu) userMenu.style.display = 'block';
-    if (authButtons) authButtons.style.display = 'none';
-    if (userName) userName.textContent = user.name.split(' ')[0];
+    userMenu.style.display = 'block';
+    authButtons.style.display = 'none';
+    userName.textContent = user.name.split(' ')[0];
   } else {
-    if (userMenu) userMenu.style.display = 'none';
-    if (authButtons) authButtons.style.display = 'flex';
+    userMenu.style.display = 'none';
+    authButtons.style.display = 'flex';
   }
 }
 
@@ -854,104 +902,96 @@ async function alterarRole(userId, novaRole) {
   }
 }
 
-function renderizarDashboard(stats, usuarios) {
-  const container = document.getElementById('mainContainer');
-  const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
+// ============================================
+// FUNÇÕES DE CATEGORIAS COM MODAIS
+// ============================================
+
+function salvarCategorias() {
+  localStorage.setItem('protech_filtros', JSON.stringify(categorias));
+  // Disparar evento para atualizar outras páginas
+  window.dispatchEvent(new CustomEvent('protech_categorias_updated', { detail: categorias }));
+}
+
+function carregarCategoriasSalvas() {
+  const saved = localStorage.getItem('protech_filtros');
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    categorias = { ...categorias, ...parsed };
+  }
+}
+
+function abrirModalAdicionar() {
+  document.getElementById('modalAddNome').value = '';
+  document.getElementById('modalAddTipo').value = 'dispositivo';
+  document.getElementById('modalAddCategoria').classList.add('active');
+}
+
+function adicionarCategoria() {
+  const tipo = document.getElementById('modalAddTipo').value;
+  const nome = document.getElementById('modalAddNome').value.trim();
   
-  container.innerHTML = `
-    <div class="page-header">
-      <h1><i class="fas fa-crown"></i> Painel Administrativo</h1>
-      <span class="admin-info"><i class="fas fa-user-shield"></i> ${escapeHtml(user.name)}</span>
-    </div>
-    
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
-      <button class="tab-btn" data-tab="usuarios"><i class="fas fa-users"></i> Usuários</button>
-      <button class="tab-btn" data-tab="categorias"><i class="fas fa-tags"></i> Categorias</button>
-    </div>
-    
-    <div class="tab-content active" id="tab-dashboard">
-      <div class="stats-grid">
-        <div class="stat-card"><i class="fas fa-users"></i><div class="number">${stats.totalUsuarios}</div><div class="label">Total Usuários</div></div>
-        <div class="stat-card"><i class="fas fa-user-cog"></i><div class="number">${stats.totalTecnicos}</div><div class="label">Técnicos</div></div>
-        <div class="stat-card"><i class="fas fa-crown"></i><div class="number">${stats.totalAdmins}</div><div class="label">Administradores</div></div>
-        <div class="stat-card"><i class="fas fa-clipboard-list"></i><div class="number">${stats.totalOrdens || 0}</div><div class="label">Ordens de Serviço</div></div>
-      </div>
-      <div style="background: rgba(255,255,255,0.03); border-radius: 20px; padding: 24px; text-align: center;">
-        <i class="fas fa-chart-line" style="font-size: 48px; color: #4fa3ff; margin-bottom: 16px; opacity: 0.5;"></i>
-        <h3>Bem-vindo ao Painel Administrativo</h3>
-        <p style="color: #94a3b8; margin-top: 8px;">Gerencie usuários, categorias e acompanhe as estatísticas do sistema.</p>
-        <p style="color: #4fa3ff; margin-top: 16px; font-size: 12px;">⚡ As alterações são sincronizadas em tempo real com todas as páginas!</p>
-      </div>
-    </div>
-    
-    <div class="tab-content" id="tab-usuarios">
-      <div class="usuarios-table">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Papel</th>
-              <th>Data Cadastro</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${usuarios.map(user => `
-              <tr>
-                <td>${user.id}</td>
-                <td>${escapeHtml(user.name)}</td>
-                <td>${escapeHtml(user.email)}</td>
-                <td><span class="role-badge ${user.role}">${user.role === 'admin' ? '👑 Admin' : user.role === 'tecnico' ? '🔧 Técnico' : '👤 Usuário'}</span></td>
-                <td>${new Date(user.created_at).toLocaleDateString('pt-BR')}</td>
-                <td>
-                  <select class="role-select" data-id="${user.id}">
-                    <option value="user" ${user.role === 'user' ? 'selected' : ''}>👤 Usuário</option>
-                    <option value="tecnico" ${user.role === 'tecnico' ? 'selected' : ''}>🔧 Técnico</option>
-                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>👑 Admin</option>
-                  </select>
-                  <button class="btn-salvar" onclick="salvarRole(${user.id})">Salvar</button>
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    
-    <div class="tab-content" id="tab-categorias">
-      <div class="form-categoria">
-        <h3><i class="fas fa-plus-circle"></i> Adicionar Nova Categoria</h3>
-        <div class="form-group">
-          <label>Tipo</label>
-          <select id="categoriaTipo">
-            <option value="dispositivo">📱 Dispositivo</option>
-            <option value="servico">🔧 Serviço</option>
-            <option value="marca">🏷️ Marca</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Nome da Categoria</label>
-          <input type="text" id="categoriaNome" placeholder="Ex: Smartwatch, Reparo de Placa, Google...">
-        </div>
-        <button class="btn-adicionar" onclick="adicionarCategoriaDireto()"><i class="fas fa-plus"></i> Adicionar</button>
-      </div>
-      
-      <h3 style="margin: 32px 0 16px 0;"><i class="fas fa-mobile-alt"></i> Dispositivos</h3>
-      <div class="categorias-grid" id="dispositivosGrid"></div>
-      
-      <h3 style="margin: 32px 0 16px 0;"><i class="fas fa-wrench"></i> Serviços</h3>
-      <div class="categorias-grid" id="servicosGrid"></div>
-      
-      <h3 style="margin: 32px 0 16px 0;"><i class="fas fa-tag"></i> Marcas</h3>
-      <div class="categorias-grid" id="marcasGrid"></div>
-    </div>
-  `;
+  if (!nome) {
+    showToast('Digite um nome para a categoria', true);
+    return;
+  }
   
+  if (tipo === 'dispositivo') {
+    categorias.dispositivos.push(nome);
+  } else if (tipo === 'servico') {
+    categorias.servicos.push(nome);
+  } else {
+    categorias.marcas.push(nome);
+  }
+  
+  salvarCategorias();
   renderizarCategorias();
-  configurarTabs();
+  fecharModal('modalAddCategoria');
+  showToast(`✅ "${nome}" adicionado com sucesso!`);
+}
+
+function abrirModalEditar(tipo, index, nome) {
+  editando = { tipo, index, nomeAtual: nome };
+  document.getElementById('modalEditNome').value = nome;
+  document.getElementById('modalEditCategoria').classList.add('active');
+}
+
+function salvarEdicaoCategoria() {
+  const novoNome = document.getElementById('modalEditNome').value.trim();
+  
+  if (!novoNome) {
+    showToast('Digite um nome válido', true);
+    return;
+  }
+  
+  const lista = editando.tipo === 'dispositivo' ? categorias.dispositivos : 
+                editando.tipo === 'servico' ? categorias.servicos : categorias.marcas;
+  
+  lista[editando.index] = novoNome;
+  salvarCategorias();
+  renderizarCategorias();
+  fecharModal('modalEditCategoria');
+  showToast(`✅ Categoria alterada para "${novoNome}"`);
+}
+
+function abrirModalExcluir(tipo, index, nome) {
+  excluindo = { tipo, index, nome };
+  document.getElementById('modalDeleteMensagem').innerHTML = `Tem certeza que deseja excluir a categoria "<strong>${escapeHtml(nome)}</strong>"?`;
+  document.getElementById('modalDeleteCategoria').classList.add('active');
+}
+
+function confirmarExcluirCategoria() {
+  const lista = excluindo.tipo === 'dispositivo' ? categorias.dispositivos : 
+                excluindo.tipo === 'servico' ? categorias.servicos : categorias.marcas;
+  
+  lista.splice(excluindo.index, 1);
+  salvarCategorias();
+  renderizarCategorias();
+  fecharModal('modalDeleteCategoria');
+  showToast(`🗑️ "${excluindo.nome}" removido com sucesso!`);
+}
+
+function fecharModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
 }
 
 function renderizarCategorias() {
@@ -1005,43 +1045,6 @@ function renderizarCategorias() {
   }
 }
 
-function adicionarCategoriaDireto() {
-  const tipo = document.getElementById('categoriaTipo').value;
-  const nome = document.getElementById('categoriaNome').value.trim();
-  
-  if (!nome) {
-    showToast('Digite um nome para a categoria', true);
-    return;
-  }
-  
-  if (tipo === 'dispositivo') {
-    categorias.dispositivos.push(nome);
-  } else if (tipo === 'servico') {
-    categorias.servicos.push(nome);
-  } else {
-    categorias.marcas.push(nome);
-  }
-  
-  salvarCategorias();
-  renderizarCategorias();
-  document.getElementById('categoriaNome').value = '';
-  showToast(`✅ "${nome}" adicionado com sucesso!`);
-}
-
-function salvarCategorias() {
-  localStorage.setItem('protech_filtros', JSON.stringify(categorias));
-  // Disparar evento para atualizar outras páginas
-  window.dispatchEvent(new CustomEvent('protech_categorias_updated', { detail: categorias }));
-}
-
-function carregarCategoriasSalvas() {
-  const saved = localStorage.getItem('protech_filtros');
-  if (saved) {
-    const parsed = JSON.parse(saved);
-    categorias = { ...categorias, ...parsed };
-  }
-}
-
 function configurarTabs() {
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1051,6 +1054,92 @@ function configurarTabs() {
       document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
     });
   });
+}
+
+function renderizarDashboard(stats, usuarios) {
+  const container = document.getElementById('mainContainer');
+  const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
+  
+  container.innerHTML = `
+    <div class="page-header">
+      <h1><i class="fas fa-crown"></i> Painel Administrativo</h1>
+      <span class="admin-info"><i class="fas fa-user-shield"></i> ${escapeHtml(user.name)}</span>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
+      <button class="tab-btn" data-tab="usuarios"><i class="fas fa-users"></i> Usuários</button>
+      <button class="tab-btn" data-tab="categorias"><i class="fas fa-tags"></i> Categorias</button>
+    </div>
+    
+    <div class="tab-content active" id="tab-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card"><i class="fas fa-users"></i><div class="number">${stats.totalUsuarios}</div><div class="label">Total Usuários</div></div>
+        <div class="stat-card"><i class="fas fa-user-cog"></i><div class="number">${stats.totalTecnicos}</div><div class="label">Técnicos</div></div>
+        <div class="stat-card"><i class="fas fa-crown"></i><div class="number">${stats.totalAdmins}</div><div class="label">Administradores</div></div>
+        <div class="stat-card"><i class="fas fa-clipboard-list"></i><div class="number">${stats.totalOrdens || 0}</div><div class="label">Ordens de Serviço</div></div>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border-radius: 20px; padding: 24px; text-align: center;">
+        <i class="fas fa-chart-line" style="font-size: 48px; color: #4fa3ff; margin-bottom: 16px; opacity: 0.5;"></i>
+        <h3>Bem-vindo ao Painel Administrativo</h3>
+        <p style="color: #94a3b8; margin-top: 8px;">Gerencie usuários, categorias e acompanhe as estatísticas do sistema.</p>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="tab-usuarios">
+      <div class="usuarios-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Papel</th>
+              <th>Data Cadastro</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${usuarios.map(user => `
+              <tr>
+                <td>${user.id}</td>
+                <td>${escapeHtml(user.name)}</td>
+                <td>${escapeHtml(user.email)}</td>
+                <td><span class="role-badge ${user.role}">${user.role === 'admin' ? '👑 Admin' : user.role === 'tecnico' ? '🔧 Técnico' : '👤 Usuário'}</span></td>
+                <td>${new Date(user.created_at).toLocaleDateString('pt-BR')}</td>
+                <td>
+                  <select class="role-select" data-id="${user.id}">
+                    <option value="user" ${user.role === 'user' ? 'selected' : ''}>👤 Usuário</option>
+                    <option value="tecnico" ${user.role === 'tecnico' ? 'selected' : ''}>🔧 Técnico</option>
+                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>👑 Admin</option>
+                  </select>
+                  <button class="btn-salvar" onclick="salvarRole(${user.id})">Salvar</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="tab-categorias">
+      <button class="btn-add-categoria" onclick="abrirModalAdicionar()">
+        <i class="fas fa-plus"></i> Adicionar Nova Categoria
+      </button>
+      
+      <h3 style="margin: 32px 0 16px 0;"><i class="fas fa-mobile-alt"></i> Dispositivos</h3>
+      <div class="categorias-grid" id="dispositivosGrid"></div>
+      
+      <h3 style="margin: 32px 0 16px 0;"><i class="fas fa-wrench"></i> Serviços</h3>
+      <div class="categorias-grid" id="servicosGrid"></div>
+      
+      <h3 style="margin: 32px 0 16px 0;"><i class="fas fa-tag"></i> Marcas</h3>
+      <div class="categorias-grid" id="marcasGrid"></div>
+    </div>
+  `;
+  
+  renderizarCategorias();
+  configurarTabs();
 }
 
 async function salvarRole(userId) {
@@ -1076,34 +1165,7 @@ async function carregarDashboard() {
   renderizarDashboard(stats, usuarios);
 }
 
-// Modal handlers (simplificados)
-let categoriaEditando = { tipo: null, index: null };
-let categoriaExcluindo = { tipo: null, index: null };
-
-function abrirModalEditar(tipo, index, nome) {
-  categoriaEditando = { tipo, index };
-  const novoNome = prompt('Digite o novo nome:', nome);
-  if (novoNome && novoNome.trim()) {
-    const lista = tipo === 'dispositivo' ? categorias.dispositivos : 
-                  tipo === 'servico' ? categorias.servicos : categorias.marcas;
-    lista[index] = novoNome.trim();
-    salvarCategorias();
-    renderizarCategorias();
-    showToast(`✅ Categoria alterada para "${novoNome}"`);
-  }
-}
-
-function abrirModalExcluir(tipo, index, nome) {
-  if (confirm(`Tem certeza que deseja excluir "${nome}"?`)) {
-    const lista = tipo === 'dispositivo' ? categorias.dispositivos : 
-                  tipo === 'servico' ? categorias.servicos : categorias.marcas;
-    lista.splice(index, 1);
-    salvarCategorias();
-    renderizarCategorias();
-    showToast(`🗑️ "${nome}" removido com sucesso!`);
-  }
-}
-
+// Configurar eventos dos modais
 document.addEventListener('DOMContentLoaded', () => {
   updateUserMenu();
   carregarCategoriasSalvas();
@@ -1112,6 +1174,24 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarDashboard();
   }
   
+  // Eventos dos modais
+  document.getElementById('btnConfirmAdd')?.addEventListener('click', adicionarCategoria);
+  document.getElementById('btnCancelAdd')?.addEventListener('click', () => fecharModal('modalAddCategoria'));
+  document.getElementById('btnConfirmEdit')?.addEventListener('click', salvarEdicaoCategoria);
+  document.getElementById('btnCancelEdit')?.addEventListener('click', () => fecharModal('modalEditCategoria'));
+  document.getElementById('btnConfirmDelete')?.addEventListener('click', confirmarExcluirCategoria);
+  document.getElementById('btnCancelDelete')?.addEventListener('click', () => fecharModal('modalDeleteCategoria'));
+  
+  // Fechar modais ao clicar fora
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  });
+  
+  // Menu dropdown
   const userAvatar = document.querySelector('.user-avatar');
   const userMenu = document.querySelector('.user-menu');
   if (userAvatar && userMenu) {
@@ -1122,6 +1202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', () => userMenu.classList.remove('active'));
   }
   
+  // Logout
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
     localStorage.removeItem('protech_token');
     localStorage.removeItem('protech_user');
@@ -1129,6 +1210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Partículas
 const canvas = document.getElementById('particles');
 if (canvas) {
   let ctx = canvas.getContext('2d');
@@ -1161,6 +1243,5 @@ if (canvas) {
   window.addEventListener('resize', () => { resize(); createParticles(); });
 }
 </script>
-<script src="script-global.js"></script>
 </body>
 </html>

@@ -281,6 +281,80 @@ footer {
   position: relative;
   z-index: 2;
 }
+/* ============================================ */
+/* ESTILO GLOBAL PARA SELECTS - CORRIGIDO */
+/* ============================================ */
+
+select,
+.status-select,
+.role-select,
+.filter-select {
+  background: rgba(30, 41, 59, 0.9) !important;
+  border: 1px solid rgba(79, 163, 255, 0.4) !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234fa3ff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 18px !important;
+  padding-right: 40px !important;
+}
+
+select:hover,
+.status-select:hover,
+.role-select:hover,
+.filter-select:hover {
+  border-color: #4fa3ff !important;
+  background: rgba(30, 41, 59, 1) !important;
+  box-shadow: 0 0 0 2px rgba(79, 163, 255, 0.2) !important;
+}
+
+select:focus,
+.status-select:focus,
+.role-select:focus,
+.filter-select:focus {
+  outline: none !important;
+  border-color: #4fa3ff !important;
+  box-shadow: 0 0 0 3px rgba(79, 163, 255, 0.3) !important;
+}
+
+select option,
+.status-select option,
+.role-select option,
+.filter-select option {
+  background: #1e293b !important;
+  color: #fff !important;
+  padding: 12px !important;
+  font-size: 14px !important;
+}
+
+select optgroup,
+.status-select optgroup,
+.role-select optgroup,
+.filter-select optgroup {
+  background: #0f172a !important;
+  color: #4fa3ff !important;
+  font-weight: 600 !important;
+}
+
+/* Estilo específico para selects desabilitados */
+select:disabled,
+.status-select:disabled,
+.role-select:disabled,
+.filter-select:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  border-color: rgba(79, 163, 255, 0.2) !important;
+}
 </style>
 </head>
 <body>

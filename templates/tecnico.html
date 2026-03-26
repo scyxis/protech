@@ -7,9 +7,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 /* ============================================ */
-/* PRO TECH - PAINEL DO TÉCNICO */
+/* ESTILOS GLOBAIS */
 /* ============================================ */
-
 * {
   margin: 0;
   padding: 0;
@@ -134,6 +133,11 @@ nav a:hover {
   border: 1px solid rgba(79, 163, 255, 0.2);
 }
 
+.user-avatar:hover {
+  background: rgba(79, 163, 255, 0.1);
+  border-color: #4fa3ff;
+}
+
 .user-name {
   font-size: 14px;
   font-weight: 500;
@@ -244,11 +248,6 @@ nav a:hover {
   transition: all 0.3s;
 }
 
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(79, 163, 255, 0.3);
-}
-
 .stat-card i {
   font-size: 28px;
   color: #4fa3ff;
@@ -281,13 +280,18 @@ nav a:hover {
   border: 1px solid rgba(79, 163, 255, 0.15);
   overflow: hidden;
   transition: all 0.3s;
+  position: relative;
 }
 
-.ordem-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(79, 163, 255, 0.4);
-  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
+.card-status-bar {
+  height: 4px;
+  width: 100%;
 }
+
+.card-status-bar.pendente { background: #f59e0b; }
+.card-status-bar.em_andamento { background: #3b82f6; }
+.card-status-bar.concluido { background: #10b981; }
+.card-status-bar.pago { background: #8b5cf6; }
 
 .card-header {
   padding: 20px 20px 0 20px;
@@ -350,10 +354,6 @@ nav a:hover {
   margin-bottom: 8px;
 }
 
-.cliente-info p:last-child {
-  margin-bottom: 0;
-}
-
 .cliente-info i {
   width: 20px;
   color: #4fa3ff;
@@ -382,23 +382,57 @@ nav a:hover {
   font-weight: 500;
 }
 
+/* ============================================ */
+/* ESTILO CORRIGIDO PARA SELECTS */
+/* ============================================ */
+
+select,
 .status-select {
+  background: rgba(30, 41, 59, 0.95) !important;
+  border: 1px solid rgba(79, 163, 255, 0.4) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234fa3ff' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 18px !important;
+  padding-right: 40px !important;
   width: calc(100% - 40px);
   margin: 16px 20px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(79, 163, 255, 0.2);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
 }
 
+select:hover,
+.status-select:hover {
+  border-color: #4fa3ff !important;
+  background: rgba(30, 41, 59, 1) !important;
+  box-shadow: 0 0 0 2px rgba(79, 163, 255, 0.2) !important;
+}
+
+select:focus,
 .status-select:focus {
-  outline: none;
-  border-color: #4fa3ff;
+  outline: none !important;
+  border-color: #4fa3ff !important;
+  box-shadow: 0 0 0 3px rgba(79, 163, 255, 0.3) !important;
 }
 
+select option,
+.status-select option {
+  background: #1e293b !important;
+  color: #fff !important;
+  padding: 12px !important;
+  font-size: 14px !important;
+}
+
+/* CARD FOOTER */
 .card-footer {
   padding: 16px 20px 20px;
   border-top: 1px solid rgba(79, 163, 255, 0.1);
@@ -410,7 +444,7 @@ nav a:hover {
   color: white;
   border: none;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 40px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -495,6 +529,21 @@ nav a:hover {
   to { transform: translateX(0); opacity: 1; }
 }
 
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+}
+
+.empty-state i {
+  font-size: 64px;
+  color: #4fa3ff;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
 footer {
   background: #050a12;
   text-align: center;
@@ -505,25 +554,25 @@ footer {
   margin-top: auto;
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     text-align: center;
   }
-  
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-  
   .ordens-grid {
     grid-template-columns: 1fr;
   }
-  
   .page-header {
     flex-direction: column;
     text-align: center;
+  }
+  select,
+  .status-select {
+    width: calc(100% - 40px);
   }
 }
 </style>
@@ -538,11 +587,9 @@ footer {
     <nav>
       <a href="index.html"><i class="fas fa-home"></i> Início</a>
       <a href="index.html#servicos"><i class="fas fa-tools"></i> Serviços</a>
-      <a href="index.html#contato"><i class="fas fa-envelope"></i> Contato</a>
       <a href="manutencoes.html"><i class="fas fa-clipboard-list"></i> Manutenções</a>
-      <a href="tecnico.html" id="tecnicoLink" style="display: none;"><i class="fas fa-user-cog"></i> Técnico</a>
+      <a href="tecnico.html"><i class="fas fa-user-cog"></i> Técnico</a>
       <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-crown"></i> Admin</a>
-      
       <div class="user-menu" id="userMenu" style="display: none;">
         <div class="user-avatar" id="userAvatar">
           <i class="fas fa-user-circle"></i>
@@ -551,13 +598,12 @@ footer {
         </div>
         <div class="user-dropdown">
           <a href="manutencoes.html" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Minhas Manutenções</a>
-          <a href="tecnico.html" id="dropdownTecnicoLink" class="dropdown-item" style="display: none;"><i class="fas fa-user-cog"></i> Painel Técnico</a>
+          <a href="tecnico.html" class="dropdown-item"><i class="fas fa-user-cog"></i> Painel Técnico</a>
           <a href="admin.html" id="dropdownAdminLink" class="dropdown-item" style="display: none;"><i class="fas fa-crown"></i> Administração</a>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
       </div>
-      
       <div id="authButtons">
         <a href="login.html" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a>
         <a href="cadastro.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Cadastro</a>
@@ -567,15 +613,14 @@ footer {
 </header>
 
 <div class="main-container" id="mainContainer">
-  <div class="loading-state"><div class="spinner"></div><p>Verificando permissões...</p></div>
+  <div class="loading-state"><div class="spinner"></div><p>Carregando ordens de serviço...</p></div>
 </div>
 
-<footer>
-  <p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p>
-</footer>
+<footer><p>© 2026 ProTech - Tecnologia de ponta para seu dispositivo</p></footer>
 
 <script>
 const API_URL = 'https://protech-rt8q.onrender.com/api';
+let ordens = [];
 
 function showToast(message, isError = false) {
   const toast = document.createElement('div');
@@ -588,7 +633,7 @@ function showToast(message, isError = false) {
 function formatDate(dateString) {
   if (!dateString) return 'Data não informada';
   const date = new Date(dateString);
-  return date.toLocaleDateString('pt-BR');
+  return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 }
 
 function getStatusText(status) {
@@ -608,43 +653,30 @@ function updateUserMenu() {
   const userMenu = document.getElementById('userMenu');
   const authButtons = document.getElementById('authButtons');
   const userName = document.getElementById('userName');
-  const tecnicoLink = document.getElementById('tecnicoLink');
   const adminLink = document.getElementById('adminLink');
-  const dropdownTecnicoLink = document.getElementById('dropdownTecnicoLink');
   const dropdownAdminLink = document.getElementById('dropdownAdminLink');
   
   if (user && user.name) {
-    if (userMenu) userMenu.style.display = 'block';
-    if (authButtons) authButtons.style.display = 'none';
-    if (userName) userName.textContent = user.name.split(' ')[0];
-    
-    if (user.role === 'tecnico' || user.role === 'admin') {
-      if (tecnicoLink) tecnicoLink.style.display = 'block';
-      if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'flex';
-    }
+    userMenu.style.display = 'block';
+    authButtons.style.display = 'none';
+    userName.textContent = user.name.split(' ')[0];
     if (user.role === 'admin') {
       if (adminLink) adminLink.style.display = 'block';
       if (dropdownAdminLink) dropdownAdminLink.style.display = 'flex';
     }
   } else {
-    if (userMenu) userMenu.style.display = 'none';
-    if (authButtons) authButtons.style.display = 'flex';
-    if (tecnicoLink) tecnicoLink.style.display = 'none';
-    if (adminLink) adminLink.style.display = 'none';
-    if (dropdownTecnicoLink) dropdownTecnicoLink.style.display = 'none';
-    if (dropdownAdminLink) dropdownAdminLink.style.display = 'none';
+    userMenu.style.display = 'none';
+    authButtons.style.display = 'flex';
   }
 }
 
 function checkPermissions() {
   const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
   const token = localStorage.getItem('protech_token');
-  
   if (!token || !user || !user.name) {
     window.location.href = 'login.html';
     return false;
   }
-  
   if (user.role !== 'tecnico' && user.role !== 'admin') {
     const container = document.getElementById('mainContainer');
     container.innerHTML = `
@@ -653,38 +685,27 @@ function checkPermissions() {
         <h2>Acesso Negado</h2>
         <p>Você não tem permissão para acessar esta área.</p>
         <p>Esta página é restrita para <strong>Técnicos</strong> e <strong>Administradores</strong>.</p>
-        <a href="index.html" class="btn btn-primary" style="margin-top: 24px;"><i class="fas fa-home"></i> Voltar para o início</a>
+        <a href="index.html" class="btn btn-primary" style="margin-top: 24px;"><i class="fas fa-home"></i> Voltar</a>
       </div>
     `;
     return false;
   }
-  
   return true;
 }
 
 async function carregarOrdens() {
   const token = localStorage.getItem('protech_token');
   const container = document.getElementById('mainContainer');
-  
   container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Carregando ordens de serviço...</p></div>`;
-  
   try {
     const response = await fetch(`${API_URL}/tecnico/ordens`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    
     if (response.ok) {
-      const ordens = await response.json();
-      renderizarOrdens(ordens);
+      ordens = await response.json();
+      renderizarOrdens();
     } else if (response.status === 403) {
-      container.innerHTML = `
-        <div class="access-denied">
-          <i class="fas fa-lock"></i>
-          <h2>Acesso Negado</h2>
-          <p>Você não tem permissão para acessar esta área.</p>
-          <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> Voltar</a>
-        </div>
-      `;
+      container.innerHTML = `<div class="access-denied"><i class="fas fa-lock"></i><h2>Acesso Negado</h2><p>Você não tem permissão.</p><a href="index.html" class="btn btn-primary">Voltar</a></div>`;
     } else if (response.status === 401) {
       localStorage.removeItem('protech_token');
       localStorage.removeItem('protech_user');
@@ -693,56 +714,62 @@ async function carregarOrdens() {
       throw new Error('Erro ao carregar');
     }
   } catch (error) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-exclamation-triangle"></i>
-        <h3>Erro ao carregar ordens</h3>
-        <p>Tente novamente mais tarde</p>
-      </div>
-    `;
+    container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>Erro ao carregar ordens</h3><p>Tente novamente mais tarde</p></div>`;
   }
 }
 
-function renderizarOrdens(ordens) {
+async function atualizarStatus(ordemId, novoStatus) {
+  const token = localStorage.getItem('protech_token');
+  try {
+    const response = await fetch(`${API_URL}/tecnico/ordens/${ordemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ status: novoStatus })
+    });
+    if (response.ok) {
+      showToast(`✅ Status atualizado para ${getStatusText(novoStatus)}`);
+      await carregarOrdens();
+      return true;
+    } else {
+      showToast('❌ Erro ao atualizar status', true);
+      return false;
+    }
+  } catch (error) {
+    showToast('Erro de conexão', true);
+    return false;
+  }
+}
+
+function renderizarOrdens() {
   const container = document.getElementById('mainContainer');
   const user = JSON.parse(localStorage.getItem('protech_user') || '{}');
-  
   if (!ordens || ordens.length === 0) {
     container.innerHTML = `
-      <div class="page-header">
-        <h1><i class="fas fa-user-cog"></i> Painel do Técnico</h1>
-        <span class="tec-info"><i class="fas fa-briefcase"></i> ${escapeHtml(user.name)}</span>
-      </div>
-      <div class="empty-state">
-        <i class="fas fa-check-circle"></i>
-        <h3>Nenhuma ordem pendente</h3>
-        <p>Todas as ordens foram atendidas!</p>
-      </div>
+      <div class="page-header"><h1><i class="fas fa-user-cog"></i> Painel do Técnico</h1><span class="tec-info"><i class="fas fa-briefcase"></i> ${escapeHtml(user.name)}</span></div>
+      <div class="empty-state"><i class="fas fa-check-circle"></i><h3>Nenhuma ordem pendente</h3><p>Todas as ordens foram atendidas!</p></div>
     `;
     return;
   }
-  
   const pendentes = ordens.filter(o => o.status === 'pendente').length;
   const emAndamento = ordens.filter(o => o.status === 'em_andamento').length;
   const concluidas = ordens.filter(o => o.status === 'concluido').length;
   const pagas = ordens.filter(o => o.status === 'pago').length;
   
   container.innerHTML = `
-    <div class="page-header">
-      <h1><i class="fas fa-user-cog"></i> Painel do Técnico</h1>
-      <span class="tec-info"><i class="fas fa-briefcase"></i> ${escapeHtml(user.name)}</span>
-    </div>
-    
+    <div class="page-header"><h1><i class="fas fa-user-cog"></i> Painel do Técnico</h1><span class="tec-info"><i class="fas fa-briefcase"></i> ${escapeHtml(user.name)}</span></div>
     <div class="stats-grid">
       <div class="stat-card"><i class="fas fa-clock"></i><div class="number">${pendentes}</div><div class="label">Pendentes</div></div>
       <div class="stat-card"><i class="fas fa-sync-alt"></i><div class="number">${emAndamento}</div><div class="label">Em andamento</div></div>
       <div class="stat-card"><i class="fas fa-check-circle"></i><div class="number">${concluidas}</div><div class="label">Concluídas</div></div>
       <div class="stat-card"><i class="fas fa-credit-card"></i><div class="number">${pagas}</div><div class="label">Pagas</div></div>
     </div>
-    
     <div class="ordens-grid">
       ${ordens.map(ordem => `
         <div class="ordem-card">
+          <div class="card-status-bar ${ordem.status}"></div>
           <div class="card-header">
             <h3><i class="fas fa-tools"></i> ${escapeHtml(ordem.nome)}</h3>
             <span class="status ${ordem.status}">${getStatusText(ordem.status)}</span>
@@ -764,47 +791,28 @@ function renderizarOrdens(ordens) {
             <option value="pago" ${ordem.status === 'pago' ? 'selected' : ''}>💳 Pago</option>
           </select>
           <div class="card-footer">
-            <button class="btn-atualizar" onclick="atualizarStatus(${ordem.id})"><i class="fas fa-save"></i> Atualizar Status</button>
+            <button class="btn-atualizar" data-id="${ordem.id}"><i class="fas fa-save"></i> Atualizar Status</button>
           </div>
         </div>
       `).join('')}
     </div>
   `;
-}
-
-async function atualizarStatus(ordemId) {
-  const token = localStorage.getItem('protech_token');
-  const select = document.querySelector(`.status-select[data-id="${ordemId}"]`);
-  const novoStatus = select.value;
   
-  try {
-    const response = await fetch(`${API_URL}/tecnico/ordens/${ordemId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ status: novoStatus })
+  document.querySelectorAll('.btn-atualizar').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const ordemId = parseInt(btn.dataset.id);
+      const select = document.querySelector(`.status-select[data-id="${ordemId}"]`);
+      const novoStatus = select.value;
+      await atualizarStatus(ordemId, novoStatus);
     });
-    
-    if (response.ok) {
-      showToast(`✅ Status atualizado para ${getStatusText(novoStatus)}`);
-      carregarOrdens();
-    } else {
-      showToast('❌ Erro ao atualizar status', true);
-    }
-  } catch (error) {
-    showToast('Erro de conexão', true);
-  }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   updateUserMenu();
-  
   if (checkPermissions()) {
     carregarOrdens();
   }
-  
   const userAvatar = document.querySelector('.user-avatar');
   const userMenu = document.querySelector('.user-menu');
   if (userAvatar && userMenu) {
@@ -814,7 +822,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.addEventListener('click', () => userMenu.classList.remove('active'));
   }
-  
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
     localStorage.removeItem('protech_token');
     localStorage.removeItem('protech_user');
@@ -854,6 +861,5 @@ if (canvas) {
   window.addEventListener('resize', () => { resize(); createParticles(); });
 }
 </script>
-<script src="script-global.js"></script>
 </body>
 </html>

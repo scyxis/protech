@@ -6,7 +6,9 @@
 <title>ProTech - Minhas Manutenções</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-/* Estilos similares ao index.html, mantendo o design */
+/* ============================================ */
+/* ESTILOS - MESMOS DO ANTERIOR */
+/* ============================================ */
 * {
   margin: 0;
   padding: 0;
@@ -31,9 +33,24 @@ body {
   z-index: 0;
   opacity: 0.3;
 }
-/* Header e estilos básicos (mesmo do index.html) */
-header { position: sticky; top: 0; z-index: 100; background: rgba(10, 15, 26, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(79, 163, 255, 0.2); }
-.navbar { max-width: 1280px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 15, 26, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(79, 163, 255, 0.2);
+}
+.navbar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 .logo { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
 .logo .pro { color: #fff; }
 .logo .tech { background: linear-gradient(135deg, #4fa3ff, #9bd4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -53,7 +70,6 @@ nav a:hover { color: #4fa3ff; background: rgba(79, 163, 255, 0.1); }
 .dropdown-item:hover { background: rgba(79, 163, 255, 0.15); color: #4fa3ff; }
 .dropdown-divider { height: 1px; background: rgba(79, 163, 255, 0.2); margin: 8px 0; }
 .logout-item { color: #f87171; }
-/* Layout principal */
 .manutencoes-container { flex: 1; max-width: 1280px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 2; }
 .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
 .page-header h1 { font-size: 28px; font-weight: 700; background: linear-gradient(135deg, #fff, #4fa3ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -87,6 +103,7 @@ nav a:hover { color: #4fa3ff; background: rgba(79, 163, 255, 0.1); }
 .card-footer { padding: 16px 20px 20px; border-top: 1px solid rgba(79, 163, 255, 0.1); display: flex; gap: 12px; }
 .btn-pagar { flex: 1; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; }
 .btn-pagar:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+.btn-pagar:disabled { background: #5a6e8a; cursor: not-allowed; transform: none; }
 .btn-detalhes { flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(79, 163, 255, 0.3); color: #4fa3ff; padding: 10px; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; }
 .btn-detalhes:hover { background: rgba(79, 163, 255, 0.15); }
 .empty-state { text-align: center; padding: 60px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; }
@@ -105,12 +122,88 @@ nav a:hover { color: #4fa3ff; background: rgba(79, 163, 255, 0.1); }
 .pagamento-option { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid rgba(79, 163, 255, 0.2); border-radius: 12px; cursor: pointer; }
 .pagamento-option input { width: 18px; height: 18px; accent-color: #4fa3ff; }
 .pagamento-btn { background: linear-gradient(135deg, #4fa3ff, #3b82f6); color: white; border: none; padding: 12px; border-radius: 40px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 20px; }
+.pagamento-info { margin-top: 16px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; font-size: 12px; color: #10b981; }
 footer { background: #050a12; text-align: center; padding: 24px; color: #5a6e8a; font-size: 12px; border-top: 1px solid rgba(79, 163, 255, 0.1); margin-top: auto; }
 @media (max-width: 768px) {
   .navbar { flex-direction: column; text-align: center; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .manutencoes-grid { grid-template-columns: 1fr; }
   .page-header { flex-direction: column; text-align: center; }
+  .card-footer { flex-direction: column; }
+}
+/* ============================================ */
+/* ESTILO GLOBAL PARA SELECTS - CORRIGIDO */
+/* ============================================ */
+
+select,
+.status-select,
+.role-select,
+.filter-select {
+  background: rgba(30, 41, 59, 0.9) !important;
+  border: 1px solid rgba(79, 163, 255, 0.4) !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234fa3ff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 18px !important;
+  padding-right: 40px !important;
+}
+
+select:hover,
+.status-select:hover,
+.role-select:hover,
+.filter-select:hover {
+  border-color: #4fa3ff !important;
+  background: rgba(30, 41, 59, 1) !important;
+  box-shadow: 0 0 0 2px rgba(79, 163, 255, 0.2) !important;
+}
+
+select:focus,
+.status-select:focus,
+.role-select:focus,
+.filter-select:focus {
+  outline: none !important;
+  border-color: #4fa3ff !important;
+  box-shadow: 0 0 0 3px rgba(79, 163, 255, 0.3) !important;
+}
+
+select option,
+.status-select option,
+.role-select option,
+.filter-select option {
+  background: #1e293b !important;
+  color: #fff !important;
+  padding: 12px !important;
+  font-size: 14px !important;
+}
+
+select optgroup,
+.status-select optgroup,
+.role-select optgroup,
+.filter-select optgroup {
+  background: #0f172a !important;
+  color: #4fa3ff !important;
+  font-weight: 600 !important;
+}
+
+/* Estilo específico para selects desabilitados */
+select:disabled,
+.status-select:disabled,
+.role-select:disabled,
+.filter-select:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  border-color: rgba(79, 163, 255, 0.2) !important;
 }
 </style>
 </head>
@@ -173,6 +266,9 @@ footer { background: #050a12; text-align: center; padding: 24px; color: #5a6e8a;
       <label class="pagamento-option"><input type="radio" name="metodoPagamento" value="pix" checked><span><i class="fas fa-qrcode"></i> PIX (Instantâneo)</span></label>
       <label class="pagamento-option"><input type="radio" name="metodoPagamento" value="cartao"><span><i class="fas fa-credit-card"></i> Cartão de Crédito</span></label>
       <label class="pagamento-option"><input type="radio" name="metodoPagamento" value="boleto"><span><i class="fas fa-barcode"></i> Boleto Bancário</span></label>
+    </div>
+    <div class="pagamento-info" id="pagamentoInfo">
+      <i class="fas fa-info-circle"></i> Após o pagamento, o status será alterado para "Pago". O técnico será notificado.
     </div>
     <button class="pagamento-btn" id="confirmarPagamentoBtn">Confirmar Pagamento</button>
   </div>
@@ -284,18 +380,25 @@ async function pagarManutencao(manutencaoId) {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
     });
+    const data = await response.json();
     if (response.ok) {
-      showToast(`✅ Pagamento realizado com sucesso!`);
+      showToast(`✅ Pagamento realizado com sucesso! Status alterado para "Pago".`);
       await carregarManutencoes();
       return true;
     } else {
-      showToast('❌ Erro ao processar pagamento', true);
+      showToast(data.message || '❌ Erro ao processar pagamento', true);
       return false;
     }
   } catch (error) {
     showToast('Erro de conexão', true);
     return false;
   }
+}
+
+function podePagar(status) {
+  // Usuário comum só pode pagar se estiver pendente ou em_andamento
+  // Não pode pagar se já estiver pago ou concluído
+  return status === 'pendente' || status === 'em_andamento';
 }
 
 function renderizarManutencoes() {
@@ -308,6 +411,7 @@ function renderizarManutencoes() {
   const emAndamento = manutencoes.filter(m => m.status === 'em_andamento').length;
   const concluidas = manutencoes.filter(m => m.status === 'concluido').length;
   const pagas = manutencoes.filter(m => m.status === 'pago').length;
+  
   if (filtradas.length === 0) {
     container.innerHTML = `
       <div class="stats-grid">
@@ -320,6 +424,7 @@ function renderizarManutencoes() {
     `;
     return;
   }
+  
   container.innerHTML = `
     <div class="stats-grid">
       <div class="stat-card"><i class="fas fa-clock"></i><div class="number">${pendentes}</div><div class="label">Pendentes</div></div>
@@ -342,13 +447,14 @@ function renderizarManutencoes() {
             <div class="info-row"><i class="fas fa-dollar-sign"></i> <span><strong>Valor:</strong> ${escapeHtml(item.preco)}</span></div>
           </div>
           <div class="card-footer">
-            ${item.status === 'pendente' || item.status === 'concluido' ? `<button class="btn-pagar" data-id="${item.id}"><i class="fas fa-credit-card"></i> Pagar</button>` : ''}
+            ${podePagar(item.status) ? `<button class="btn-pagar" data-id="${item.id}"><i class="fas fa-credit-card"></i> Pagar Agora</button>` : ''}
             <button class="btn-detalhes" data-id="${item.id}"><i class="fas fa-info-circle"></i> Detalhes</button>
           </div>
         </div>
       `).join('')}
     </div>
   `;
+  
   document.querySelectorAll('.btn-pagar').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -361,6 +467,7 @@ function renderizarManutencoes() {
       }
     });
   });
+  
   document.querySelectorAll('.btn-detalhes').forEach(btn => {
     btn.addEventListener('click', () => showToast('📋 Mais detalhes em breve'));
   });
